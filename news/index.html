@@ -1,0 +1,535 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>News &amp; Collaborations — Abbadeen Holdings, LLC</title>
+<meta name="description" content="Abbadeen Holdings, LLC — Your Farm-to-Table Freight. Est. 2024, USA Registered. Cold-chain logistics, Beta Relay 2.0 platform. Visit us at www.abbadeenholdings.org" />
+<link rel="canonical" href="https://www.abbadeenholdings.org/news/" />
+<meta property="og:type" content="website" />
+<meta property="og:site_name" content="Abbadeen Holdings, LLC" />
+<meta property="og:title" content="News & Collaborations — Abbadeen Holdings, LLC" />
+<meta property="og:url" content="https://www.abbadeenholdings.org/news/" />
+<meta property="og:description" content="Farm-to-Table Freight powered by Beta Relay 2.0. USA Registered LLC, Est. 2024. abbadeenholdings.org" />
+<meta name="twitter:card" content="summary" />
+<meta name="twitter:title" content="News & Collaborations — Abbadeen Holdings, LLC" />
+<meta name="twitter:site" content="@abbadeenholdings" />
+<link rel="icon" type="image/svg+xml" href="https://www.abbadeenholdings.org/favicon.svg" />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@400;600;700;800;900&family=Barlow:ital,wght@0,300;0,400;0,500;0,600;1,300&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet" />
+<style>
+  *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+  :root{
+    --navy:#1B2A47;--navy-d:#111C30;--navy-l:#253860;
+    --green:#4D8B31;--green-l:#62A83E;--green-d:#3A6A24;
+    --white:#F5F7FA;--cream:#EEF0EB;--mid:#8A9BB8;--text:#2C3A52;
+    --border:rgba(77,139,49,0.25);--gold:#E8A020;--gold-l:#F0B535;
+    --ease:cubic-bezier(0.22,1,0.36,1);
+  }
+  html{scroll-behavior:smooth}
+  body{font-family:'Barlow',sans-serif;background:var(--white);color:var(--text);overflow-x:hidden}
+  ::-webkit-scrollbar{width:6px}::-webkit-scrollbar-track{background:var(--navy-d)}::-webkit-scrollbar-thumb{background:var(--green);border-radius:3px}
+
+  /* CURSOR */
+  .cursor{width:14px;height:14px;border-radius:50%;background:var(--green);position:fixed;top:0;left:0;pointer-events:none;z-index:9999;transform:translate(-50%,-50%);transition:width .3s,height .3s;mix-blend-mode:multiply}
+  .cursor-ring{width:38px;height:38px;border-radius:50%;border:1.5px solid var(--green);position:fixed;top:0;left:0;pointer-events:none;z-index:9998;transform:translate(-50%,-50%);transition:transform .18s var(--ease),width .3s,height .3s;opacity:.6}
+  .cursor.hovered{width:22px;height:22px}.cursor-ring.hovered{width:54px;height:54px;opacity:.3}
+
+  /* NAV */
+  #navbar{position:fixed;top:0;left:0;right:0;z-index:999;padding:0 5vw;display:flex;align-items:center;justify-content:space-between;height:76px;background:rgba(17,28,48,.97);backdrop-filter:blur(16px);box-shadow:0 2px 30px rgba(0,0,0,.3)}
+  .nav-logo{display:flex;align-items:center;text-decoration:none}
+  .nav-logo-img{height:70px;width:auto;object-fit:contain;mix-blend-mode:lighten;filter:brightness(1.15) contrast(1.05);transition:transform .3s var(--ease)}
+  .nav-logo:hover .nav-logo-img{transform:scale(1.04)}
+  nav{display:flex;gap:.15rem;align-items:center}
+  nav a{font-size:.88rem;font-weight:500;color:rgba(255,255,255,.75);text-decoration:none;letter-spacing:.04em;text-transform:uppercase;position:relative;padding:.4rem .85rem;transition:color .3s}
+  nav a::after{content:'';position:absolute;bottom:0;left:.85rem;right:.85rem;height:1.5px;background:var(--green-l);transform:scaleX(0);transform-origin:left;transition:transform .3s var(--ease)}
+  nav a:hover,nav a.active{color:#fff}nav a:hover::after,nav a.active::after{transform:scaleX(1)}
+  .nav-cta{background:var(--green)!important;color:#fff!important;padding:.5rem 1.3rem!important;border-radius:3px;font-weight:600!important;margin-left:.5rem;transition:background .3s,transform .2s!important}
+  .nav-cta:hover{background:var(--green-l)!important;transform:translateY(-2px)}
+  .nav-cta::after{display:none!important}
+  .nav-hamburger{display:none;flex-direction:column;gap:5px;cursor:pointer}
+  .nav-hamburger span{width:24px;height:2px;background:#fff;border-radius:2px;transition:.3s}
+  nav.open{display:flex;position:fixed;top:76px;left:0;right:0;flex-direction:column;background:rgba(17,28,48,.98);backdrop-filter:blur(16px);padding:2rem 5vw;gap:1.5rem;border-top:1px solid rgba(255,255,255,.08)}
+
+  /* PAGE HERO */
+  .page-hero{padding:140px 5vw 80px;background:var(--navy-d);position:relative;overflow:hidden}
+  .page-hero-bg{position:absolute;inset:0;background-image:repeating-linear-gradient(-15deg,transparent,transparent 38px,rgba(77,139,49,.06) 38px,rgba(77,139,49,.06) 39px)}
+  .page-hero-glow{position:absolute;top:-80px;right:-80px;width:700px;height:500px;background:radial-gradient(ellipse,rgba(77,139,49,.1) 0%,transparent 70%);pointer-events:none}
+  .page-hero-inner{position:relative;z-index:2;max-width:1240px;margin:0 auto}
+  .page-breadcrumb{display:flex;align-items:center;gap:.5rem;font-family:'Space Mono',monospace;font-size:.65rem;letter-spacing:.14em;text-transform:uppercase;color:rgba(255,255,255,.3);margin-bottom:1.4rem}
+  .page-breadcrumb a{color:rgba(255,255,255,.3);text-decoration:none;transition:color .2s}
+  .page-breadcrumb a:hover{color:var(--green-l)}
+  .page-breadcrumb span{color:rgba(255,255,255,.15)}
+  .page-hero-label{font-family:'Space Mono',monospace;font-size:.7rem;color:var(--green-l);letter-spacing:.2em;text-transform:uppercase;margin-bottom:1rem;display:flex;align-items:center;gap:.8rem}
+  .page-hero-label::before{content:'';display:inline-block;width:20px;height:2px;background:var(--green-l)}
+  .page-hero-h1{font-family:'Barlow Condensed',sans-serif;font-weight:800;font-size:clamp(3rem,6vw,5.2rem);color:#fff;line-height:.95;text-transform:uppercase;letter-spacing:-.01em;margin-bottom:1.2rem}
+  .page-hero-h1 em{font-style:normal;color:var(--green-l)}
+  .page-hero-desc{font-size:1.1rem;font-weight:300;color:rgba(255,255,255,.6);line-height:1.75;max-width:580px}
+
+  /* TICKER */
+  .ticker{background:var(--green-d);overflow:hidden;padding:.7rem 0;position:relative}
+  .ticker::before,.ticker::after{content:'';position:absolute;top:0;bottom:0;width:80px;z-index:2}
+  .ticker::before{left:0;background:linear-gradient(to right,var(--green-d),transparent)}
+  .ticker::after{right:0;background:linear-gradient(to left,var(--green-d),transparent)}
+  .ticker-track{display:flex;gap:4rem;animation:tickerScroll 30s linear infinite;width:max-content}
+  @keyframes tickerScroll{to{transform:translateX(-50%)}}
+  .ticker-item{display:flex;align-items:center;gap:.7rem;font-family:'Barlow Condensed',sans-serif;font-size:.85rem;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:rgba(255,255,255,.7);white-space:nowrap}
+  .ticker-dot{width:5px;height:5px;border-radius:50%;background:rgba(255,255,255,.4)}
+
+  /* SHARED */
+  .section-inner{max-width:1240px;margin:0 auto;padding:0 5vw}
+  .section-label{font-family:'Space Mono',monospace;font-size:.7rem;color:var(--green);letter-spacing:.2em;text-transform:uppercase;margin-bottom:.8rem;display:flex;align-items:center;gap:.8rem}
+  .section-label::before{content:'';display:inline-block;width:20px;height:2px;background:var(--green)}
+  .section-h2{font-family:'Barlow Condensed',sans-serif;font-weight:800;font-size:clamp(2.2rem,4vw,3.4rem);color:var(--navy);line-height:1;text-transform:uppercase;letter-spacing:-.01em}
+  .section-h2.light{color:#fff}
+  .section-sub{font-size:1rem;font-weight:300;color:#6B7A94;line-height:1.7;max-width:540px;margin-top:.8rem}
+  .btn-primary{background:var(--green);color:#fff;padding:.85rem 2.2rem;border-radius:4px;font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:1rem;letter-spacing:.08em;text-transform:uppercase;text-decoration:none;display:inline-flex;align-items:center;gap:.6rem;border:2px solid var(--green);transition:background .3s,transform .25s var(--ease),box-shadow .3s;position:relative;overflow:hidden}
+  .btn-primary::before{content:'';position:absolute;inset:0;background:linear-gradient(120deg,transparent 30%,rgba(255,255,255,.15) 50%,transparent 70%);transform:translateX(-100%);transition:transform .5s}
+  .btn-primary:hover::before{transform:translateX(100%)}
+  .btn-primary:hover{background:var(--green-l);box-shadow:0 8px 30px rgba(77,139,49,.4);transform:translateY(-3px)}
+
+  /* ── FEATURED STORY ── */
+  #featured{padding:7rem 0;background:var(--white)}
+  .featured-grid{display:grid;grid-template-columns:1fr 1fr;gap:5rem;align-items:center}
+  .featured-img{width:100%;aspect-ratio:4/3;background:var(--navy-d);border-radius:16px;overflow:hidden;position:relative;display:flex;align-items:center;justify-content:center}
+  .featured-img-icon{font-size:6rem;opacity:.3}
+  .featured-cat-badge{position:absolute;top:1.2rem;left:1.2rem;background:linear-gradient(135deg,var(--gold),var(--gold-l));color:var(--navy-d);font-family:'Barlow Condensed',sans-serif;font-weight:800;font-size:.7rem;letter-spacing:.15em;text-transform:uppercase;padding:.3rem .85rem;border-radius:3px}
+  .featured-img-glow{position:absolute;inset:0;background:radial-gradient(circle at 70% 40%,rgba(77,139,49,.2) 0%,transparent 60%)}
+  .featured-tag{font-family:'Space Mono',monospace;font-size:.65rem;letter-spacing:.15em;text-transform:uppercase;color:var(--green);margin-bottom:1rem;display:flex;align-items:center;gap:.6rem}
+  .featured-tag::before{content:'';display:inline-block;width:16px;height:2px;background:var(--green)}
+  .featured-date{font-size:.78rem;color:var(--mid);letter-spacing:.06em;text-transform:uppercase;margin-bottom:.8rem}
+  .featured-h2{font-family:'Barlow Condensed',sans-serif;font-weight:800;font-size:clamp(1.8rem,3.5vw,2.8rem);text-transform:uppercase;color:var(--navy);line-height:1.05;margin-bottom:1.2rem;letter-spacing:-.01em}
+  .featured-body{font-size:.95rem;color:#6B7A94;line-height:1.75;margin-bottom:1.6rem}
+  .featured-link{display:inline-flex;align-items:center;gap:.5rem;font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:.9rem;letter-spacing:.08em;text-transform:uppercase;color:var(--green);text-decoration:none;transition:gap .2s,color .2s}
+  .featured-link:hover{gap:.8rem;color:var(--green-l)}
+
+  /* ── NEWS GRID ── */
+  #all-news{padding:6rem 0;background:var(--cream)}
+  .news-filters{display:flex;gap:.6rem;flex-wrap:wrap;margin-bottom:3rem}
+  .filter-btn{font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:.82rem;letter-spacing:.08em;text-transform:uppercase;padding:.45rem 1.1rem;border-radius:100px;border:1.5px solid rgba(27,42,71,.18);background:transparent;color:var(--text);cursor:pointer;transition:all .25s var(--ease)}
+  .filter-btn:hover,.filter-btn.active{background:var(--navy);border-color:var(--navy);color:#fff}
+  .news-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.5rem}
+  .news-card{background:#fff;border-radius:10px;overflow:hidden;border:1px solid rgba(27,42,71,.08);transition:transform .35s var(--ease),box-shadow .35s;cursor:pointer}
+  .news-card:hover{transform:translateY(-8px);box-shadow:0 20px 60px rgba(27,42,71,.12)}
+  .news-card-img{height:180px;position:relative;overflow:hidden;display:flex;align-items:center;justify-content:center}
+  .news-card-img-inner{width:100%;height:100%;display:flex;align-items:center;justify-content:center;font-size:3rem;transition:transform .5s var(--ease)}
+  .news-card:hover .news-card-img-inner{transform:scale(1.08)}
+  .news-cat{position:absolute;top:.8rem;left:.8rem;font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:.68rem;letter-spacing:.12em;text-transform:uppercase;padding:.25rem .7rem;border-radius:3px}
+  .cat-green{background:var(--green);color:#fff}.cat-gold{background:var(--gold);color:var(--navy-d)}.cat-navy{background:var(--navy);color:#fff}.cat-green-l{background:var(--green-l);color:#fff}
+  .news-body{padding:1.5rem}
+  .news-date{font-size:.7rem;color:var(--mid);letter-spacing:.06em;text-transform:uppercase;margin-bottom:.5rem}
+  .news-title{font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:1.2rem;text-transform:uppercase;color:var(--navy);line-height:1.2;margin-bottom:.7rem;letter-spacing:.01em}
+  .news-desc{font-size:.82rem;color:#6B7A94;line-height:1.65}
+  .news-link{display:inline-flex;align-items:center;gap:.35rem;margin-top:1rem;font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:.8rem;letter-spacing:.08em;text-transform:uppercase;color:var(--green);text-decoration:none;transition:gap .2s}
+  .news-link:hover{gap:.7rem}
+
+  /* ── COLLABORATIONS ── */
+  #collabs{padding:7rem 0;background:var(--navy-d);position:relative;overflow:hidden}
+  .collabs-grid-bg{position:absolute;inset:0;background-image:linear-gradient(rgba(77,139,49,.05) 1px,transparent 1px),linear-gradient(90deg,rgba(77,139,49,.05) 1px,transparent 1px);background-size:50px 50px;pointer-events:none}
+  .collabs-header{display:flex;justify-content:space-between;align-items:flex-end;margin-bottom:4rem;flex-wrap:wrap;gap:1.5rem}
+  .collab-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:1.5rem}
+  .collab-card{background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.07);border-radius:12px;padding:2.2rem;display:flex;gap:1.8rem;align-items:flex-start;transition:background .3s,border-color .3s,transform .3s var(--ease);cursor:default}
+  .collab-card:hover{background:rgba(77,139,49,.08);border-color:rgba(77,139,49,.3);transform:translateY(-4px)}
+  .collab-icon-wrap{width:56px;height:56px;flex-shrink:0;border-radius:12px;display:flex;align-items:center;justify-content:center;font-size:1.6rem;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.08)}
+  .collab-type{font-family:'Space Mono',monospace;font-size:.6rem;letter-spacing:.15em;text-transform:uppercase;color:var(--green-l);margin-bottom:.4rem}
+  .collab-name{font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:1.2rem;text-transform:uppercase;color:#fff;margin-bottom:.5rem}
+  .collab-desc{font-size:.85rem;color:rgba(255,255,255,.45);line-height:1.65}
+  .collab-status{display:inline-flex;align-items:center;gap:.4rem;margin-top:.8rem;font-family:'Space Mono',monospace;font-size:.6rem;letter-spacing:.12em;text-transform:uppercase}
+  .collab-status.active{color:var(--green-l)}
+  .collab-status.active::before{content:'';width:5px;height:5px;border-radius:50%;background:var(--green-l);animation:pillPulse 1.5s infinite}
+  .collab-status.pending{color:var(--gold-l)}
+  .collab-status.pending::before{content:'';width:5px;height:5px;border-radius:50%;background:var(--gold-l)}
+  @keyframes pillPulse{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.4;transform:scale(.7)}}
+
+  /* ── PRESS & MEDIA ── */
+  #press{padding:6rem 0;background:var(--white)}
+  .press-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.2rem;margin-top:3rem}
+  .press-item{border:1px solid rgba(27,42,71,.08);border-radius:10px;padding:1.8rem;transition:border-color .3s,transform .3s var(--ease),box-shadow .3s;cursor:default}
+  .press-item:hover{border-color:var(--border);transform:translateY(-4px);box-shadow:0 10px 30px rgba(27,42,71,.08)}
+  .press-outlet{font-family:'Barlow Condensed',sans-serif;font-weight:800;font-size:1rem;text-transform:uppercase;letter-spacing:.06em;color:var(--navy);margin-bottom:.5rem}
+  .press-quote{font-size:.85rem;font-style:italic;color:#6B7A94;line-height:1.65;margin-bottom:.8rem}
+  .press-date{font-family:'Space Mono',monospace;font-size:.6rem;letter-spacing:.1em;color:var(--mid);text-transform:uppercase}
+  .press-divider{width:24px;height:2px;background:var(--green);margin-bottom:.8rem}
+
+  /* ── NEWSLETTER ── */
+  #newsletter{padding:6rem 0;background:var(--green-d)}
+  .newsletter-inner{display:flex;flex-direction:column;align-items:center;text-align:center;gap:1.5rem}
+  .newsletter-h2{font-family:'Barlow Condensed',sans-serif;font-weight:800;font-size:clamp(2rem,4vw,3rem);text-transform:uppercase;color:#fff;line-height:1}
+  .newsletter-sub{font-size:.95rem;font-weight:300;color:rgba(255,255,255,.65);max-width:460px;line-height:1.7}
+  .newsletter-form{display:flex;gap:.7rem;flex-wrap:wrap;justify-content:center;width:100%;max-width:500px}
+  .newsletter-input{flex:1;min-width:220px;padding:.85rem 1.2rem;background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.2);border-radius:4px;font-family:'Barlow',sans-serif;font-size:.9rem;color:#fff;outline:none;transition:border-color .3s,background .3s}
+  .newsletter-input:focus{border-color:rgba(255,255,255,.6);background:rgba(255,255,255,.15)}
+  .newsletter-input::placeholder{color:rgba(255,255,255,.4)}
+  .newsletter-btn{background:#fff;color:var(--green-d);padding:.85rem 1.8rem;border:none;border-radius:4px;font-family:'Barlow Condensed',sans-serif;font-weight:800;font-size:.9rem;letter-spacing:.08em;text-transform:uppercase;cursor:pointer;transition:background .3s,transform .25s var(--ease)}
+  .newsletter-btn:hover{background:var(--cream);transform:translateY(-2px)}
+  .newsletter-note{font-size:.72rem;color:rgba(255,255,255,.35)}
+
+  /* FOOTER */
+  footer{background:var(--navy-d);padding:5rem 0 2rem;border-top:1px solid rgba(255,255,255,.06)}
+  .footer-grid{display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:3rem;padding-bottom:3rem;border-bottom:1px solid rgba(255,255,255,.08);margin-bottom:2rem}
+  .footer-logo-img{height:70px;width:auto;object-fit:contain;mix-blend-mode:lighten;filter:brightness(1.1)}
+  .footer-brand-desc{font-size:.88rem;color:rgba(255,255,255,.4);line-height:1.7;margin-top:1rem;max-width:280px}
+  .footer-brand-est{font-family:'Space Mono',monospace;font-size:.6rem;letter-spacing:.1em;color:rgba(255,255,255,.2);margin-top:.6rem;text-transform:uppercase}
+  .footer-socials{display:flex;gap:.7rem;margin-top:1.5rem}
+  .social-btn{width:36px;height:36px;border:1px solid rgba(255,255,255,.12);border-radius:6px;display:flex;align-items:center;justify-content:center;color:rgba(255,255,255,.4);text-decoration:none;font-size:.9rem;transition:background .3s,border-color .3s,color .3s,transform .2s}
+  .social-btn:hover{background:var(--green);border-color:var(--green);color:#fff;transform:translateY(-3px)}
+  .footer-col-title{font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:.85rem;text-transform:uppercase;letter-spacing:.1em;color:#fff;margin-bottom:1.2rem}
+  .footer-col ul{list-style:none;display:flex;flex-direction:column;gap:.65rem}
+  .footer-col ul a{font-size:.85rem;color:rgba(255,255,255,.4);text-decoration:none;transition:color .3s,padding-left .2s}
+  .footer-col ul a:hover{color:var(--green-l);padding-left:6px}
+  .footer-bottom{display:flex;justify-content:space-between;align-items:center;font-size:.78rem;color:rgba(255,255,255,.25);flex-wrap:wrap;gap:.5rem}
+  .footer-bottom a{color:var(--green-l);text-decoration:none}
+
+  /* ANIMATIONS */
+  .reveal{opacity:0;transform:translateY(40px);transition:opacity .8s var(--ease),transform .8s var(--ease)}
+  .reveal.visible{opacity:1;transform:translateY(0)}
+  .reveal-delay-1{transition-delay:.1s}.reveal-delay-2{transition-delay:.2s}.reveal-delay-3{transition-delay:.3s}.reveal-delay-4{transition-delay:.4s}.reveal-delay-5{transition-delay:.5s}.reveal-delay-6{transition-delay:.6s}
+
+  /* RESPONSIVE */
+  @media(max-width:1024px){
+    .featured-grid{grid-template-columns:1fr}
+    .collab-grid{grid-template-columns:1fr}
+    .news-grid{grid-template-columns:repeat(2,1fr)}
+    .press-grid{grid-template-columns:repeat(2,1fr)}
+    .footer-grid{grid-template-columns:1fr 1fr}
+  }
+  @media(max-width:768px){
+    .news-grid{grid-template-columns:1fr}
+    .press-grid{grid-template-columns:1fr}
+    nav{display:none}.nav-hamburger{display:flex}
+    .footer-grid{grid-template-columns:1fr}
+  }
+</style>
+</head>
+<body>
+
+<div class="cursor" id="cursor"></div>
+<div class="cursor-ring" id="cursorRing"></div>
+
+<!-- ══ NAV ══ -->
+<header id="navbar">
+  <a href="../" class="nav-logo">
+    <img src="../srcs/logo.png" alt="Abbadeen Holdings, LLC" class="nav-logo-img" />
+  </a>
+  <nav id="mainNav">
+    <a href="../index.html">Home</a>
+    <a href="../about/">About</a>
+    <a href="./news/" class="active">News &amp; Collaborations</a>
+    <a href="../contact/" class="nav-cta">Contact Us</a>
+  </nav>
+  <div class="nav-hamburger" id="hamburger" onclick="toggleNav()">
+    <span></span><span></span><span></span>
+  </div>
+</header>
+
+<!-- ══ PAGE HERO ══ -->
+<section class="page-hero">
+  <div class="page-hero-bg"></div>
+  <div class="page-hero-glow"></div>
+  <div class="page-hero-inner">
+    <div class="page-breadcrumb">
+      <a href="../">Home</a>
+      <span>/</span>
+      <span style="color:rgba(255,255,255,.55)">News &amp; Collaborations</span>
+    </div>
+    <div class="page-hero-label">What's Happening</div>
+    <h1 class="page-hero-h1">News &amp; <em>Collaborations</em></h1>
+    <p class="page-hero-desc">The latest from Abbadeen Holdings, LLC — platform launches, strategic partnerships, network expansions, and the stories shaping the future of farm-to-table freight.</p>
+  </div>
+</section>
+
+<!-- ══ TICKER ══ -->
+<div class="ticker">
+  <div class="ticker-track">
+    <div class="ticker-item"><span class="ticker-dot"></span>Beta Relay 2.0 — Now Live</div>
+    <div class="ticker-item"><span class="ticker-dot"></span>200+ New CPG Routes Added</div>
+    <div class="ticker-item"><span class="ticker-dot"></span>Partnership Expansion 2025</div>
+    <div class="ticker-item"><span class="ticker-dot"></span>Abbadeen Holdings — Est. 2024</div>
+    <div class="ticker-item"><span class="ticker-dot"></span>National Freight Intelligence Platform</div>
+    <div class="ticker-item"><span class="ticker-dot"></span>$875B U.S. Freight Sector</div>
+    <div class="ticker-item"><span class="ticker-dot"></span>Beta Relay 2.0 — Now Live</div>
+    <div class="ticker-item"><span class="ticker-dot"></span>200+ New CPG Routes Added</div>
+    <div class="ticker-item"><span class="ticker-dot"></span>Partnership Expansion 2025</div>
+    <div class="ticker-item"><span class="ticker-dot"></span>Abbadeen Holdings — Est. 2024</div>
+    <div class="ticker-item"><span class="ticker-dot"></span>National Freight Intelligence Platform</div>
+    <div class="ticker-item"><span class="ticker-dot"></span>$875B U.S. Freight Sector</div>
+  </div>
+</div>
+
+<!-- ══ FEATURED STORY ══ -->
+<section id="featured">
+  <div class="section-inner">
+    <div class="featured-grid">
+      <a href="/news/stories/story-beta-relay/" style="display:block;text-decoration:none"><div class="featured-img reveal">
+        <div class="featured-img-icon">🚀</div>
+        <div class="featured-img-glow"></div>
+        <div class="featured-cat-badge">⭐ Flagship Launch</div>
+      </div></a>
+      <div class="reveal">
+        <div class="featured-tag">Feature Story</div>
+        <div class="featured-date">2025 · Technology</div>
+        <h2 class="featured-h2">Beta Relay 2.0 Goes Live — A Game-Changer for U.S. Freight</h2>
+        <p class="featured-body">After months of development, our flagship National Over-the-Road Freight Coordination Platform is officially operational. Beta Relay 2.0 transforms fragmented U.S. trucking into a synchronized logistics infrastructure — combining real-time route-to-market optimization, a novel baton-relay driver network, and live vehicle dashboard sync for administrators.</p>
+        <p class="featured-body">The platform directly addresses federal priorities: a $875B freight sector demanding efficiency, an 80,000+ driver shortage met by our relay model, public safety improvements through fatigue reduction, and CO₂ emissions cuts via intelligent routing.</p>
+        <a href="/news/stories/story-beta-relay/" class="featured-link">Read the Full Story →</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ ALL NEWS ══ -->
+<section id="all-news">
+  <div class="section-inner">
+    <div style="display:flex;justify-content:space-between;align-items:flex-end;flex-wrap:wrap;gap:1.5rem;margin-bottom:2rem" class="reveal">
+      <div>
+        <div class="section-label">All Updates</div>
+        <h2 class="section-h2">Latest Stories</h2>
+      </div>
+    </div>
+    <div class="news-filters reveal">
+      <button class="filter-btn active">All</button>
+      <button class="filter-btn">Platform</button>
+      <button class="filter-btn">Partnerships</button>
+      <button class="filter-btn">Company News</button>
+      <button class="filter-btn">Industry</button>
+    </div>
+    <div class="news-grid">
+      <div class="news-card reveal reveal-delay-1">
+        <a href="/news/stories/story-beta-relay/" style="display:block;text-decoration:none"><div class="news-card-img"><div class="news-card-img-inner" style="background:var(--navy)">🚀</div><span class="news-cat cat-gold">Flagship Launch</span></div></a>
+        <div class="news-body">
+          <div class="news-date">2025 · Platform</div>
+          <a href="/news/stories/story-beta-relay/" style="text-decoration:none"><div class="news-title" style="cursor:pointer;transition:color .2s" onmouseover="this.style.color='var(--green)'" onmouseout="this.style.color=''">Beta Relay 2.0 Platform — Official Launch</div></a>
+          <p class="news-desc">Our national freight intelligence platform goes live, introducing baton-relay operations and real-time vehicle dashboard sync across all active routes.</p>
+          <a href="/news/stories/story-beta-relay/" class="news-link">Read Full Story →</a>
+        </div>
+      </div>
+      <div class="news-card reveal reveal-delay-2">
+        <a href="/news/stories/story-cpg-routes/" style="display:block;text-decoration:none"><div class="news-card-img"><div class="news-card-img-inner" style="background:#1a3525">🤝</div><span class="news-cat cat-green">Partnership</span></div></a>
+        <div class="news-body">
+          <div class="news-date">2025 · Partnerships</div>
+          <a href="/news/stories/story-cpg-routes/" style="text-decoration:none"><div class="news-title" style="cursor:pointer;transition:color .2s" onmouseover="this.style.color='var(--green)'" onmouseout="this.style.color=''">200+ New CPG Routes Added Across U.S. Midwest &amp; Southeast</div></a>
+          <p class="news-desc">Abbadeen expands its CPG distribution partnerships, adding over 200 new routes serving the Midwest and Southeast. Brands gain access to our Beta Relay 2.0 powered delivery network.</p>
+          <a href="/news/stories/story-cpg-routes/" class="news-link">Read Full Story →</a>
+        </div>
+      </div>
+      <div class="news-card reveal reveal-delay-3">
+        <a href="/news/stories/story-founded/" style="display:block;text-decoration:none"><div class="news-card-img"><div class="news-card-img-inner" style="background:#1c1a30">🏛️</div><span class="news-cat cat-navy">Company</span></div></a>
+        <div class="news-body">
+          <div class="news-date">2024 · Company News</div>
+          <a href="/news/stories/story-founded/" style="text-decoration:none"><div class="news-title" style="cursor:pointer;transition:color .2s" onmouseover="this.style.color='var(--green)'" onmouseout="this.style.color=''">Abbadeen Holdings, LLC — Officially USA Registered</div></a>
+          <p class="news-desc">Abbadeen Holdings, LLC is formally registered as a U.S. Limited Liability Company, marking the official launch of operations and a new era in farm-to-table cold-chain freight.</p>
+          <a href="/news/stories/story-founded/" class="news-link">Read Full Story →</a>
+        </div>
+      </div>
+      <div class="news-card reveal reveal-delay-1">
+        <a href="/news/stories/story-farm-network/" style="display:block;text-decoration:none"><div class="news-card-img"><div class="news-card-img-inner" style="background:#1a2e1a">🌾</div><span class="news-cat cat-green-l">Farm Network</span></div></a>
+        <div class="news-body">
+          <div class="news-date">2024 · Network</div>
+          <a href="/news/stories/story-farm-network/" style="text-decoration:none"><div class="news-title" style="cursor:pointer;transition:color .2s" onmouseover="this.style.color='var(--green)'" onmouseout="this.style.color=''">850+ Farm Partners Onboarded Nationwide</div></a>
+          <p class="news-desc">Our farm partner network surpasses 850 growers across 12+ states. Direct farm-gate collection now covers major agricultural corridors from California to the Carolinas.</p>
+          <a href="/news/stories/story-farm-network/" class="news-link">Read Full Story →</a>
+        </div>
+      </div>
+      <div class="news-card reveal reveal-delay-2">
+        <a href="/news/stories/story-driver-shortage/" style="display:block;text-decoration:none"><div class="news-card-img"><div class="news-card-img-inner" style="background:#2a1a1a">📊</div><span class="news-cat cat-navy">Industry</span></div></a>
+        <div class="news-body">
+          <div class="news-date">2025 · Industry Insight</div>
+          <a href="/news/stories/story-driver-shortage/" style="text-decoration:none"><div class="news-title" style="cursor:pointer;transition:color .2s" onmouseover="this.style.color='var(--green)'" onmouseout="this.style.color=''">Addressing the 80,000 Driver Shortage — How the Relay Model Changes Everything</div></a>
+          <p class="news-desc">Our baton-relay driver network offers a practical, scalable solution to the U.S. trucking workforce crisis — enabling shorter driver runs, more home time, and continuous freight flow.</p>
+          <a href="/news/stories/story-driver-shortage/" class="news-link">Read Full Story →</a>
+        </div>
+      </div>
+      <div class="news-card reveal reveal-delay-3">
+        <a href="/news/stories/story-emissions/" style="display:block;text-decoration:none"><div class="news-card-img"><div class="news-card-img-inner" style="background:#1a251a">🌿</div><span class="news-cat cat-green">Sustainability</span></div></a>
+        <div class="news-body">
+          <div class="news-date">2025 · Sustainability</div>
+          <a href="/news/stories/story-emissions/" style="text-decoration:none"><div class="news-title" style="cursor:pointer;transition:color .2s" onmouseover="this.style.color='var(--green)'" onmouseout="this.style.color=''">Optimized Routing Cuts Fleet CO₂ Emissions by Up to 30%</div></a>
+          <p class="news-desc">Beta Relay 2.0's real-time route optimization eliminates unnecessary miles and idle time. Early data shows fleet carbon emissions reduced significantly compared to traditional dispatching methods.</p>
+          <a href="/news/stories/story-emissions/" class="news-link">Read Full Story →</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ COLLABORATIONS ══ -->
+<section id="collabs">
+  <div class="collabs-grid-bg"></div>
+  <div class="section-inner" style="position:relative;z-index:1">
+    <div class="collabs-header reveal">
+      <div>
+        <div class="section-label" style="color:rgba(255,255,255,.4)">Strategic Partners</div>
+        <h2 class="section-h2 light">Collaborations</h2>
+        <p class="section-sub light">The organizations and partners building the future of farm-to-table freight alongside Abbadeen.</p>
+      </div>
+    </div>
+    <div class="collab-grid">
+      <div class="collab-card reveal reveal-delay-1">
+        <div class="collab-icon-wrap">🌾</div>
+        <div>
+          <div class="collab-type">Farm Network</div>
+          <div class="collab-name">Regional Agricultural Cooperatives</div>
+          <p class="collab-desc">Partnerships with farm cooperatives across the Southeast and Midwest, providing direct farm-gate collection and cold-chain pickup services to member growers.</p>
+          <div class="collab-status active">Active Partnership</div>
+        </div>
+      </div>
+      <div class="collab-card reveal reveal-delay-2">
+        <div class="collab-icon-wrap">🏭</div>
+        <div>
+          <div class="collab-type">CPG Distribution</div>
+          <div class="collab-name">Consumer Packaged Goods Brands</div>
+          <p class="collab-desc">Distribution agreements with regional CPG brands covering 200+ routes. Beta Relay 2.0 provides their logistics teams with full real-time shipment visibility and route optimization.</p>
+          <div class="collab-status active">Active Partnership</div>
+        </div>
+      </div>
+      <div class="collab-card reveal reveal-delay-3">
+        <div class="collab-icon-wrap">🍽️</div>
+        <div>
+          <div class="collab-type">Hospitality &amp; Food Service</div>
+          <div class="collab-name">Restaurant Groups &amp; Hotel Chains</div>
+          <p class="collab-desc">White-glove cold-chain delivery partnerships with restaurant groups and hotel hospitality networks. Dedicated coordinator programs ensure same-day and express delivery reliability.</p>
+          <div class="collab-status active">Active Partnership</div>
+        </div>
+      </div>
+      <div class="collab-card reveal reveal-delay-4">
+        <div class="collab-icon-wrap">🔬</div>
+        <div>
+          <div class="collab-type">Technology &amp; Integration</div>
+          <div class="collab-name">Logistics &amp; Supply Chain Tech Partners</div>
+          <p class="collab-desc">Technology integration partnerships supporting the Beta Relay 2.0 platform — from telematics providers to ELD compliance systems and route intelligence APIs.</p>
+          <div class="collab-status pending">Expanding</div>
+        </div>
+      </div>
+    </div>
+    <div class="reveal" style="text-align:center;margin-top:3.5rem">
+      <p style="font-size:.95rem;color:rgba(255,255,255,.45);margin-bottom:1.5rem">Interested in partnering with Abbadeen Holdings?</p>
+      <a href="../contact/" class="btn-primary">Discuss a Collaboration →</a>
+    </div>
+  </div>
+</section>
+
+<!-- ══ PRESS & MEDIA ══ -->
+<section id="press">
+  <div class="section-inner">
+    <div class="reveal" style="margin-bottom:.5rem">
+      <div class="section-label">Press &amp; Media</div>
+      <h2 class="section-h2">In the Spotlight</h2>
+      <p class="section-sub">What the industry is saying about Abbadeen Holdings and the Beta Relay 2.0 platform.</p>
+    </div>
+    <div class="press-grid">
+      <div class="press-item reveal reveal-delay-1">
+        <div class="press-divider"></div>
+        <div class="press-outlet">Freight &amp; Logistics Today</div>
+        <p class="press-quote">"Abbadeen's baton-relay model is a genuinely novel approach to the driver shortage crisis — it keeps freight moving 24/7 without pushing individual drivers past safe limits."</p>
+        <div class="press-date">2025 · Industry Feature</div>
+      </div>
+      <div class="press-item reveal reveal-delay-2">
+        <div class="press-divider"></div>
+        <div class="press-outlet">Supply Chain Digest</div>
+        <p class="press-quote">"The Beta Relay 2.0 platform's live vehicle dashboard synchronization gives logistics administrators a level of real-time visibility that was simply not available from most providers."</p>
+        <div class="press-date">2025 · Technology Review</div>
+      </div>
+      <div class="press-item reveal reveal-delay-3">
+        <div class="press-divider"></div>
+        <div class="press-outlet">Farm-to-Fork Report</div>
+        <p class="press-quote">"In just two years, Abbadeen Holdings has built a national cold-chain network that rivals companies with decades of history — their technology-first approach is clearly paying off."</p>
+        <div class="press-date">2025 · Company Profile</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ NEWSLETTER ══ -->
+<section id="newsletter">
+  <div class="section-inner">
+    <div class="newsletter-inner reveal">
+      <div class="section-label" style="justify-content:center;color:rgba(255,255,255,.6)">Stay Updated</div>
+      <h2 class="newsletter-h2">Get Abbadeen News<br>Delivered to You</h2>
+      <p class="newsletter-sub">Be the first to hear about platform updates, new partnerships, industry insights, and company milestones.</p>
+      <form class="newsletter-form" onsubmit="handleNewsletter(event)">
+        <input class="newsletter-input" type="email" placeholder="Enter your email address…" required />
+        <button class="newsletter-btn" type="submit">Subscribe →</button>
+      </form>
+      <p class="newsletter-note">No spam. Unsubscribe anytime. We send updates a few times per month.</p>
+      <p id="newsletterSuccess" style="display:none;color:rgba(255,255,255,.8);font-size:.85rem">✅ You're subscribed! Welcome aboard.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ══ FOOTER ══ -->
+<footer>
+  <div class="section-inner">
+    <div class="footer-grid">
+      <div class="footer-col">
+        <img src="/srcs/logo.png" alt="Abbadeen Holdings, LLC" class="footer-logo-img" />
+        <p class="footer-brand-desc">Your Farm-to-Table Freight partner. Delivering freshness, reliability, and trust across every route we serve.</p>
+        <p class="footer-brand-est">Abbadeen Holdings, LLC — Est. 2024 · USA Registered · Operating Nationwide</p>
+        <div class="footer-socials">
+          <a href="#" class="social-btn" title="X / Twitter">𝕏</a>
+          <a href="#" class="social-btn" title="LinkedIn">in</a>
+          <a href="#" class="social-btn" title="Facebook">f</a>
+          <a href="#" class="social-btn" title="YouTube">▶</a>
+        </div>
+      </div>
+      <div class="footer-col">
+        <div class="footer-col-title">Services</div>
+        <ul>
+          <li><a href="../index.html#services">Cold Chain Freight</a></li>
+          <li><a href="../index.html#services">Farm Pickup</a></li>
+          <li><a href="../index.html#services">Express Delivery</a></li>
+          <li><a href="../index.html#services">Warehousing</a></li>
+          <li><a href="../index.html#betarelay">Beta Relay 2.0</a></li>
+          <li><a href="../index.html#services">Wholesale Distribution</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <div class="footer-col-title">Company</div>
+        <ul>
+          <li><a href="../about/">About Us</a></li>
+          <li><a href="../index.html#howitworks">How It Works</a></li>
+          <li><a href="../index.html#betarelay">Flagship Project</a></li>
+          <li><a href="../news/">News &amp; Collaborations</a></li>
+          <li><a href="../contact/">Contact</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <div class="footer-col-title">Contact</div>
+        <ul>
+          <li><a href="/cdn-cgi/l/email-protection#dbb2b5bdb49bbab9b9babfbebeb5b3b4b7bfb2b5bca8f5b4a9bc"><span class="__cf_email__" data-cfemail="f990979f96b9989b9b989d9c9c979196959d90979e8ad7968b9e">[email&#160;protected]</span></a></li>
+          <li><a href="tel:+10000000000">+1 (000) 000-0000</a></li>
+          <li><a href="https://www.abbadeenholdings.org" target="_blank" rel="noopener">www.abbadeenholdings.org</a></li>
+          <li><a href="../contact/">USA — Nationwide Operations</a></li>
+          <li><a href="../contact/">Get a Free Quote</a></li>
+          <li><a href="../index.html#betarelay">Track a Shipment</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>© 2024–2025 Abbadeen Holdings, LLC. All rights reserved. | <a href="https://www.abbadeenholdings.org">www.abbadeenholdings.org</a></span>
+      <span><a href="#">Privacy Policy</a> &nbsp;·&nbsp; <a href="#">Terms of Service</a> &nbsp;·&nbsp; <a href="#">Cookie Policy</a></span>
+    </div>
+  </div>
+</footer>
+
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+  const cursor=document.getElementById('cursor'),ring=document.getElementById('cursorRing');
+  let mx=-100,my=-100,rx=-100,ry=-100;
+  document.addEventListener('mousemove',e=>{mx=e.clientX;my=e.clientY});
+  (function a(){rx+=(mx-rx)*.12;ry+=(my-ry)*.12;cursor.style.left=mx+'px';cursor.style.top=my+'px';ring.style.left=rx+'px';ring.style.top=ry+'px';requestAnimationFrame(a)})();
+  document.querySelectorAll('a,button,.news-card,.collab-card,.press-item').forEach(el=>{
+    el.addEventListener('mouseenter',()=>{cursor.classList.add('hovered');ring.classList.add('hovered')});
+    el.addEventListener('mouseleave',()=>{cursor.classList.remove('hovered');ring.classList.remove('hovered')});
+  });
+  function toggleNav(){document.getElementById('mainNav').classList.toggle('open')}
+  document.querySelectorAll('#mainNav a').forEach(a=>a.addEventListener('click',()=>document.getElementById('mainNav').classList.remove('open')));
+  const ro=new IntersectionObserver(e=>e.forEach(x=>{if(x.isIntersecting){x.target.classList.add('visible');ro.unobserve(x.target)}}),{threshold:.13});
+  document.querySelectorAll('.reveal').forEach(el=>ro.observe(el));
+  /* Filter buttons (UI only – full filtering would need backend/JS data layer) */
+  document.querySelectorAll('.filter-btn').forEach(btn=>{
+    btn.addEventListener('click',()=>{document.querySelectorAll('.filter-btn').forEach(b=>b.classList.remove('active'));btn.classList.add('active')});
+  });
+  function handleNewsletter(e){e.preventDefault();document.getElementById('newsletterSuccess').style.display='block';e.target.reset();}
+</script>
+</body>
+</html>

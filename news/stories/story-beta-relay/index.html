@@ -1,0 +1,424 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+<title>Beta Relay 2.0 Goes Live — A Game-Changer for U.S. Freight — Abbadeen Holdings, LLC</title>
+<meta name="description" content="After intensive development, Abbadeen Holdings, LLC officially launches its flagship National Over-the-Road Freight Coordination Platform — a technological"/>
+<link rel="canonical" href="https://www.abbadeenholdings.org/news/stories/story-beta-relay/"/>
+<meta property="og:type" content="article"/>
+<meta property="og:site_name" content="Abbadeen Holdings, LLC"/>
+<meta property="og:title" content="Beta Relay 2.0 Goes Live — A Game-Changer for U.S. Freight"/>
+<meta property="og:url" content="https://www.abbadeenholdings.org/news/stories/story-beta-relay/"/>
+<meta property="og:description" content="After intensive development, Abbadeen Holdings, LLC officially launches its flagship National Over-the-Road Freight Coordination Platform — a technological"/>
+<meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="Beta Relay 2.0 Goes Live — A Game-Changer for U.S. Freight"/>
+<meta name="twitter:site" content="@abbadeenholdings"/>
+<link rel="icon" type="image/svg+xml" href="https://www.abbadeenholdings.org/favicon.svg"/>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@400;600;700;800;900&family=Barlow:ital,wght@0,300;0,400;0,500;0,600;1,300&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet"/>
+<style>
+  *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+  :root{
+    --navy:#1B2A47;--navy-d:#111C30;--navy-l:#253860;
+    --green:#4D8B31;--green-l:#62A83E;--green-d:#3A6A24;
+    --white:#F5F7FA;--cream:#EEF0EB;--mid:#8A9BB8;--text:#2C3A52;
+    --border:rgba(77,139,49,0.25);--gold:#E8A020;--gold-l:#F0B535;
+    --ease:cubic-bezier(0.22,1,0.36,1);
+  }
+  html{scroll-behavior:smooth}
+  body{font-family:'Barlow',sans-serif;background:var(--white);color:var(--text);overflow-x:hidden}
+  ::-webkit-scrollbar{width:6px}::-webkit-scrollbar-track{background:var(--navy-d)}::-webkit-scrollbar-thumb{background:var(--green);border-radius:3px}
+
+  /* PROGRESS BAR */
+  #read-progress{position:fixed;top:0;left:0;height:3px;background:linear-gradient(90deg,var(--green-d),var(--green-l));width:0%;z-index:10000;transition:width .1s linear}
+
+  /* CURSOR */
+  .cursor{width:14px;height:14px;border-radius:50%;background:var(--green);position:fixed;top:0;left:0;pointer-events:none;z-index:9999;transform:translate(-50%,-50%);transition:width .3s,height .3s;mix-blend-mode:multiply}
+  .cursor-ring{width:38px;height:38px;border-radius:50%;border:1.5px solid var(--green);position:fixed;top:0;left:0;pointer-events:none;z-index:9998;transform:translate(-50%,-50%);transition:transform .18s var(--ease),width .3s,height .3s;opacity:.6}
+  .cursor.hovered{width:22px;height:22px}.cursor-ring.hovered{width:54px;height:54px;opacity:.3}
+
+  /* NAV */
+  #navbar{position:fixed;top:0;left:0;right:0;z-index:999;padding:0 5vw;display:flex;align-items:center;justify-content:space-between;height:76px;background:rgba(17,28,48,.97);backdrop-filter:blur(16px);box-shadow:0 2px 30px rgba(0,0,0,.3)}
+  .nav-logo{display:flex;align-items:center;text-decoration:none}
+  .nav-logo-img{height:70px;width:auto;object-fit:contain;mix-blend-mode:lighten;filter:brightness(1.15) contrast(1.05);transition:transform .3s var(--ease)}
+  .nav-logo:hover .nav-logo-img{transform:scale(1.04)}
+  nav{display:flex;gap:.15rem;align-items:center}
+  nav a{font-size:.88rem;font-weight:500;color:rgba(255,255,255,.75);text-decoration:none;letter-spacing:.04em;text-transform:uppercase;position:relative;padding:.4rem .85rem;transition:color .3s}
+  nav a::after{content:'';position:absolute;bottom:0;left:.85rem;right:.85rem;height:1.5px;background:var(--green-l);transform:scaleX(0);transform-origin:left;transition:transform .3s var(--ease)}
+  nav a:hover,nav a.active{color:#fff}nav a:hover::after,nav a.active::after{transform:scaleX(1)}
+  .nav-cta{background:var(--green)!important;color:#fff!important;padding:.5rem 1.3rem!important;border-radius:3px;font-weight:600!important;margin-left:.5rem;transition:background .3s,transform .2s!important}
+  .nav-cta:hover{background:var(--green-l)!important;transform:translateY(-2px)}
+  .nav-cta::after{display:none!important}
+  .nav-hamburger{display:none;flex-direction:column;gap:5px;cursor:pointer}
+  .nav-hamburger span{width:24px;height:2px;background:#fff;border-radius:2px;transition:.3s}
+  nav.open{display:flex;position:fixed;top:76px;left:0;right:0;flex-direction:column;background:rgba(17,28,48,.98);backdrop-filter:blur(16px);padding:2rem 5vw;gap:1.5rem;border-top:1px solid rgba(255,255,255,.08)}
+
+  /* STORY HERO */
+  .story-hero{padding:140px 5vw 70px;background:var(--navy-d);position:relative;overflow:hidden}
+  .story-hero-bg{position:absolute;inset:0;background-image:repeating-linear-gradient(-15deg,transparent,transparent 38px,rgba(77,139,49,.05) 38px,rgba(77,139,49,.05) 39px)}
+  .story-hero-glow{position:absolute;top:-60px;right:-60px;width:700px;height:600px;background:radial-gradient(ellipse,rgba(77,139,49,.11) 0%,transparent 70%);pointer-events:none}
+  .story-hero-inner{position:relative;z-index:2;max-width:900px;margin:0 auto}
+  .breadcrumb{display:flex;align-items:center;gap:.5rem;font-family:'Space Mono',monospace;font-size:.62rem;letter-spacing:.14em;text-transform:uppercase;color:rgba(255,255,255,.3);margin-bottom:1.4rem;flex-wrap:wrap}
+  .breadcrumb a{color:rgba(255,255,255,.3);text-decoration:none;transition:color .2s}.breadcrumb a:hover{color:var(--green-l)}
+  .breadcrumb span{color:rgba(255,255,255,.15)}
+  .story-cat-row{display:flex;align-items:center;gap:.8rem;margin-bottom:1.2rem;flex-wrap:wrap}
+  .story-cat{font-family:'Barlow Condensed',sans-serif;font-weight:800;font-size:.72rem;letter-spacing:.14em;text-transform:uppercase;padding:.3rem .85rem;border-radius:3px}
+  .cat-gold{background:var(--gold);color:var(--navy-d)}.cat-green{background:var(--green);color:#fff}.cat-navy{background:var(--navy-l);color:#fff}.cat-green-l{background:var(--green-l);color:#fff}
+  .story-date{font-family:'Space Mono',monospace;font-size:.65rem;color:rgba(255,255,255,.3);letter-spacing:.1em}
+  .story-hero-h1{font-family:'Barlow Condensed',sans-serif;font-weight:900;font-size:clamp(2.4rem,5.5vw,4.2rem);color:#fff;line-height:.95;text-transform:uppercase;letter-spacing:-.02em;margin-bottom:1.2rem}
+  .story-hero-h1 em{font-style:normal;color:var(--green-l)}
+  .story-hero-lead{font-size:1.15rem;font-weight:300;color:rgba(255,255,255,.65);line-height:1.75;max-width:680px;margin-bottom:2rem}
+  .story-meta-row{display:flex;align-items:center;gap:2rem;padding-top:1.4rem;border-top:1px solid rgba(255,255,255,.08);flex-wrap:wrap}
+  .story-author{display:flex;align-items:center;gap:.7rem}
+  .author-avatar{width:36px;height:36px;border-radius:50%;background:var(--green-d);border:2px solid rgba(77,139,49,.4);display:flex;align-items:center;justify-content:center;font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:.9rem;color:#fff}
+  .author-name{font-size:.82rem;font-weight:600;color:#fff}
+  .author-role{font-size:.7rem;color:rgba(255,255,255,.35)}
+  .story-read-time{font-family:'Space Mono',monospace;font-size:.65rem;color:rgba(255,255,255,.3);letter-spacing:.1em}
+  .story-share-row{margin-left:auto;display:flex;gap:.5rem;align-items:center}
+  .share-label{font-family:'Space Mono',monospace;font-size:.62rem;color:rgba(255,255,255,.25);letter-spacing:.1em;text-transform:uppercase}
+  .share-btn{width:30px;height:30px;border:1px solid rgba(255,255,255,.12);border-radius:6px;display:flex;align-items:center;justify-content:center;color:rgba(255,255,255,.4);text-decoration:none;font-size:.8rem;transition:background .2s,color .2s,border-color .2s}
+  .share-btn:hover{background:var(--green);border-color:var(--green);color:#fff}
+
+  /* ARTICLE BODY */
+  .article-wrap{max-width:900px;margin:0 auto;padding:5rem 5vw;display:grid;grid-template-columns:1fr 280px;gap:4rem;align-items:start}
+  .article-body p{font-size:1.02rem;line-height:1.85;color:var(--text);margin-bottom:1.5rem}
+  .article-body h2{font-family:'Barlow Condensed',sans-serif;font-weight:800;font-size:1.9rem;text-transform:uppercase;color:var(--navy);margin:2.8rem 0 1rem;line-height:1.05;letter-spacing:-.01em}
+  .article-body h3{font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:1.35rem;text-transform:uppercase;color:var(--navy);margin:2rem 0 .7rem;letter-spacing:.02em}
+  .article-body ul,
+  .article-body ol{margin:0 0 1.5rem 1.4rem}
+  .article-body li{font-size:1rem;line-height:1.75;color:var(--text);margin-bottom:.4rem}
+  .article-body strong{color:var(--navy);font-weight:600}
+  .article-body a{color:var(--green);text-decoration:none;border-bottom:1px solid var(--border);transition:color .2s,border-color .2s}
+  .article-body a:hover{color:var(--green-l);border-color:var(--green-l)}
+  .article-divider{width:48px;height:3px;background:var(--green);margin:2.4rem 0}
+
+  /* PULLQUOTE */
+  .pullquote{border-left:4px solid var(--green);padding:1.2rem 1.6rem;background:rgba(77,139,49,.06);border-radius:0 8px 8px 0;margin:2rem 0}
+  .pullquote p{font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:1.45rem;color:var(--navy);line-height:1.2;margin:0;text-transform:uppercase;letter-spacing:-.01em}
+  .pullquote cite{display:block;margin-top:.6rem;font-size:.75rem;font-style:normal;color:var(--mid);letter-spacing:.08em;text-transform:uppercase}
+
+  /* STAT CALLOUT */
+  .stat-callout{background:var(--navy-d);border-radius:12px;padding:1.6rem;margin:2rem 0;display:grid;grid-template-columns:repeat(3,1fr);gap:1rem;text-align:center}
+  .sc-num{font-family:'Barlow Condensed',sans-serif;font-weight:900;font-size:2.2rem;color:var(--green-l);line-height:1}
+  .sc-label{font-size:.72rem;color:rgba(255,255,255,.4);text-transform:uppercase;letter-spacing:.08em;margin-top:.3rem}
+
+  /* SIDEBAR */
+  .article-sidebar{position:sticky;top:100px}
+  .sidebar-card{background:#fff;border:1px solid rgba(27,42,71,.08);border-radius:12px;padding:1.6rem;margin-bottom:1.4rem}
+  .sidebar-card-title{font-family:'Barlow Condensed',sans-serif;font-weight:800;font-size:.85rem;text-transform:uppercase;letter-spacing:.08em;color:var(--navy);margin-bottom:1rem;display:flex;align-items:center;gap:.5rem}
+  .sidebar-card-title::before{content:'';display:inline-block;width:14px;height:2px;background:var(--green)}
+  .related-item{display:flex;gap:.7rem;padding:.7rem 0;border-bottom:1px solid rgba(27,42,71,.07);cursor:pointer;text-decoration:none;transition:transform .2s var(--ease)}
+  .related-item:last-child{border-bottom:none;padding-bottom:0}
+  .related-item:hover{transform:translateX(4px)}
+  .related-icon{width:40px;height:40px;border-radius:6px;background:var(--navy-d);display:flex;align-items:center;justify-content:center;font-size:1rem;flex-shrink:0}
+  .related-title{font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:.88rem;text-transform:uppercase;color:var(--navy);line-height:1.2;margin-bottom:.2rem}
+  .related-cat{font-size:.68rem;color:var(--mid);text-transform:uppercase;letter-spacing:.06em}
+  .sidebar-cta{background:var(--navy-d);border-radius:12px;padding:1.6rem;text-align:center}
+  .sidebar-cta-icon{font-size:1.8rem;margin-bottom:.8rem}
+  .sidebar-cta-title{font-family:'Barlow Condensed',sans-serif;font-weight:800;font-size:1.1rem;text-transform:uppercase;color:#fff;margin-bottom:.5rem}
+  .sidebar-cta-desc{font-size:.78rem;color:rgba(255,255,255,.45);line-height:1.6;margin-bottom:1.1rem}
+  .sidebar-btn{display:block;background:var(--green);color:#fff;padding:.7rem 1rem;border-radius:4px;font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:.82rem;letter-spacing:.08em;text-transform:uppercase;text-decoration:none;transition:background .3s,transform .2s var(--ease)}
+  .sidebar-btn:hover{background:var(--green-l);transform:translateY(-2px)}
+
+  /* CTA BAND */
+  .story-cta-band{background:var(--green-d);padding:4.5rem 5vw;text-align:center}
+  .scb-inner{max-width:600px;margin:0 auto}
+  .scb-label{font-family:'Space Mono',monospace;font-size:.65rem;letter-spacing:.18em;text-transform:uppercase;color:rgba(255,255,255,.5);margin-bottom:.8rem}
+  .scb-h2{font-family:'Barlow Condensed',sans-serif;font-weight:800;font-size:clamp(2rem,4vw,2.8rem);text-transform:uppercase;color:#fff;line-height:.95;margin-bottom:.8rem}
+  .scb-sub{font-size:.95rem;font-weight:300;color:rgba(255,255,255,.6);line-height:1.7;margin-bottom:1.8rem}
+  .scb-actions{display:flex;gap:1rem;justify-content:center;flex-wrap:wrap}
+  .btn-primary{background:var(--green);color:#fff;padding:.85rem 2.2rem;border-radius:4px;font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:1rem;letter-spacing:.08em;text-transform:uppercase;text-decoration:none;display:inline-flex;align-items:center;gap:.6rem;border:2px solid rgba(255,255,255,.2);transition:background .3s,transform .25s var(--ease),box-shadow .3s}
+  .btn-primary:hover{background:#fff;color:var(--green-d);transform:translateY(-3px)}
+  .btn-ghost{background:transparent;color:rgba(255,255,255,.8);padding:.85rem 2rem;border-radius:4px;font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:1rem;letter-spacing:.08em;text-transform:uppercase;text-decoration:none;display:inline-flex;align-items:center;gap:.6rem;border:2px solid rgba(255,255,255,.25);transition:border-color .3s,color .3s,transform .25s var(--ease)}
+  .btn-ghost:hover{border-color:rgba(255,255,255,.6);color:#fff;transform:translateY(-3px)}
+
+  /* FOOTER */
+  footer{background:var(--navy-d);padding:5rem 0 2rem;border-top:1px solid rgba(255,255,255,.06)}
+  .section-inner{max-width:1240px;margin:0 auto;padding:0 5vw}
+  .footer-grid{display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:3rem;padding-bottom:3rem;border-bottom:1px solid rgba(255,255,255,.08);margin-bottom:2rem}
+  .footer-logo-img{height:70px;width:auto;object-fit:contain;mix-blend-mode:lighten;filter:brightness(1.1)}
+  .footer-brand-desc{font-size:.88rem;color:rgba(255,255,255,.4);line-height:1.7;margin-top:1rem;max-width:280px}
+  .footer-brand-est{font-family:'Space Mono',monospace;font-size:.6rem;letter-spacing:.1em;color:rgba(255,255,255,.2);margin-top:.6rem;text-transform:uppercase}
+  .footer-socials{display:flex;gap:.7rem;margin-top:1.5rem}
+  .social-btn{width:36px;height:36px;border:1px solid rgba(255,255,255,.12);border-radius:6px;display:flex;align-items:center;justify-content:center;color:rgba(255,255,255,.4);text-decoration:none;font-size:.9rem;transition:background .3s,border-color .3s,color .3s,transform .2s}
+  .social-btn:hover{background:var(--green);border-color:var(--green);color:#fff;transform:translateY(-3px)}
+  .footer-col-title{font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:.85rem;text-transform:uppercase;letter-spacing:.1em;color:#fff;margin-bottom:1.2rem}
+  .footer-col ul{list-style:none;display:flex;flex-direction:column;gap:.65rem}
+  .footer-col ul a{font-size:.85rem;color:rgba(255,255,255,.4);text-decoration:none;transition:color .3s,padding-left .2s}
+  .footer-col ul a:hover{color:var(--green-l);padding-left:6px}
+  .footer-bottom{display:flex;justify-content:space-between;align-items:center;font-size:.78rem;color:rgba(255,255,255,.25);flex-wrap:wrap;gap:.5rem}
+  .footer-bottom a{color:var(--green-l);text-decoration:none}
+
+  /* TICKER */
+  .ticker{background:var(--navy);overflow:hidden;padding:.6rem 0;border-bottom:1px solid rgba(255,255,255,.05)}
+  .ticker::before,.ticker::after{content:'';position:absolute;top:0;bottom:0;width:60px;z-index:2}
+  .ticker::before{left:0;background:linear-gradient(to right,var(--navy),transparent)}
+  .ticker::after{right:0;background:linear-gradient(to left,var(--navy),transparent)}
+  .ticker-track{display:flex;gap:3rem;animation:tickerScroll 25s linear infinite;width:max-content;position:relative}
+  @keyframes tickerScroll{to{transform:translateX(-50%)}}
+  .ticker-item{display:flex;align-items:center;gap:.6rem;font-family:'Barlow Condensed',sans-serif;font-size:.78rem;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:rgba(255,255,255,.4);white-space:nowrap}
+  .ticker-dot{width:4px;height:4px;border-radius:50%;background:rgba(255,255,255,.2)}
+
+  /* ANIMATIONS */
+  .reveal{opacity:0;transform:translateY(30px);transition:opacity .8s var(--ease),transform .8s var(--ease)}
+  .reveal.visible{opacity:1;transform:translateY(0)}
+
+  /* RESPONSIVE */
+  @media(max-width:1024px){.article-wrap{grid-template-columns:1fr;gap:3rem}.article-sidebar{position:static}.stat-callout{grid-template-columns:1fr 1fr}}
+  @media(max-width:768px){nav{display:none}.nav-hamburger{display:flex}.stat-callout{grid-template-columns:1fr}.footer-grid{grid-template-columns:1fr 1fr}}
+  @media(max-width:480px){.footer-grid{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+<div id="read-progress"></div>
+<div class="cursor" id="cursor"></div>
+<div class="cursor-ring" id="cursorRing"></div>
+
+<header id="navbar">
+  <a href="../../../" class="nav-logo">
+    <img src="../../../srcs/logo.png" alt="Abbadeen Holdings, LLC" class="nav-logo-img" />
+  </a>
+  <nav id="mainNav">
+    <a href="../../../">Home</a>
+    <a href="../../../about/">About</a>
+    <a href="../../../news/" class="active">News &amp; Collaborations</a>
+    <a href="../../../contact/" class="nav-cta">Contact Us</a>
+  </nav>
+  <div class="nav-hamburger" id="hamburger" onclick="toggleNav()">
+    <span></span><span></span><span></span>
+  </div>
+</header>
+
+<!-- STORY HERO -->
+<section class="story-hero">
+  <div class="story-hero-bg"></div>
+  <div class="story-hero-glow"></div>
+  <div class="story-hero-inner">
+    <div class="breadcrumb">
+      <a href="../../../">Home</a><span>/</span>
+      <a href="../../../news/">News &amp; Collaborations</a><span>/</span>
+      <span style="color:rgba(255,255,255,.55)">Flagship Launch</span>
+    </div>
+    <div class="story-cat-row">
+      <span class="story-cat cat-gold">Flagship Launch</span>
+      <span class="story-date">2025 · Platform</span>
+    </div>
+    <h1 class="story-hero-h1">Beta Relay <em>2.0</em><br>Goes Live</h1>
+    <p class="story-hero-lead">After intensive development, Abbadeen Holdings, LLC officially launches its flagship National Over-the-Road Freight Coordination Platform — a technological breakthrough that fundamentally changes how America moves freight.</p>
+    <div class="story-meta-row">
+      <div class="story-author">
+        <div class="author-avatar">AH</div>
+        <div>
+          <div class="author-name">Abbadeen Holdings Editorial</div>
+          <div class="author-role">Technology &amp; Platform</div>
+        </div>
+      </div>
+      <span class="story-read-time">⏱ 7 min read</span>
+      <div class="story-share-row">
+        <span class="share-label">Share</span>
+        <a href="https://twitter.com/intent/tweet?url=https://www.abbadeenholdings.org/story-beta-relay.html" target="_blank" rel="noopener" class="share-btn" title="Share on X">𝕏</a>
+        <a href="https://www.linkedin.com/sharing/share-offsite/?url=https://www.abbadeenholdings.org/story-beta-relay.html" target="_blank" rel="noopener" class="share-btn" title="Share on LinkedIn">in</a>
+        <a href="#" onclick="copyLink();return false;" id="share-copy" class="share-btn" title="Copy link">🔗</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SLIM TICKER -->
+<div class="ticker" style="position:relative">
+  <div class="ticker-track">
+    <div class="ticker-item"><span class="ticker-dot"></span>Abbadeen Holdings, LLC</div>
+    <div class="ticker-item"><span class="ticker-dot"></span>Farm-to-Table Freight</div>
+    <div class="ticker-item"><span class="ticker-dot"></span>Beta Relay 2.0 — Live</div>
+    <div class="ticker-item"><span class="ticker-dot"></span>Est. 2024 · USA Registered</div>
+    <div class="ticker-item"><span class="ticker-dot"></span>abbadeenholdings.org</div>
+    <div class="ticker-item"><span class="ticker-dot"></span>Abbadeen Holdings, LLC</div>
+    <div class="ticker-item"><span class="ticker-dot"></span>Farm-to-Table Freight</div>
+    <div class="ticker-item"><span class="ticker-dot"></span>Beta Relay 2.0 — Live</div>
+    <div class="ticker-item"><span class="ticker-dot"></span>Est. 2024 · USA Registered</div>
+    <div class="ticker-item"><span class="ticker-dot"></span>abbadeenholdings.org</div>
+  </div>
+</div>
+
+<!-- ARTICLE -->
+<div class="article-wrap">
+  <div class="article-body reveal">
+
+    <p>There is a moment in every company's life when a product moves from vision to reality — when months of development, iteration, and testing converge into something that actually works in the real world. For Abbadeen Holdings, LLC, that moment arrived with the official launch of <strong>Beta Relay 2.0</strong>, our National Over-the-Road Freight Coordination Platform.</p>
+
+    <p>This is not a minor update or a feature release. Beta Relay 2.0 is a ground-up rethinking of how over-the-road freight is managed, monitored, and optimized across the United States — and we believe it represents one of the most significant advances in logistics intelligence the industry has seen in years.</p>
+
+    <div class="article-divider"></div>
+
+    <h2>What Beta Relay 2.0 Actually Does</h2>
+
+    <p>At its core, Beta Relay 2.0 is an <strong>app-based operational intelligence system</strong>. That phrase carries a lot of weight, so let's unpack it.</p>
+
+    <p>Traditional freight management systems are reactive — they tell you where a truck was, or alert you after something goes wrong. Beta Relay 2.0 is fundamentally different: it is <em>proactive</em> and <em>predictive</em>. Every vehicle in the Abbadeen network streams live telemetry data — GPS position, speed, engine status, temperature readings, driver hours-of-service status — directly into the platform in real time. Administrators see exactly what is happening, where, and when. Not fifteen minutes ago. Now.</p>
+
+    <div class="pullquote">
+      <p>"Administrators see exactly what is happening, where, and when. Not fifteen minutes ago. <em>Now.</em>"</p>
+      <cite>— Beta Relay 2.0 Platform Overview</cite>
+    </div>
+
+    <p>But live tracking is just the surface. The deeper power of Beta Relay 2.0 lies in three interlocking systems that together form a complete national freight intelligence layer.</p>
+
+    <div class="stat-callout">
+      <div><div class="sc-num">$875B</div><div class="sc-label">U.S. Freight Sector Addressed</div></div>
+      <div><div class="sc-num">24/7</div><div class="sc-label">Continuous Route Operations</div></div>
+      <div><div class="sc-num">Real-Time</div><div class="sc-label">Live Dashboard Sync</div></div>
+    </div>
+
+    <h2>The Three Pillars of the Platform</h2>
+
+    <h3>1. Route-to-Market Optimization</h3>
+    <p>Every route in the Abbadeen network is continuously evaluated against live traffic data, weather conditions, driver availability, and load requirements. The system doesn't just calculate a route once at dispatch — it recalculates constantly, identifying savings in time, fuel, and emissions that static routing simply cannot achieve. Early operational data suggests that optimized routing through Beta Relay 2.0 reduces unnecessary mileage by a meaningful margin on most routes, translating directly into cost and emissions savings.</p>
+
+    <h3>2. Baton-Relay Driver Network</h3>
+    <p>This is perhaps the most operationally innovative feature of the platform. Rather than a single driver operating a truck from origin to destination — a model that creates bottlenecks around federal hours-of-service (HOS) regulations and driver fatigue — the baton-relay model uses strategically placed relay points along major corridors.</p>
+
+    <p>At each relay point, a rested driver takes over the vehicle, and the outgoing driver rests or returns home. The truck never stops moving. The cargo stays cold. The HOS clock resets. Delivery times improve dramatically, and driver fatigue — a leading cause of trucking accidents — is fundamentally reduced. The relay network is coordinated entirely through the Beta Relay 2.0 platform, which schedules handoffs, tracks driver readiness, and manages compliance in real time.</p>
+
+    <h3>3. National Capacity Coordination</h3>
+    <p>The third pillar addresses a chronic problem in U.S. freight: empty miles. When trucks run without cargo — a phenomenon known as deadheading — it wastes fuel, adds to emissions, and inflates operational costs. Beta Relay 2.0's capacity coordination layer matches available loads to available vehicles across the national network, reducing deadhead miles and increasing the productive utilization of every vehicle in the fleet.</p>
+
+    <div class="article-divider"></div>
+
+    <h2>Why This Matters Beyond Abbadeen</h2>
+
+    <p>The U.S. freight sector moves approximately <strong>$875 billion worth of goods annually</strong>. It employs millions of people, sustains the supply chains of every major industry, and is the invisible backbone of the American economy. Yet for decades, it has been one of the least technologically modernized sectors in the country.</p>
+
+    <p>The problems are well-documented: a driver shortage exceeding 80,000 positions, an aging fleet, mounting regulatory pressure around emissions, and fragmented coordination systems that result in billions of dollars in wasted capacity every year. Beta Relay 2.0 is built specifically to address these systemic failures — not by adding complexity, but by replacing fragmentation with intelligence.</p>
+
+    <p>The platform is designed as <strong>scalable public-benefit infrastructure</strong>. While it currently powers Abbadeen Holdings' own network, its architecture is built to serve the broader U.S. retail and food-service freight ecosystem — and we intend to expand its reach accordingly.</p>
+
+    <div class="article-divider"></div>
+
+    <h2>What Comes Next</h2>
+
+    <p>The launch of Beta Relay 2.0 is a beginning, not a destination. Our development roadmap includes deeper integrations with ELD (Electronic Logging Device) systems, expanded API access for CPG brand logistics teams, enhanced predictive analytics for demand forecasting, and a shippers' portal that gives clients full visibility into their freight in real time.</p>
+
+    <p>We are also in active discussions with supply chain technology partners around API integration and platform collaboration — reflecting our belief that the future of U.S. freight is not siloed, but interconnected.</p>
+
+    <p>If you are a shipper, carrier, CPG brand, or logistics technology provider and want to learn more about Beta Relay 2.0, <a href="contact.html">reach out to our team</a>. We respond within 2 business hours and are happy to arrange a platform demonstration.</p>
+
+    <p>The trucks are moving. The data is live. The relay is running. Beta Relay 2.0 is here.</p>
+
+  </div>
+  <aside class="article-sidebar">
+    <div class="sidebar-card">
+      <div class="sidebar-card-title">Related Stories</div>
+
+      <a href="../../../news/stories/story-driver-shortage/" class="related-item">
+        <div class="related-icon">🚛</div>
+        <div><div class="related-title">Solving the 80,000 Driver Shortage</div><div class="related-cat">Industry · 2025</div></div>
+      </a>
+      <a href="../../../news/stories/story-emissions/" class="related-item">
+        <div class="related-icon">🌿</div>
+        <div><div class="related-title">Routing Cuts CO₂ by Up to 30%</div><div class="related-cat">Sustainability · 2025</div></div>
+      </a>
+      <a href="../../../news/stories/story-cpg-routes/" class="related-item">
+        <div class="related-icon">🤝</div>
+        <div><div class="related-title">200+ New CPG Routes Added</div><div class="related-cat">Partnerships · 2025</div></div>
+      </a>
+    </div>
+    <div class="sidebar-cta">
+      <div class="sidebar-cta-icon">📦</div>
+      <div class="sidebar-cta-title">Move With Abbadeen</div>
+      <p class="sidebar-cta-desc">Get a free, tailored freight quote within 2 business hours.</p>
+      <a href="../../../contact/" class="sidebar-btn">Request a Quote →</a>
+    </div>
+  </aside>
+</div>
+
+<!-- CTA BAND -->
+<div class="story-cta-band">
+  <div class="scb-inner reveal">
+    <div class="scb-label">What's Next</div>
+    <h2 class="scb-h2">Experience<br>Beta Relay 2.0</h2>
+    <p class="scb-sub">Request a demo of our flagship platform or ask about integrating Beta Relay 2.0 into your existing logistics operation.</p>
+    <div class="scb-actions">
+      <a href="../../../contact/" class="btn-primary">Get a Free Quote →</a>
+      <a href="../../../news/" class="btn-ghost">← Back to News</a>
+    </div>
+  </div>
+</div>
+
+<footer>
+  <div class="section-inner">
+    <div class="footer-grid">
+      <div class="footer-col">
+        <img src="../../../srcs/logo.png" alt="Abbadeen Holdings, LLC" class="footer-logo-img" />
+        <p class="footer-brand-desc">Your Farm-to-Table Freight partner. Delivering freshness, reliability, and trust across every route we serve.</p>
+        <p class="footer-brand-est">Abbadeen Holdings, LLC — Est. 2024 · USA Registered · Operating Nationwide</p>
+        <div class="footer-socials">
+          <a href="#" class="social-btn">𝕏</a>
+          <a href="#" class="social-btn">in</a>
+          <a href="#" class="social-btn">f</a>
+          <a href="#" class="social-btn">▶</a>
+        </div>
+      </div>
+      <div class="footer-col">
+        <div class="footer-col-title">Services</div>
+        <ul>
+          <li><a href="../../../index.html#services">Cold Chain Freight</a></li>
+          <li><a href="../../../index.html#services">Express Delivery</a></li>
+          <li><a href="../../../index.html#betarelay">Beta Relay 2.0</a></li>
+          <li><a href="../../../index.html#services">Wholesale Distribution</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <div class="footer-col-title">Company</div>
+        <ul>
+          <li><a href="../../../about/">About Us</a></li>
+          <li><a href="../../../news/">News &amp; Collaborations</a></li>
+          <li><a href="../../../contact/">Contact</a></li>
+          <li><a href="../../../index.html#betarelay">Flagship Project</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <div class="footer-col-title">Contact</div>
+        <ul>
+          <li><a href="mailto:info@abbadeenholdings.org">info@abbadeenholdings.org</a></li>
+          <li><a href="tel:+10000000000">+1 (000) 000-0000</a></li>
+          <li><a href="https://www.abbadeenholdings.org" target="_blank" rel="noopener">www.abbadeenholdings.org</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>© 2024–2025 Abbadeen Holdings, LLC. All rights reserved. | <a href="https://www.abbadeenholdings.org">www.abbadeenholdings.org</a></span>
+      <span><a href="#">Privacy Policy</a> &nbsp;·&nbsp; <a href="#">Terms of Service</a></span>
+    </div>
+  </div>
+</footer>
+
+<script>
+  /* Cursor */
+  const cursor=document.getElementById('cursor'),ring=document.getElementById('cursorRing');
+  let mx=-100,my=-100,rx=-100,ry=-100;
+  document.addEventListener('mousemove',e=>{mx=e.clientX;my=e.clientY});
+  (function a(){rx+=(mx-rx)*.12;ry+=(my-ry)*.12;cursor.style.left=mx+'px';cursor.style.top=my+'px';ring.style.left=rx+'px';ring.style.top=ry+'px';requestAnimationFrame(a)})();
+  document.querySelectorAll('a,button').forEach(el=>{
+    el.addEventListener('mouseenter',()=>{cursor.classList.add('hovered');ring.classList.add('hovered')});
+    el.addEventListener('mouseleave',()=>{cursor.classList.remove('hovered');ring.classList.remove('hovered')});
+  });
+  /* Nav */
+  function toggleNav(){document.getElementById('mainNav').classList.toggle('open')}
+  document.querySelectorAll('#mainNav a').forEach(a=>a.addEventListener('click',()=>document.getElementById('mainNav').classList.remove('open')));
+  /* Reveal */
+  const ro=new IntersectionObserver(e=>e.forEach(x=>{if(x.isIntersecting){x.target.classList.add('visible');ro.unobserve(x.target)}}),{threshold:.1});
+  document.querySelectorAll('.reveal').forEach(el=>ro.observe(el));
+  /* Reading progress */
+  window.addEventListener('scroll',()=>{
+    const doc=document.documentElement,body=document.body;
+    const top=doc.scrollTop||body.scrollTop;
+    const height=(doc.scrollHeight||body.scrollHeight)-doc.clientHeight;
+    document.getElementById('read-progress').style.width=(height>0?(top/height*100):0)+'%';
+  });
+  /* Share copy */
+  function copyLink(){navigator.clipboard.writeText(window.location.href).then(()=>{const b=document.getElementById('share-copy');b.textContent='✓';setTimeout(()=>{b.textContent='🔗'},1500)});}
+</script>
+</body>
+</html>
