@@ -741,7 +741,77 @@ html,body{height:100%;font-family:'Manrope',sans-serif;background:var(--bg);colo
 .stt-label{font-size:8px;color:var(--muted);margin-top:3px;text-align:center;max-width:60px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;}
 .stt-stop.done .stt-label{color:var(--blue);}
 .stt-stop.current .stt-label{color:var(--amber);font-weight:700;}
-@media(max-width:768px){.shipments-header-grid{grid-template-columns:repeat(2,1fr);}.shipments-grid{grid-template-columns:1fr;}}
+/* ═══════════════ DOCUMENTATION MODAL ═══════════════ */
+.docs-ov{position:fixed;inset:0;background:rgba(15,23,42,.6);backdrop-filter:blur(6px);z-index:300000;display:none;align-items:center;justify-content:center;padding:16px;}
+.docs-ov.open{display:flex;}
+.docs-modal{background:var(--surf);border:1px solid var(--border2);border-radius:var(--rl);width:960px;max-width:98vw;height:90vh;max-height:860px;overflow:hidden;display:flex;flex-direction:column;box-shadow:var(--sh4);animation:modalIn .28s cubic-bezier(.34,1.4,.64,1) both;}
+.docs-header{padding:18px 24px 14px;border-bottom:1px solid var(--border);display:flex;align-items:center;gap:14px;flex-shrink:0;background:linear-gradient(135deg,#1e3a8a 0%,#1d4ed8 50%,#0891b2 100%);}
+.docs-logo{width:42px;height:42px;border-radius:10px;background:rgba(255,255,255,.2);display:flex;align-items:center;justify-content:center;flex-shrink:0;}
+.docs-logo svg{width:22px;height:22px;fill:#fff;}
+.docs-header-text{flex:1;}
+.docs-title{font-family:'Syne',sans-serif;font-size:20px;font-weight:800;color:#fff;line-height:1;}
+.docs-subtitle{font-size:11px;color:rgba(255,255,255,.72);margin-top:3px;font-weight:500;}
+.docs-header-meta{display:flex;align-items:center;gap:8px;flex-shrink:0;}
+.docs-version{background:rgba(255,255,255,.18);color:#fff;font-family:var(--num-font);font-size:10px;font-weight:700;padding:3px 9px;border-radius:12px;border:1px solid rgba(255,255,255,.25);}
+.docs-close{cursor:pointer;color:rgba(255,255,255,.8);background:rgba(255,255,255,.12);border:1px solid rgba(255,255,255,.2);border-radius:var(--rs);padding:6px;display:flex;transition:all .14s;}
+.docs-close:hover{color:#fff;background:rgba(255,255,255,.22);}
+.docs-close svg{width:15px;height:15px;fill:none;stroke:currentColor;stroke-width:2.5;}
+.docs-body{display:flex;flex:1;min-height:0;}
+.docs-nav{width:220px;flex-shrink:0;border-right:1px solid var(--border);overflow-y:auto;padding:12px 0;background:var(--surf2);}
+.docs-nav-section{padding:10px 16px 4px;font-size:9px;color:var(--muted);text-transform:uppercase;letter-spacing:1.8px;font-weight:700;}
+.docs-nav-item{display:flex;align-items:center;gap:8px;padding:7px 16px;cursor:pointer;font-size:12px;color:var(--text3);font-weight:500;transition:all .12s;border-left:3px solid transparent;}
+.docs-nav-item:hover{background:var(--blue-l);color:var(--blue);}
+.docs-nav-item.active{background:var(--blue-l);color:var(--blue);font-weight:700;border-left-color:var(--blue);}
+.docs-nav-item .nav-ic{font-size:14px;width:18px;text-align:center;flex-shrink:0;}
+.docs-content{flex:1;overflow-y:auto;padding:28px 32px;}
+.docs-section{display:none;}
+.docs-section.active{display:block;}
+.docs-h1{font-family:'Syne',sans-serif;font-size:22px;font-weight:800;color:var(--text);margin-bottom:6px;line-height:1.2;}
+.docs-h2{font-family:'Syne',sans-serif;font-size:16px;font-weight:700;color:var(--text);margin:24px 0 8px;padding-bottom:6px;border-bottom:2px solid var(--blue-100);display:flex;align-items:center;gap:8px;}
+.docs-h2 .sec-ic{font-size:16px;}
+.docs-h3{font-family:'Syne',sans-serif;font-size:13px;font-weight:700;color:var(--text2);margin:16px 0 6px;}
+.docs-lead{font-size:13px;color:var(--text3);line-height:1.7;margin-bottom:16px;border-left:3px solid var(--blue);padding-left:12px;background:var(--blue-l);border-radius:0 var(--rs) var(--rs) 0;padding:10px 14px;}
+.docs-p{font-size:12.5px;color:var(--text3);line-height:1.8;margin-bottom:12px;}
+.docs-feature-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:10px;margin:14px 0;}
+.docs-feature-card{background:var(--surf2);border:1px solid var(--border);border-radius:var(--r);padding:14px;transition:all .15s;}
+.docs-feature-card:hover{border-color:var(--blue-200);box-shadow:var(--sh1);}
+.docs-feature-ic{font-size:22px;margin-bottom:8px;}
+.docs-feature-title{font-family:'Syne',sans-serif;font-size:12px;font-weight:700;color:var(--text);margin-bottom:4px;}
+.docs-feature-desc{font-size:11px;color:var(--text3);line-height:1.6;}
+.docs-table{width:100%;border-collapse:collapse;margin:12px 0;font-size:12px;}
+.docs-table th{background:var(--surf3);padding:8px 12px;text-align:left;font-size:10px;font-weight:700;color:var(--muted);text-transform:uppercase;letter-spacing:.5px;border-bottom:2px solid var(--border);}
+.docs-table td{padding:9px 12px;border-bottom:1px solid var(--border);color:var(--text3);vertical-align:top;line-height:1.5;}
+.docs-table tr:last-child td{border-bottom:none;}
+.docs-table tr:hover td{background:var(--blue-l);}
+.docs-table td strong{color:var(--text);font-weight:700;}
+.docs-tip{background:var(--amber-l);border:1px solid rgba(217,119,6,.2);border-radius:var(--rs);padding:10px 14px;margin:12px 0;font-size:12px;color:var(--text2);line-height:1.6;}
+.docs-tip::before{content:'💡 ';font-style:normal;}
+.docs-note{background:var(--blue-l);border:1px solid rgba(37,99,235,.15);border-radius:var(--rs);padding:10px 14px;margin:12px 0;font-size:12px;color:var(--text2);line-height:1.6;}
+.docs-note::before{content:'ℹ️ ';font-style:normal;}
+.docs-warn{background:var(--red-l);border:1px solid rgba(220,38,38,.15);border-radius:var(--rs);padding:10px 14px;margin:12px 0;font-size:12px;color:var(--text2);line-height:1.6;}
+.docs-warn::before{content:'⚠️ ';font-style:normal;}
+.docs-step-list{counter-reset:step-counter;list-style:none;padding:0;margin:12px 0;}
+.docs-step-list li{counter-increment:step-counter;display:flex;gap:12px;margin-bottom:10px;align-items:flex-start;}
+.docs-step-list li::before{content:counter(step-counter);font-family:var(--num-font);font-size:11px;font-weight:800;min-width:24px;height:24px;border-radius:50%;background:var(--blue);color:#fff;display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:1px;}
+.docs-step-list li span{font-size:12.5px;color:var(--text3);line-height:1.7;}
+.docs-badge-row{display:flex;flex-wrap:wrap;gap:8px;margin:10px 0;}
+.docs-badge{display:inline-flex;align-items:center;gap:5px;padding:4px 10px;border-radius:20px;font-size:11px;font-weight:700;}
+.docs-kbd{background:var(--surf3);border:1px solid var(--border2);border-radius:4px;padding:2px 7px;font-family:var(--num-font);font-size:11px;font-weight:700;color:var(--text2);}
+.docs-divider{height:1px;background:var(--border);margin:20px 0;}
+.docs-plan-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin:14px 0;}
+.docs-plan-card{border:2px solid var(--border);border-radius:var(--r);padding:18px;text-align:center;transition:all .2s;}
+.docs-plan-card.featured{border-color:var(--blue);background:var(--blue-l);}
+.docs-plan-card:hover{transform:translateY(-2px);box-shadow:var(--sh2);}
+.docs-plan-name{font-family:'Syne',sans-serif;font-size:14px;font-weight:800;color:var(--text);margin-bottom:4px;}
+.docs-plan-price{font-family:var(--num-font);font-size:28px;font-weight:800;color:var(--blue);line-height:1;margin:8px 0 4px;}
+.docs-plan-period{font-size:10px;color:var(--muted);}
+.docs-plan-features{text-align:left;margin-top:12px;font-size:11.5px;color:var(--text3);line-height:2;}
+.docs-plan-features li{list-style:none;padding-left:0;}
+.docs-plan-features li::before{content:'✓  ';color:var(--green);font-weight:700;}
+.docs-footer{padding:12px 24px;border-top:1px solid var(--border);display:flex;align-items:center;justify-content:space-between;flex-shrink:0;background:var(--surf2);}
+.docs-footer-left{font-size:11px;color:var(--muted);}
+.docs-footer-right{display:flex;gap:8px;}
+@media(max-width:768px){.docs-nav{display:none;}.docs-content{padding:16px;}.docs-plan-grid{grid-template-columns:1fr;}.docs-feature-grid{grid-template-columns:1fr 1fr;}}
 </style>
 </head>
 <body>
@@ -1517,7 +1587,7 @@ html,body{height:100%;font-family:'Manrope',sans-serif;background:var(--bg);colo
 </div>
 <div class="menu-dropdown" id="md-help">
   <div class="md-section">
-    <div class="md-item" onclick="window.open('https://docs.anthropic.com','_blank');closeAllMenus()"><span class="md-icon">📖</span>Documentation</div>
+    <div class="md-item" onclick="openDocs();closeAllMenus()"><span class="md-icon">📖</span>Documentation</div>
     <div class="md-item" onclick="showNotif('🎬 Tutorial: Open Routes Map → click Plan New Route → pin waypoints → Compute Route','blue');closeAllMenus()"><span class="md-icon">🎬</span>Video Tutorials</div>
     <div class="md-item" onclick="showNotif('Ctrl+N New Route · Ctrl+S Save · F11 Fullscreen · Esc Exit FS','blue');closeAllMenus()"><span class="md-icon">⌨</span>Keyboard Shortcuts<span class="md-kbd">?</span></div>
   </div>
@@ -1659,6 +1729,508 @@ html,body{height:100%;font-family:'Manrope',sans-serif;background:var(--bg);colo
     </div>
   </div>
 </div>
+
+<!-- ═══════════════════ DOCUMENTATION MODAL ═══════════════════ -->
+<div class="docs-ov" id="docs-ov">
+  <div class="docs-modal">
+
+    <!-- Header -->
+    <div class="docs-header">
+      <div class="docs-logo"><svg viewBox="0 0 24 24"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg></div>
+      <div class="docs-header-text">
+        <div class="docs-title">Beta Relay 2.0 — Documentation</div>
+        <div class="docs-subtitle">Complete Feature Guide &amp; Subscription Reference for Fleet Operators</div>
+      </div>
+      <div class="docs-header-meta">
+        <span class="docs-version">v2.1.0</span>
+        <div class="docs-close" onclick="closeDocs()"><svg viewBox="0 0 24 24"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></div>
+      </div>
+    </div>
+
+    <div class="docs-body">
+      <!-- Side Nav -->
+      <nav class="docs-nav" id="docs-nav">
+        <div class="docs-nav-section">Getting Started</div>
+        <div class="docs-nav-item active" onclick="showDocsSection('overview',this)"><span class="nav-ic">🏠</span>Overview</div>
+        <div class="docs-nav-item" onclick="showDocsSection('quickstart',this)"><span class="nav-ic">🚀</span>Quick Start</div>
+        <div class="docs-nav-section">Core Features</div>
+        <div class="docs-nav-item" onclick="showDocsSection('dashboard',this)"><span class="nav-ic">📊</span>Dashboard</div>
+        <div class="docs-nav-item" onclick="showDocsSection('routes',this)"><span class="nav-ic">🗺️</span>Routes Map</div>
+        <div class="docs-nav-item" onclick="showDocsSection('relay',this)"><span class="nav-ic">🔄</span>Relay System</div>
+        <div class="docs-nav-item" onclick="showDocsSection('planner',this)"><span class="nav-ic">📍</span>Route Planner</div>
+        <div class="docs-nav-item" onclick="showDocsSection('shipments',this)"><span class="nav-ic">📦</span>Shipments</div>
+        <div class="docs-nav-section">Management</div>
+        <div class="docs-nav-item" onclick="showDocsSection('drivers',this)"><span class="nav-ic">👤</span>Driver Management</div>
+        <div class="docs-nav-item" onclick="showDocsSection('vehicles',this)"><span class="nav-ic">🚛</span>Vehicle Fleet</div>
+        <div class="docs-nav-item" onclick="showDocsSection('alerts',this)"><span class="nav-ic">🔔</span>Alerts &amp; Monitoring</div>
+        <div class="docs-nav-item" onclick="showDocsSection('reports',this)"><span class="nav-ic">📈</span>Reports &amp; Analytics</div>
+        <div class="docs-nav-item" onclick="showDocsSection('settings',this)"><span class="nav-ic">⚙️</span>Settings</div>
+        <div class="docs-nav-section">Subscription</div>
+        <div class="docs-nav-item" onclick="showDocsSection('plans',this)"><span class="nav-ic">💳</span>Plans &amp; Pricing</div>
+        <div class="docs-nav-item" onclick="showDocsSection('integration',this)"><span class="nav-ic">🔌</span>API &amp; Integration</div>
+        <div class="docs-nav-item" onclick="showDocsSection('support',this)"><span class="nav-ic">🆘</span>Support &amp; Contact</div>
+      </nav>
+
+      <!-- Content -->
+      <div class="docs-content">
+
+        <!-- ── OVERVIEW ── -->
+        <div class="docs-section active" id="docs-overview">
+          <div class="docs-h1">Welcome to Beta Relay 2.0</div>
+          <div class="docs-lead">Beta Relay 2.0 is an enterprise-grade, real-time relay freight dispatch and fleet management platform. It is purpose-built for logistics companies that operate multi-driver relay chains across interstate corridors — enabling a single freight shipment to be handed between multiple drivers at designated relay points, dramatically reducing driver fatigue and improving delivery speed.</div>
+          <div class="docs-h2"><span class="sec-ic">🎯</span>What is the Relay (Baton) Method?</div>
+          <div class="docs-p">In traditional trucking, a single driver carries freight from origin to destination. With the <strong>relay baton method</strong>, a long-distance route is divided into multiple legs — typically 100–200 km each. A different driver handles each leg. When a leg is complete, the driver arrives at a pre-arranged truck stop or depot (called a <strong>relay point</strong>), where the next driver is already waiting on standby. The freight (the "baton") is transferred in 15–25 minutes, and the new driver immediately departs. This allows 24/7 freight movement without violating hours-of-service regulations.</div>
+          <div class="docs-feature-grid">
+            <div class="docs-feature-card"><div class="docs-feature-ic">🗺️</div><div class="docs-feature-title">Real-Road GPS Routing</div><div class="docs-feature-desc">All routes use Google Maps Directions API — real road geometry, no straight lines.</div></div>
+            <div class="docs-feature-card"><div class="docs-feature-ic">🔄</div><div class="docs-feature-title">Live Relay Handoffs</div><div class="docs-feature-desc">Automated baton transfers with countdown timers and real-time status updates.</div></div>
+            <div class="docs-feature-card"><div class="docs-feature-ic">📡</div><div class="docs-feature-title">60fps GPS Simulation</div><div class="docs-feature-desc">RequestAnimationFrame engine interpolates vehicle positions smoothly on the map.</div></div>
+            <div class="docs-feature-card"><div class="docs-feature-ic">🚦</div><div class="docs-feature-title">Live Traffic Layer</div><div class="docs-feature-desc">Google Maps real-time traffic overlay with congestion-aware speed modelling.</div></div>
+            <div class="docs-feature-card"><div class="docs-feature-ic">📊</div><div class="docs-feature-title">Full Fleet Analytics</div><div class="docs-feature-desc">KPIs, cost charts, driver performance, utilization and route completion reports.</div></div>
+            <div class="docs-feature-card"><div class="docs-feature-ic">🔔</div><div class="docs-feature-title">Intelligent Alerts</div><div class="docs-feature-desc">Priority-ranked alerts for low fuel, delays, maintenance, and traffic incidents.</div></div>
+            <div class="docs-feature-card"><div class="docs-feature-ic">👤</div><div class="docs-feature-title">Driver Profiles</div><div class="docs-feature-desc">Full driver records, license class, experience, live speed, and performance metrics.</div></div>
+            <div class="docs-feature-card"><div class="docs-feature-ic">🛠️</div><div class="docs-feature-title">Maintenance Scheduler</div><div class="docs-feature-desc">Service calendar with colour-coded upcoming and overdue maintenance records.</div></div>
+          </div>
+          <div class="docs-h2"><span class="sec-ic">🏗️</span>Technology Stack</div>
+          <table class="docs-table">
+            <thead><tr><th>Layer</th><th>Technology</th><th>Purpose</th></tr></thead>
+            <tbody>
+              <tr><td><strong>Mapping</strong></td><td>Google Maps JS API v3</td><td>Interactive map, real-road polylines, markers, traffic</td></tr>
+              <tr><td><strong>Routing</strong></td><td>Google Directions API + Routes API v2</td><td>Real-road geometry, traffic-aware ETAs</td></tr>
+              <tr><td><strong>Charts</strong></td><td>Chart.js 4.4</td><td>Cost trends, travel distance, utilization doughnut</td></tr>
+              <tr><td><strong>Typography</strong></td><td>Inter + Syne + Manrope</td><td>Tabular metrics, display headings, body text</td></tr>
+              <tr><td><strong>Animation</strong></td><td>requestAnimationFrame</td><td>60fps smooth vehicle movement along road paths</td></tr>
+              <tr><td><strong>Storage</strong></td><td>localStorage</td><td>Driver records, settings persistence across sessions</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <!-- ── QUICK START ── -->
+        <div class="docs-section" id="docs-quickstart">
+          <div class="docs-h1">Quick Start Guide</div>
+          <div class="docs-lead">Get your fleet live on the map in under 2 minutes. Follow these steps after logging into your Beta Relay account.</div>
+          <div class="docs-h2"><span class="sec-ic">1️⃣</span>Open the Routes Map</div>
+          <ol class="docs-step-list">
+            <li><span>Click <strong>Routes Map</strong> in the left sidebar. The map will initialise and automatically fetch real road routes via Google Maps for today's 4 active relay shipments.</span></li>
+            <li><span>Watch the loading indicator — it shows which API is fetching each leg. Once loaded, 4 coloured polylines appear on the map following real highways and roads.</span></li>
+            <li><span>Driver markers (labelled D1–D4) appear on the map at their current positions and begin moving in real time along the road paths.</span></li>
+          </ol>
+          <div class="docs-h2"><span class="sec-ic">2️⃣</span>Monitor a Shipment</div>
+          <ol class="docs-step-list">
+            <li><span>Click any <strong>driver marker</strong> on the map to see a popup with name, vehicle, leg progress, current speed, and traffic level.</span></li>
+            <li><span>Click any <strong>route polyline</strong> to open the Route Info Card showing distance, ETA, driver, stops completed, and average speed.</span></li>
+            <li><span>The <strong>bottom stats bar</strong> shows live aggregate data: total routes, progress %, total distance, average speed, and ETA.</span></li>
+          </ol>
+          <div class="docs-h2"><span class="sec-ic">3️⃣</span>Plan a New Route</div>
+          <ol class="docs-step-list">
+            <li><span>Click <strong>Plan New Route</strong> in the routes toolbar (or press <span class="docs-kbd">Ctrl+N</span>).</span></li>
+            <li><span>Click anywhere on the map to pin your <strong>origin</strong> (green A marker). Click again to pin your <strong>destination</strong> (red B marker). Add optional intermediate stops.</span></li>
+            <li><span>The system automatically computes a real road route using Google Directions API. Distance and ETA are shown instantly.</span></li>
+            <li><span>Assign a driver and name the route, then click <strong>Save &amp; Assign Route</strong>.</span></li>
+          </ol>
+          <div class="docs-tip">The map auto-regenerates 4 fresh relay routes every day at midnight. Routes are drawn from the interstate pool (TX, LA, MS, OK, AR) and assigned to the available driver pool automatically.</div>
+          <div class="docs-h2"><span class="sec-ic">⌨️</span>Keyboard Shortcuts</div>
+          <table class="docs-table">
+            <thead><tr><th>Shortcut</th><th>Action</th></tr></thead>
+            <tbody>
+              <tr><td><span class="docs-kbd">Ctrl+N</span></td><td>Open Route Planner</td></tr>
+              <tr><td><span class="docs-kbd">Ctrl+S</span></td><td>Save current route</td></tr>
+              <tr><td><span class="docs-kbd">F11</span></td><td>Toggle map fullscreen (on Routes page)</td></tr>
+              <tr><td><span class="docs-kbd">Esc</span></td><td>Exit fullscreen / close menus</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <!-- ── DASHBOARD ── -->
+        <div class="docs-section" id="docs-dashboard">
+          <div class="docs-h1">Dashboard</div>
+          <div class="docs-lead">The Dashboard is your real-time command centre. It consolidates the most important fleet metrics, live speed telemetry, cost analytics, and a mini-map — all on a single screen that updates every 4 seconds.</div>
+          <div class="docs-h2"><span class="sec-ic">📌</span>KPI Strip (Top Row)</div>
+          <div class="docs-p">Four large KPI cards show the headline numbers at a glance. Each card includes a trend indicator, a mini progress bar, and a sub-label with contextual detail.</div>
+          <table class="docs-table">
+            <thead><tr><th>KPI Card</th><th>What It Shows</th><th>Updates</th></tr></thead>
+            <tbody>
+              <tr><td><strong>Total Vehicles</strong></td><td>All registered vehicles in the fleet</td><td>On vehicle add/remove</td></tr>
+              <tr><td><strong>Active Drivers</strong></td><td>Drivers currently en route + available</td><td>Every 4 seconds</td></tr>
+              <tr><td><strong>Active Routes</strong></td><td>Relay shipments currently in progress</td><td>Every 4 seconds</td></tr>
+              <tr><td><strong>Fleet Alerts</strong></td><td>Unresolved alerts requiring attention</td><td>Real time</td></tr>
+            </tbody>
+          </table>
+          <div class="docs-h2"><span class="sec-ic">📉</span>Metrics Row</div>
+          <div class="docs-p">Four secondary metric cards track operational efficiency: <strong>Total Distance</strong> (YTD km across all routes), <strong>Fuel Cost</strong> (monthly spend), <strong>On-Time Rate</strong> (delivery punctuality %), and <strong>Fleet Utilization</strong> (active vehicles as % of total).</div>
+          <div class="docs-h2"><span class="sec-ic">📊</span>Analytics Charts</div>
+          <div class="docs-p">Two Chart.js charts occupy the main body of the dashboard. The <strong>Fleet Cost Breakdown</strong> stacked bar chart shows monthly fuel, service, and insurance costs over 12 months. The <strong>Total Travel Distance</strong> area chart shows monthly km driven — useful for spotting seasonal patterns and utilization trends.</div>
+          <div class="docs-h2"><span class="sec-ic">⚡</span>Live Speed Monitor</div>
+          <div class="docs-p">The right panel shows a live speed row for each en-route driver. Each row displays the driver name, a real-time speed bar (colour-coded by traffic level: blue = light, amber = moderate, red = heavy), and the exact speed in km/h plus metres-per-tick telemetry. Stopped drivers show their stop reason and remaining wait time.</div>
+          <div class="docs-h2"><span class="sec-ic">🗺️</span>Mini-Map</div>
+          <div class="docs-p">A compact Google Map at the bottom of the dashboard shows the real-time positions of all en-route drivers. Clicking a driver marker on the mini-map jumps directly to the Routes Map page and focuses that driver. The four stats below the mini-map show en-route count, average speed, average progress, and total active km.</div>
+        </div>
+
+        <!-- ── ROUTES MAP ── -->
+        <div class="docs-section" id="docs-routes">
+          <div class="docs-h1">Routes Map</div>
+          <div class="docs-lead">The Routes Map page is the live operational core of Beta Relay 2.0. It renders all active relay routes on a Google Map using real road geometry, animates vehicle positions at 60fps, and provides full dispatch control through a menu bar and toolbar.</div>
+          <div class="docs-h2"><span class="sec-ic">🔧</span>Menu Bar</div>
+          <table class="docs-table">
+            <thead><tr><th>Menu</th><th>Key Actions</th></tr></thead>
+            <tbody>
+              <tr><td><strong>File</strong></td><td>New Route, Import/Export routes, Print manifest, Save to CSV</td></tr>
+              <tr><td><strong>View</strong></td><td>Toggle map type (Roadmap / Satellite / Hybrid / Terrain), zoom controls, fullscreen</td></tr>
+              <tr><td><strong>Routes</strong></td><td>Recenter map, refresh all routes, optimize routes via traffic API</td></tr>
+              <tr><td><strong>Operations</strong></td><td>Dispatch all drivers, recall drivers, send fleet alert, emergency stop all</td></tr>
+              <tr><td><strong>Help</strong></td><td>Documentation (this page), keyboard shortcuts, What's New, contact support</td></tr>
+            </tbody>
+          </table>
+          <div class="docs-h2"><span class="sec-ic">🎨</span>Route Colour Coding</div>
+          <div class="docs-badge-row">
+            <span class="docs-badge" style="background:#dbeafe;color:#2563eb;">● Blue — Route 1</span>
+            <span class="docs-badge" style="background:#fee2e2;color:#dc2626;">● Red — Route 2</span>
+            <span class="docs-badge" style="background:#d1fae5;color:#059669;">● Green — Route 3</span>
+            <span class="docs-badge" style="background:#ede9fe;color:#7c3aed;">● Purple — Route 4</span>
+          </div>
+          <div class="docs-h2"><span class="sec-ic">📍</span>Map Markers Explained</div>
+          <table class="docs-table">
+            <thead><tr><th>Marker</th><th>Meaning</th></tr></thead>
+            <tbody>
+              <tr><td><strong>Numbered circle (D1–D16)</strong></td><td>En-route driver. Colour matches route. Shows live speed badge.</td></tr>
+              <tr><td><strong>Grey circle (Standby)</strong></td><td>Driver waiting at relay point for the baton to arrive.</td></tr>
+              <tr><td><strong>Amber circle (Transferring)</strong></td><td>Relay handoff in progress — cargo being transferred.</td></tr>
+              <tr><td><strong>Pin with ⏳ / ⟳ / ✓</strong></td><td>Relay handoff point. ⏳ = waiting, ⟳ = transfer active, ✓ = completed.</td></tr>
+              <tr><td><strong>Lettered circle (A/B/1/2…)</strong></td><td>Route stop markers showing origin, waypoints, and destination.</td></tr>
+            </tbody>
+          </table>
+          <div class="docs-h2"><span class="sec-ic">🚦</span>Live Traffic</div>
+          <div class="docs-p">The traffic layer is enabled by default and shows real-time congestion from Google Maps (green = clear, orange = moderate, red = heavy). The vehicle simulation engine uses the traffic state to modulate speed: 50–55 m/tick in light traffic, 44–49 m/tick in moderate, 40–43 m/tick in heavy traffic. This affects the displayed km/h on each driver.</div>
+          <div class="docs-h2"><span class="sec-ic">📋</span>Routes Panel &amp; Data Table</div>
+          <div class="docs-p">The left panel shows 4 route cards with progress bars, distance, ETA, and live speed. The bottom panel has two tabs — <strong>Timeline</strong> (Gantt-style view of each driver's leg progress) and <strong>Table</strong> (a fully resizable data table with 20 configurable columns including dispatched time, planned vs actual distance, service times, and completion status).</div>
+        </div>
+
+        <!-- ── RELAY SYSTEM ── -->
+        <div class="docs-section" id="docs-relay">
+          <div class="docs-h1">The Relay (Baton) System</div>
+          <div class="docs-lead">The relay system is the defining innovation of Beta Relay 2.0. It models the real-world practice of handing a freight load between multiple drivers at scheduled intermediate stops, enabling 24/7 continuous freight movement without violating driver rest regulations.</div>
+          <div class="docs-h2"><span class="sec-ic">🏗️</span>How a Relay Shipment is Built</div>
+          <ol class="docs-step-list">
+            <li><span>A relay route is selected from the interstate pool (e.g. <em>Houston TX → New Orleans LA — 505 km, 4 legs</em>).</span></li>
+            <li><span>The route is divided into <strong>legs</strong> at real truck stops, Pilot/Flying J/Love's locations. Each leg is 100–200 km.</span></li>
+            <li><span>One driver is assigned to each leg. The Leg 1 driver departs immediately. All other drivers travel to their relay points and wait on <strong>standby</strong>.</span></li>
+            <li><span>When the active driver completes their leg, a <strong>relay handoff</strong> is triggered: a 15–25 minute transfer window begins. The status shows "⟳ Loading" and a countdown.</span></li>
+            <li><span>Once the transfer completes, the next driver's vehicle marker activates and begins moving along Leg 2's real road path.</span></li>
+            <li><span>This continues until the final driver delivers to the destination. The shipment is marked complete.</span></li>
+          </ol>
+          <div class="docs-h2"><span class="sec-ic">🛣️</span>Interstate Route Pool</div>
+          <table class="docs-table">
+            <thead><tr><th>Route ID</th><th>Corridor</th><th>Highway</th><th>Distance</th><th>Legs</th></tr></thead>
+            <tbody>
+              <tr><td>R-001</td><td>Houston TX → Dallas TX</td><td>I-45 North</td><td>390 km</td><td>3</td></tr>
+              <tr><td>R-002</td><td>Houston TX → New Orleans LA</td><td>I-10 East</td><td>505 km</td><td>4</td></tr>
+              <tr><td>R-003</td><td>San Antonio TX → Dallas TX</td><td>I-35 North</td><td>440 km</td><td>3</td></tr>
+              <tr><td>R-004</td><td>Houston TX → Jackson MS</td><td>I-10/I-20</td><td>610 km</td><td>4</td></tr>
+              <tr><td>R-005</td><td>Dallas TX → Oklahoma City OK</td><td>I-35 North</td><td>325 km</td><td>3</td></tr>
+              <tr><td>R-006</td><td>Dallas TX → Little Rock AR</td><td>I-30 East</td><td>500 km</td><td>3</td></tr>
+            </tbody>
+          </table>
+          <div class="docs-h2"><span class="sec-ic">⏱️</span>Realistic Stop Simulation</div>
+          <div class="docs-p">En-route drivers experience realistic random stops during their leg. Each stop has a type, duration range, and a visible countdown timer on the driver marker and popup.</div>
+          <table class="docs-table">
+            <thead><tr><th>Stop Type</th><th>Duration</th><th>Frequency</th></tr></thead>
+            <tbody>
+              <tr><td>Fuel Stop</td><td>12–20 min</td><td>~0.8% per tick</td></tr>
+              <tr><td>Rest Break</td><td>10–18 min</td><td>~0.8% per tick</td></tr>
+              <tr><td>Meal Break</td><td>12–20 min</td><td>~0.8% per tick</td></tr>
+              <tr><td>Delivery Stop</td><td>5–15 min</td><td>~0.8% per tick</td></tr>
+              <tr><td>Traffic Signal</td><td>1–3 min</td><td>~0.8% per tick</td></tr>
+              <tr><td>Weigh Station</td><td>8–15 min</td><td>~0.8% per tick</td></tr>
+              <tr><td>Traffic Delay</td><td>3–10 min</td><td>~0.8% per tick</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <!-- ── ROUTE PLANNER ── -->
+        <div class="docs-section" id="docs-planner">
+          <div class="docs-h1">Interactive Route Planner</div>
+          <div class="docs-lead">The Route Planner lets dispatchers create custom relay legs or one-off routes directly on the map, using real road routing from Google Maps. It supports up to 8 waypoints per route.</div>
+          <div class="docs-h2"><span class="sec-ic">🖱️</span>How to Use the Planner</div>
+          <ol class="docs-step-list">
+            <li><span>Click <strong>Plan New Route</strong> in the Routes toolbar to open the planner modal.</span></li>
+            <li><span>Click anywhere on the map to place your <strong>origin</strong> pin (green A). The system reverse-geocodes the click to show a human-readable address.</span></li>
+            <li><span>Click again to place your <strong>destination</strong> pin (red B). With 2+ pins, the route is computed <em>automatically</em> using real roads.</span></li>
+            <li><span>Add up to 6 additional <strong>intermediate stops</strong> by clicking more points. The route recomputes each time.</span></li>
+            <li><span>The result panel shows: total distance (km), estimated travel time, and which API was used (Directions API / Routes API v2).</span></li>
+            <li><span>Select a driver from the dropdown, enter a route name, and click <strong>Save &amp; Assign Route</strong>.</span></li>
+          </ol>
+          <div class="docs-h2"><span class="sec-ic">🔀</span>Routing Priority Chain</div>
+          <div class="docs-p">The planner uses a three-tier routing priority to guarantee a real road path is always found:</div>
+          <ol class="docs-step-list">
+            <li><span><strong>Google Maps DirectionsService</strong> (primary) — built into the Maps JS SDK. Most reliable, works with any standard API key. Returns step-by-step road geometry.</span></li>
+            <li><span><strong>Routes API v2</strong> (secondary) — richer traffic data. Falls back to this if DirectionsService returns an unexpected error.</span></li>
+            <li><span><strong>Great-circle arc path</strong> (last resort) — a densely interpolated arc shown with a dashed line, clearly indicating it is not a real road route.</span></li>
+          </ol>
+          <div class="docs-tip">To remove a waypoint, click the × beside it in the sidebar list. The route will automatically recompute with the remaining points.</div>
+        </div>
+
+        <!-- ── SHIPMENTS ── -->
+        <div class="docs-section" id="docs-shipments">
+          <div class="docs-h1">Shipments</div>
+          <div class="docs-lead">The Shipments page provides a card-based view of every active relay shipment, with live progress tracking, cargo details, stop timelines, and quick-action buttons.</div>
+          <div class="docs-h2"><span class="sec-ic">📦</span>Shipment Card Breakdown</div>
+          <table class="docs-table">
+            <thead><tr><th>Element</th><th>Description</th></tr></thead>
+            <tbody>
+              <tr><td><strong>Route name &amp; corridor</strong></td><td>The relay label (e.g. "Houston TX → Dallas TX") and state corridor</td></tr>
+              <tr><td><strong>Status pill</strong></td><td>⏳ Dispatched · 🚛 En Route · ✅ Delivered</td></tr>
+              <tr><td><strong>Progress bar</strong></td><td>Overall shipment progress as % of total route distance</td></tr>
+              <tr><td><strong>Stop timeline</strong></td><td>Horizontal step diagram showing Origin → Stop 1 → … → Destination, colour-coded by completion</td></tr>
+              <tr><td><strong>Meta strip</strong></td><td>Distance (km), ETA (traffic-aware), Live Speed (km/h)</td></tr>
+              <tr><td><strong>Cargo panel</strong></td><td>Cargo type, weight, declared value, assigned driver</td></tr>
+              <tr><td><strong>Action buttons</strong></td><td>Track Route (jumps to map), Driver Info (opens detail panel), ETA (shows notification)</td></tr>
+            </tbody>
+          </table>
+          <div class="docs-h2"><span class="sec-ic">🔄</span>Auto-Refresh</div>
+          <div class="docs-p">The Shipments page auto-refreshes every 12 seconds while it is the active page. This keeps progress bars, speeds, and stop completions in sync with the live simulation without requiring a manual reload. The four stat cards at the top (En Route, Completed Today, Total Route Distance, Average Progress) update on every refresh cycle.</div>
+          <div class="docs-tip">Click <strong>Regenerate Shipments</strong> from the File menu to generate a fresh set of 4 relay routes for today. This clears the map, resets all driver positions, and loads new real-road routes from the interstate pool.</div>
+        </div>
+
+        <!-- ── DRIVERS ── -->
+        <div class="docs-section" id="docs-drivers">
+          <div class="docs-h1">Driver Management</div>
+          <div class="docs-lead">The Drivers page gives you a full view of every driver in your fleet — their current status, vehicle assignment, license class, experience, and live telemetry. The onboarding flow lets you add new drivers in a structured 5-step process.</div>
+          <div class="docs-h2"><span class="sec-ic">🟢</span>Driver Status Types</div>
+          <div class="docs-badge-row">
+            <span class="docs-badge" style="background:#fffbeb;color:#d97706;">🟡 En Route</span>
+            <span class="docs-badge" style="background:#ecfdf5;color:#059669;">🟢 Available</span>
+            <span class="docs-badge" style="background:#f1f5f9;color:#94a3b8;">⚫ Offline</span>
+            <span class="docs-badge" style="background:#ede9fe;color:#7c3aed;">🟣 Standby</span>
+            <span class="docs-badge" style="background:#fff7ed;color:#ea580c;">🟠 Transferring</span>
+          </div>
+          <div class="docs-h2"><span class="sec-ic">👤</span>Driver Detail Panel</div>
+          <div class="docs-p">Clicking any driver card opens a full-width slide-in panel on the right with five information sections: <strong>Live Status</strong> (speed, traffic level, leg progress, stop reason), <strong>Contact &amp; Personal</strong> (phone, license, experience), <strong>License &amp; Compliance</strong> (license class, expiry, certifications), <strong>Performance Metrics</strong> (on-time rate, km driven, efficiency score), and <strong>Recent Activity</strong> (last 5 route events).</div>
+          <div class="docs-h2"><span class="sec-ic">🆕</span>Adding a New Driver (5-Step Onboarding)</div>
+          <table class="docs-table">
+            <thead><tr><th>Step</th><th>Fields</th></tr></thead>
+            <tbody>
+              <tr><td><strong>1 · Personal Info</strong></td><td>Full name, date of birth, nationality, emergency contact</td></tr>
+              <tr><td><strong>2 · License</strong></td><td>License class (A/B/C/D), license number, expiry date, endorsements</td></tr>
+              <tr><td><strong>3 · Vehicle</strong></td><td>Assign an available vehicle from the fleet (van/car/truck)</td></tr>
+              <tr><td><strong>4 · Schedule</strong></td><td>Start date, shift pattern, home depot, preferred route corridor</td></tr>
+              <tr><td><strong>5 · Review</strong></td><td>Confirm all details before finalising onboarding</td></tr>
+            </tbody>
+          </table>
+          <div class="docs-h2"><span class="sec-ic">🔍</span>Search &amp; Filter</div>
+          <div class="docs-p">Use the search bar to filter drivers by name, plate, or vehicle model. The status dropdown filters by En Route / Available / Offline. The vehicle type filter shows only Van, Car, or Truck drivers. All filters combine in real time.</div>
+        </div>
+
+        <!-- ── VEHICLES ── -->
+        <div class="docs-section" id="docs-vehicles">
+          <div class="docs-h1">Vehicle Fleet</div>
+          <div class="docs-lead">The Vehicles page shows the full registered fleet with live fuel levels, driver assignments, current status, and capacity. The fuel bar updates every 30 seconds for en-route vehicles.</div>
+          <div class="docs-h2"><span class="sec-ic">🚛</span>Vehicle Types &amp; Capacities</div>
+          <table class="docs-table">
+            <thead><tr><th>Type</th><th>Example Models</th><th>Typical Capacity</th></tr></thead>
+            <tbody>
+              <tr><td><strong>Van</strong></td><td>Mercedes Sprinter, Ford Transit, VW Transporter, Renault Master</td><td>800 kg – 1,200 kg</td></tr>
+              <tr><td><strong>Car</strong></td><td>Toyota Corolla, Honda Civic, Hyundai Tucson</td><td>Passengers / Light cargo</td></tr>
+              <tr><td><strong>Truck</strong></td><td>Isuzu NPR 3.5t, MAN TGS 7.5t, Ford F-650</td><td>3,500 kg – 7,500 kg</td></tr>
+            </tbody>
+          </table>
+          <div class="docs-h2"><span class="sec-ic">⛽</span>Fuel Monitoring</div>
+          <div class="docs-p">Each vehicle card shows a colour-coded fuel bar. The fuel level updates every 30 seconds for en-route vehicles (consumption is simulated at ~0.3% per tick).</div>
+          <div class="docs-badge-row">
+            <span class="docs-badge" style="background:#eff6ff;color:#2563eb;">🔵 Above 55% — Normal</span>
+            <span class="docs-badge" style="background:#fffbeb;color:#d97706;">🟡 30–55% — Monitor</span>
+            <span class="docs-badge" style="background:#fef2f2;color:#dc2626;">🔴 Below 30% — Refuel Soon</span>
+          </div>
+          <div class="docs-h2"><span class="sec-ic">➕</span>Adding a Vehicle</div>
+          <div class="docs-p">Click <strong>Add Vehicle</strong> in the Vehicles toolbar. A prompt sequence collects vehicle type, name, plate number, and year. The vehicle is immediately added to the fleet and available for assignment. In the full production release, this will include a full form with VIN, insurance details, and maintenance history upload.</div>
+        </div>
+
+        <!-- ── ALERTS ── -->
+        <div class="docs-section" id="docs-alerts">
+          <div class="docs-h1">Alerts &amp; Monitoring</div>
+          <div class="docs-lead">The Alerts page provides a centralised view of all fleet events requiring dispatcher attention. Alerts are prioritised by severity and can be filtered, acknowledged, and resolved.</div>
+          <div class="docs-h2"><span class="sec-ic">🚨</span>Alert Severity Levels</div>
+          <table class="docs-table">
+            <thead><tr><th>Level</th><th>Colour</th><th>Examples</th><th>Response Time</th></tr></thead>
+            <tbody>
+              <tr><td><strong>Critical</strong></td><td style="color:#dc2626;">■ Red</td><td>Vehicle breakdown, emergency stop triggered, GPS signal lost</td><td>Immediate</td></tr>
+              <tr><td><strong>Warning</strong></td><td style="color:#d97706;">■ Amber</td><td>Low fuel (&lt;30%), driver overdue, missed relay handoff window</td><td>&lt; 15 min</td></tr>
+              <tr><td><strong>Info</strong></td><td style="color:#2563eb;">■ Blue</td><td>Route regenerated, new shipment dispatched, driver checked in</td><td>Informational</td></tr>
+              <tr><td><strong>Resolved</strong></td><td style="color:#059669;">■ Green</td><td>Previously active alerts that have been addressed</td><td>Archive</td></tr>
+            </tbody>
+          </table>
+          <div class="docs-h2"><span class="sec-ic">⚡</span>Auto-Generated Alerts</div>
+          <div class="docs-p">The system generates alerts automatically for: fuel levels below 30%, vehicles overdue for service, drivers exceeding estimated leg times by more than 20%, traffic incidents on active route corridors, and emergency stops. The badge on the Alerts nav item shows the live unresolved count.</div>
+          <div class="docs-h2"><span class="sec-ic">🔔</span>Toast Notifications</div>
+          <div class="docs-p">In addition to the Alerts page, time-sensitive events trigger <strong>toast notifications</strong> at the bottom-right of the screen. These appear for relay handoffs, driver stops, resume events, and system messages. Each toast auto-dismisses after 6 seconds and can be manually closed.</div>
+        </div>
+
+        <!-- ── REPORTS ── -->
+        <div class="docs-section" id="docs-reports">
+          <div class="docs-h1">Reports &amp; Analytics</div>
+          <div class="docs-lead">The Reports page delivers fleet-wide performance analytics across cost, utilization, distance, and driver efficiency — all visualised with interactive Chart.js charts and exportable data tables.</div>
+          <div class="docs-h2"><span class="sec-ic">📊</span>Available Reports</div>
+          <table class="docs-table">
+            <thead><tr><th>Report</th><th>Type</th><th>Period</th><th>Export</th></tr></thead>
+            <tbody>
+              <tr><td><strong>Driver Performance</strong></td><td>Table</td><td>Current month</td><td>CSV / PDF</td></tr>
+              <tr><td><strong>Vehicle Utilization</strong></td><td>Doughnut chart</td><td>Current day</td><td>PNG / PDF</td></tr>
+              <tr><td><strong>Monthly Fuel Costs</strong></td><td>Bar chart</td><td>Last 7 months</td><td>CSV / PDF</td></tr>
+              <tr><td><strong>Route Completion</strong></td><td>Progress bars</td><td>Live / today</td><td>PDF</td></tr>
+              <tr><td><strong>Fleet Cost Breakdown</strong></td><td>Stacked bar</td><td>Last 12 months</td><td>CSV / PDF</td></tr>
+              <tr><td><strong>Total Travel Distance</strong></td><td>Area chart</td><td>Last 12 months</td><td>CSV / PDF</td></tr>
+            </tbody>
+          </table>
+          <div class="docs-h2"><span class="sec-ic">📄</span>Export Options</div>
+          <div class="docs-p">Click <strong>Export PDF</strong> in the Reports toolbar to open the browser print dialog. This captures the full reports page as a high-quality PDF. The <strong>Schedule</strong> button allows you to configure automated report delivery (weekly, monthly) by email — a feature fully enabled in the production release.</div>
+          <div class="docs-h2"><span class="sec-ic">📐</span>Data Table (Routes Page)</div>
+          <div class="docs-p">The data table at the bottom of the Routes page provides the most granular data in the system. It has <strong>20 configurable columns</strong> including planned vs actual distance, planned vs actual travel time, average service time, dispatched timestamp, and destination completion counts. Columns can be shown/hidden via the <strong>Customize Columns</strong> button, and each column is individually resizable by dragging the column edge.</div>
+        </div>
+
+        <!-- ── SETTINGS ── -->
+        <div class="docs-section" id="docs-settings">
+          <div class="docs-h1">Settings</div>
+          <div class="docs-lead">The Settings page lets each user personalise the platform, configure API keys, and control which real-time features are active.</div>
+          <div class="docs-h2"><span class="sec-ic">⚙️</span>Settings Sections</div>
+          <table class="docs-table">
+            <thead><tr><th>Section</th><th>Options</th></tr></thead>
+            <tbody>
+              <tr><td><strong>Profile</strong></td><td>Display name, role title, email, timezone</td></tr>
+              <tr><td><strong>Map Configuration</strong></td><td>Default map type, zoom level, auto-recenter on load, traffic layer default state</td></tr>
+              <tr><td><strong>Notifications</strong></td><td>Toast duration, alert sound on/off, email digest frequency</td></tr>
+              <tr><td><strong>Simulation</strong></td><td>Tick rate (1–10s), speed range (light/moderate/heavy traffic bands), stop frequency</td></tr>
+              <tr><td><strong>API Keys</strong></td><td>Google Maps API key, Routes API key override (for organisations with their own billing account)</td></tr>
+              <tr><td><strong>Data &amp; Privacy</strong></td><td>Clear saved driver records, reset to defaults, export all data as JSON</td></tr>
+            </tbody>
+          </table>
+          <div class="docs-note">Settings are persisted to <code>localStorage</code> and survive page refreshes. In the production cloud deployment, settings sync across all devices logged into the same account.</div>
+        </div>
+
+        <!-- ── PLANS ── -->
+        <div class="docs-section" id="docs-plans">
+          <div class="docs-h1">Subscription Plans &amp; Pricing</div>
+          <div class="docs-lead">Beta Relay 2.0 is offered as a SaaS subscription. All plans include the full real-road routing engine, live GPS simulation, relay handoff system, and Google Maps integration. Plans are differentiated by fleet size, number of active routes, and support tier.</div>
+          <div class="docs-plan-grid">
+            <div class="docs-plan-card">
+              <div class="docs-plan-name">Starter</div>
+              <div class="docs-plan-price">$199</div>
+              <div class="docs-plan-period">per month · billed annually</div>
+              <ul class="docs-plan-features">
+                <li>Up to 10 drivers</li>
+                <li>Up to 2 active routes</li>
+                <li>1 dispatcher account</li>
+                <li>Real-road GPS routing</li>
+                <li>Basic alerts</li>
+                <li>Standard support (email)</li>
+              </ul>
+            </div>
+            <div class="docs-plan-card featured">
+              <div class="docs-plan-name">Professional ⭐</div>
+              <div class="docs-plan-price">$499</div>
+              <div class="docs-plan-period">per month · billed annually</div>
+              <ul class="docs-plan-features">
+                <li>Up to 50 drivers</li>
+                <li>Up to 8 active routes</li>
+                <li>5 dispatcher accounts</li>
+                <li>Full relay baton system</li>
+                <li>Traffic-aware routing</li>
+                <li>Advanced analytics</li>
+                <li>API access (REST)</li>
+                <li>Priority support</li>
+              </ul>
+            </div>
+            <div class="docs-plan-card">
+              <div class="docs-plan-name">Enterprise</div>
+              <div class="docs-plan-price">Custom</div>
+              <div class="docs-plan-period">contact sales for pricing</div>
+              <ul class="docs-plan-features">
+                <li>Unlimited drivers</li>
+                <li>Unlimited active routes</li>
+                <li>Unlimited accounts</li>
+                <li>White-label branding</li>
+                <li>Custom integrations</li>
+                <li>Dedicated infrastructure</li>
+                <li>SLA 99.9% uptime</li>
+                <li>24/7 dedicated support</li>
+              </ul>
+            </div>
+          </div>
+          <div class="docs-note">All plans include a <strong>14-day free trial</strong> with no credit card required. Contact our sales team at <strong>sales@betarelay.com</strong> to start your trial or schedule a live demo.</div>
+          <div class="docs-h2"><span class="sec-ic">🔑</span>What's Included in Every Plan</div>
+          <div class="docs-p">Every subscription includes: the full Beta Relay 2.0 web application, Google Maps integration (using your own API key or our shared key on Starter), real-road routing via Directions API, the relay baton dispatch system, live traffic overlay, driver and vehicle management, the interactive route planner, and all dashboard analytics.</div>
+        </div>
+
+        <!-- ── INTEGRATION ── -->
+        <div class="docs-section" id="docs-integration">
+          <div class="docs-h1">API &amp; Integration</div>
+          <div class="docs-lead">Beta Relay 2.0 Professional and Enterprise plans include REST API access, allowing you to integrate fleet data with your existing TMS, ERP, or warehouse management systems.</div>
+          <div class="docs-h2"><span class="sec-ic">🔌</span>Available API Endpoints (Production)</div>
+          <table class="docs-table">
+            <thead><tr><th>Endpoint</th><th>Method</th><th>Description</th></tr></thead>
+            <tbody>
+              <tr><td><code>/api/v1/shipments</code></td><td>GET</td><td>List all active and completed shipments</td></tr>
+              <tr><td><code>/api/v1/shipments/{id}</code></td><td>GET</td><td>Full detail of a single shipment including leg positions</td></tr>
+              <tr><td><code>/api/v1/drivers</code></td><td>GET / POST</td><td>List drivers or add a new driver record</td></tr>
+              <tr><td><code>/api/v1/drivers/{id}/position</code></td><td>GET</td><td>Live GPS coordinates of a driver (lat/lng + speed)</td></tr>
+              <tr><td><code>/api/v1/routes</code></td><td>GET / POST</td><td>List routes or create a new relay route</td></tr>
+              <tr><td><code>/api/v1/alerts</code></td><td>GET</td><td>All unresolved fleet alerts with severity and timestamp</td></tr>
+              <tr><td><code>/api/v1/vehicles</code></td><td>GET / POST</td><td>Fleet vehicle list or register a new vehicle</td></tr>
+              <tr><td><code>/api/v1/telemetry/stream</code></td><td>WebSocket</td><td>Real-time telemetry stream (position, speed, status) for all drivers</td></tr>
+            </tbody>
+          </table>
+          <div class="docs-h2"><span class="sec-ic">🗝️</span>Google Maps API Key Setup</div>
+          <ol class="docs-step-list">
+            <li><span>Go to <strong>Google Cloud Console</strong> → APIs &amp; Services → Credentials.</span></li>
+            <li><span>Create an API key and enable: <strong>Maps JavaScript API</strong>, <strong>Directions API</strong>, <strong>Routes API</strong>, and <strong>Geocoding API</strong>.</span></li>
+            <li><span>Restrict the key to your domain for security.</span></li>
+            <li><span>Enter the key in Beta Relay Settings → API Keys → Google Maps API Key.</span></li>
+          </ol>
+          <div class="docs-warn">Never expose your Google Maps API key in public repositories. The key included in the Beta Relay demo is for demonstration purposes and has usage limits applied.</div>
+        </div>
+
+        <!-- ── SUPPORT ── -->
+        <div class="docs-section" id="docs-support">
+          <div class="docs-h1">Support &amp; Contact</div>
+          <div class="docs-lead">The Beta Relay support team is available to help with onboarding, technical issues, API integration, and custom enterprise requirements.</div>
+          <div class="docs-h2"><span class="sec-ic">📧</span>Contact Channels</div>
+          <table class="docs-table">
+            <thead><tr><th>Channel</th><th>Contact</th><th>Response Time</th><th>Plans</th></tr></thead>
+            <tbody>
+              <tr><td><strong>Email Support</strong></td><td>support@betarelay.com</td><td>24–48 hours</td><td>All plans</td></tr>
+              <tr><td><strong>Priority Email</strong></td><td>priority@betarelay.com</td><td>4–8 hours</td><td>Professional +</td></tr>
+              <tr><td><strong>Sales &amp; Demo</strong></td><td>sales@betarelay.com</td><td>Same business day</td><td>All plans</td></tr>
+              <tr><td><strong>Enterprise Hotline</strong></td><td>+1 (555) 000-0100</td><td>24/7</td><td>Enterprise only</td></tr>
+              <tr><td><strong>In-App Feedback</strong></td><td>Help → Send Feedback</td><td>Logged immediately</td><td>All plans</td></tr>
+            </tbody>
+          </table>
+          <div class="docs-h2"><span class="sec-ic">🆕</span>What's New in Version 2.1</div>
+          <div class="docs-badge-row">
+            <span class="docs-badge" style="background:#ecfdf5;color:#059669;">✓ Real-road DirectionsService routing (primary)</span>
+            <span class="docs-badge" style="background:#ecfdf5;color:#059669;">✓ Inter tabular-nums font for all metrics</span>
+            <span class="docs-badge" style="background:#ecfdf5;color:#059669;">✓ Routes API v2 fallback chain</span>
+            <span class="docs-badge" style="background:#ecfdf5;color:#059669;">✓ In-app documentation modal</span>
+            <span class="docs-badge" style="background:#ecfdf5;color:#059669;">✓ Responsive clamp() metric sizing</span>
+            <span class="docs-badge" style="background:#ecfdf5;color:#059669;">✓ Planner result markers on route draw</span>
+          </div>
+          <div class="docs-divider"></div>
+          <div class="docs-p" style="text-align:center;color:var(--muted);font-size:12px;">Beta Relay 2.0 · v2.1.0 · © 2026 Beta Relay Corp · All rights reserved<br>Powered by Google Maps Platform · Built for the modern relay freight industry</div>
+        </div>
+
+      </div><!-- /docs-content -->
+    </div><!-- /docs-body -->
+
+    <!-- Footer -->
+    <div class="docs-footer">
+      <div class="docs-footer-left">Beta Relay 2.0 Documentation · v2.1.0 · © 2026 Beta Relay Corp</div>
+      <div class="docs-footer-right">
+        <button class="btn btn-sm" onclick="window.print()">
+          <svg viewBox="0 0 24 24" width="11" height="11" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 6 2 18 2 18 9"/><path d="M6 18H4a2 2 0 01-2-2v-5a2 2 0 012-2h16a2 2 0 012 2v5a2 2 0 01-2 2h-2"/><rect x="6" y="14" width="12" height="8"/></svg>
+          Print
+        </button>
+        <button class="btn btn-primary btn-sm" onclick="closeDocs()">Close</button>
+      </div>
+    </div>
+
+  </div><!-- /docs-modal -->
+</div><!-- /docs-ov -->
 
 <!-- NOTIFICATIONS -->
 <div class="notif-container" id="notif-container"></div>
@@ -4916,6 +5488,29 @@ setInterval(() => {
     refreshVehicleFuel();
   }
 }, 30000);
+
+// ══════════════════════════════════════════
+// DOCUMENTATION MODAL
+// ══════════════════════════════════════════
+function openDocs() {
+  document.getElementById('docs-ov').classList.add('open');
+  showDocsSection('overview', document.querySelector('.docs-nav-item'));
+}
+function closeDocs() {
+  document.getElementById('docs-ov').classList.remove('open');
+}
+function showDocsSection(id, el) {
+  document.querySelectorAll('.docs-section').forEach(s => s.classList.remove('active'));
+  document.querySelectorAll('.docs-nav-item').forEach(n => n.classList.remove('active'));
+  const sec = document.getElementById('docs-' + id);
+  if (sec) sec.classList.add('active');
+  if (el) el.classList.add('active');
+  const content = document.querySelector('.docs-content');
+  if (content) content.scrollTop = 0;
+}
+document.getElementById('docs-ov').addEventListener('click', e => {
+  if (e.target === e.currentTarget) closeDocs();
+});
 
 document.addEventListener('DOMContentLoaded', () => {
   initDashCharts();
