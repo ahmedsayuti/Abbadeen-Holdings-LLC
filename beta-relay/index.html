@@ -13,6 +13,7 @@
 <meta property="og:title"              content="Beta Relay 2.0 — Intelligent Relay Fleet Management">
 <meta property="og:description"        content="Real-time relay freight dispatch powered by Google Maps. Live GPS tracking, interstate multi-driver relay chains, traffic-aware routing, and full fleet analytics.">
 <meta property="og:image"              content="https://www.abbadeenholdings.org/beta-relay/betarelay_og_image.png">
+<meta property="og:image:width"        content="1200">
 <meta property="og:image:height"       content="630">
 <meta property="og:image:type"         content="image/png">
 <meta property="og:image:alt"          content="Beta Relay 2.0 — Fleet management dashboard showing live relay routes across US states with GPS tracking">
@@ -20,7 +21,6 @@
 <meta name="twitter:title"             content="Beta Relay 2.0 — Intelligent Relay Fleet Management">
 <meta name="twitter:description"       content="Live relay freight dispatch: multi-driver relay chains, real interstate routes, traffic-aware GPS, and real-time fleet analytics — all in one dashboard.">
 <meta name="twitter:image"             content="https://www.abbadeenholdings.org/beta-relay/betarelay_og_image.png">
-<meta property="og:image:width"        content="1200">
 <meta name="twitter:image:alt"         content="Beta Relay 2.0 fleet dashboard with live route map">
 <meta name="description"               content="Beta Relay 2.0: Real-time relay freight dispatch with live GPS, multi-driver relay chains, interstate routes, traffic-aware routing and full fleet analytics.">
 <meta name="keywords"                  content="fleet management, relay dispatch, GPS tracking, freight routing, interstate shipping, logistics dashboard">
@@ -2134,31 +2134,41 @@ function setupRoutesPage() {
 // Returns encoded polylines decoded via geometry library
 // ══════════════════════════════════════════
 function loadAllRealRoutes() {
-  const jobs = ROUTE_CONFIGS.map((cfg, i) => new Promise(resolve => fetchRouteViaAPI(cfg, i, resolve)));
+  // For relay: load the FIRST LEG of each shipment as a separate road geometry.
+  // This means routePaths[shipIdx] contains only the road from leg-0 origin → leg-0 destination.
+  // Subsequent legs are loaded on-demand by triggerRelayHandoff.
+  const jobs = RELAY_SHIPMENTS.map((ship, i) => new Promise(resolve => {
+    const leg0 = ship.legs[0];
+    const legCfg = {
+      label:  leg0.desc,
+      origin: leg0.fromPoint,
+      wpts:   [],               // direct leg – no intermediate stops
+      dest:   leg0.toPoint,
+      avgSpeed: 95,
+    };
+    fetchRouteViaAPI(legCfg, i, resolve);
+  }));
   return Promise.all(jobs);
 }
 
 async function fetchRouteViaAPI(cfg, idx, done) {
-  updateLoaderStatus(`Route ${idx+1}: ${cfg.label} — calling Routes API…`);
+  updateLoaderStatus(`Loading leg ${idx+1}: ${cfg.label}…`);
 
-  // Build waypoints body for Routes API v2
-  const intermediates = cfg.wpts.map(wp => ({
-    location: { latLng: { latitude: wp.lat, longitude: wp.lng } }
-  }));
-
-  const body = {
+  const buildBody = (trafficPref) => ({
     origin:      { location: { latLng: { latitude: cfg.origin.lat, longitude: cfg.origin.lng } } },
     destination: { location: { latLng: { latitude: cfg.dest.lat,   longitude: cfg.dest.lng   } } },
-    intermediates,
+    intermediates: (cfg.wpts || []).map(wp => ({
+      location: { latLng: { latitude: wp.lat, longitude: wp.lng } }
+    })),
     travelMode: 'DRIVE',
-    routingPreference: 'TRAFFIC_AWARE',
+    routingPreference: trafficPref,        // try TRAFFIC_AWARE first, fallback TRAFFIC_UNAWARE
     computeAlternativeRoutes: false,
     routeModifiers: { avoidTolls: false, avoidHighways: false, avoidFerries: true },
     polylineQuality: 'HIGH_QUALITY',
     polylineEncoding: 'ENCODED_POLYLINE',
-  };
+  });
 
-  try {
+  const tryFetch = async (body) => {
     const resp = await fetch('https://routes.googleapis.com/directions/v2:computeRoutes', {
       method: 'POST',
       headers: {
@@ -2166,114 +2176,137 @@ async function fetchRouteViaAPI(cfg, idx, done) {
         'X-Goog-Api-Key': GMAPS_KEY,
         'X-Goog-FieldMask': 'routes.duration,routes.distanceMeters,routes.polyline,routes.legs',
       },
-      body: JSON.stringify(body)
+      body: JSON.stringify(body),
     });
-
     if (!resp.ok) {
-      const errText = await resp.text();
-      console.warn(`Route ${idx+1} API error ${resp.status}:`, errText);
-      throw new Error('API error ' + resp.status);
+      const txt = await resp.text().catch(() => '');
+      throw new Error(`HTTP ${resp.status}: ${txt.slice(0,120)}`);
     }
-
     const data = await resp.json();
+    if (!data.routes?.[0]?.polyline?.encodedPolyline) throw new Error('No polyline in response');
+    return data;
+  };
 
-    if (!data.routes || !data.routes[0]) {
-      throw new Error('No routes returned');
+  let data = null;
+  try {
+    // Attempt 1: traffic-aware (may fail on basic billing plan)
+    data = await tryFetch(buildBody('TRAFFIC_AWARE'));
+  } catch (e1) {
+    console.warn(`Leg ${idx+1} TRAFFIC_AWARE failed (${e1.message}) — retrying without traffic…`);
+    try {
+      // Attempt 2: no traffic requirement (works on all plans)
+      data = await tryFetch(buildBody('TRAFFIC_UNAWARE'));
+    } catch (e2) {
+      console.warn(`Leg ${idx+1} Routes API also failed (${e2.message}) — trying DirectionsService…`);
+      fetchRouteViaDirections(cfg, idx, done);
+      return;
     }
-
-    const route = data.routes[0];
-    const encodedPoly = route.polyline?.encodedPolyline;
-
-    if (!encodedPoly) throw new Error('No polyline in response');
-
-    // Decode the encoded polyline to array of LatLng objects
-    const decodedPath = google.maps.geometry.encoding.decodePath(encodedPoly);
-    routePaths[idx] = decodedPath;
-
-    // Distance & ETA from API response
-    routeDistKm[idx]  = (route.distanceMeters || 20000) / 1000;
-    const durSecs = parseInt((route.duration || '0s').replace('s',''));
-    routeEtaText[idx] = Math.round(durSecs / 60) + ' min';
-
-    // Draw the real-road polyline on the map
-    if (routePolylines[idx]) routePolylines[idx].setMap(null);
-    routePolylines[idx] = new google.maps.Polyline({
-      path: decodedPath,
-      strokeColor: ROUTE_COLORS[idx],
-      strokeOpacity: 0.88,
-      strokeWeight: 5,
-      map: gmap,
-      zIndex: 2,
-      icons: [{
-        icon: { path: google.maps.SymbolPath.FORWARD_CLOSED_ARROW, scale: 2.5, strokeWeight: 1.5, strokeColor: '#fff', fillColor: ROUTE_COLORS[idx], fillOpacity: 1 },
-        offset: '50%',
-        repeat: '120px'
-      }]
-    });
-    routePolylines[idx].addListener('click', () => showRouteInfoCard(idx));
-
-    // Place stop markers from legs
-    if (route.legs) {
-      route.legs.forEach((leg, li) => {
-        if (leg.startLocation?.latLng) {
-          const pos = new google.maps.LatLng(leg.startLocation.latLng.latitude, leg.startLocation.latLng.longitude);
-          createStopMarker(pos, String(li+1), ROUTE_COLORS[idx]);
-        }
-        if (li === route.legs.length - 1 && leg.endLocation?.latLng) {
-          const pos = new google.maps.LatLng(leg.endLocation.latLng.latitude, leg.endLocation.latLng.longitude);
-          createStopMarker(pos, 'E', '#374151');
-        }
-      });
-    }
-
-    console.log(`✅ Route ${idx+1} (${cfg.label}): ${routeDistKm[idx].toFixed(1)}km, ${routeEtaText[idx]}, ${decodedPath.length} road points`);
-    done();
-
-  } catch (err) {
-    console.warn(`Route ${idx+1} Routes API failed (${err.message}), trying Directions API fallback…`);
-    // Fallback: try the legacy Directions API via Maps JS SDK
-    fetchRouteViaDirections(cfg, idx, done);
   }
+
+  // ── Success: decode & store ─────────────────────────────────────
+  const route       = data.routes[0];
+  const decodedPath = google.maps.geometry.encoding.decodePath(route.polyline.encodedPolyline);
+  routePaths[idx]   = decodedPath;
+
+  const distM   = route.distanceMeters || 0;
+  const durSec  = parseInt((route.duration || '0s').replace('s', '')) || 0;
+  routeDistKm[idx]  = distM / 1000;
+  routeEtaText[idx] = durSec >= 3600
+    ? `${Math.floor(durSec/3600)}h ${Math.round((durSec%3600)/60)}m`
+    : Math.round(durSec/60) + ' min';
+
+  // Draw real-road polyline
+  if (routePolylines[idx]) routePolylines[idx].setMap(null);
+  routePolylines[idx] = new google.maps.Polyline({
+    path: decodedPath,
+    strokeColor:   ROUTE_COLORS[idx],
+    strokeOpacity: 0.9,
+    strokeWeight:  5,
+    map: gmap,
+    zIndex: 2,
+    icons: [{
+      icon: {
+        path: google.maps.SymbolPath.FORWARD_CLOSED_ARROW,
+        scale: 2.5, strokeWeight: 1.5, strokeColor: '#fff',
+        fillColor: ROUTE_COLORS[idx], fillOpacity: 1,
+      },
+      offset: '50%', repeat: '100px',
+    }],
+  });
+  routePolylines[idx].addListener('click', () => showRouteInfoCard(idx));
+
+  // Stop markers from leg endpoints
+  if (route.legs) {
+    route.legs.forEach((leg, li) => {
+      if (leg.startLocation?.latLng) {
+        const pos = new google.maps.LatLng(leg.startLocation.latLng.latitude, leg.startLocation.latLng.longitude);
+        createStopMarker(pos, li === 0 ? 'A' : String(li+1), ROUTE_COLORS[idx]);
+      }
+      if (li === route.legs.length - 1 && leg.endLocation?.latLng) {
+        const pos = new google.maps.LatLng(leg.endLocation.latLng.latitude, leg.endLocation.latLng.longitude);
+        createStopMarker(pos, 'B', '#374151');
+      }
+    });
+  }
+
+  console.log(`✅ Leg ${idx+1} (${cfg.label}): ${routeDistKm[idx].toFixed(1)} km, ${routeEtaText[idx]}, ${decodedPath.length} road points`);
+  done();
 }
 
 function fetchRouteViaDirections(cfg, idx, done) {
-  // Fallback using DirectionsService (requires Directions API enabled)
+  // Standard Directions API — no premium drivingOptions needed
   if (!window.google?.maps?.DirectionsService) {
     useStraightLineFallback(cfg, idx, done);
     return;
   }
   const svc = new google.maps.DirectionsService();
-  const waypoints = cfg.wpts.map(wp => ({
+  const waypoints = (cfg.wpts || []).map(wp => ({
     location: new google.maps.LatLng(wp.lat, wp.lng),
-    stopover: true
+    stopover: true,
   }));
   svc.route({
     origin:      new google.maps.LatLng(cfg.origin.lat, cfg.origin.lng),
     destination: new google.maps.LatLng(cfg.dest.lat,   cfg.dest.lng),
     waypoints,
-    travelMode: google.maps.TravelMode.DRIVING,
-    drivingOptions: { departureTime: new Date(), trafficModel: google.maps.TrafficModel.BEST_GUESS },
+    travelMode:  google.maps.TravelMode.DRIVING,
+    // No drivingOptions — avoids premium-plan requirement
   }, (result, status) => {
     if (status === 'OK') {
       const route = result.routes[0];
-      const path = [];
-      route.legs.forEach(leg => leg.steps.forEach(step => step.path.forEach(pt => path.push(pt))));
+      const path  = [];
+      route.legs.forEach(leg =>
+        leg.steps.forEach(step =>
+          step.path.forEach(pt => path.push(pt))
+        )
+      );
       routePaths[idx] = path;
       let totalM = 0, totalS = 0;
-      route.legs.forEach(leg => { totalM += leg.distance.value; totalS += (leg.duration_in_traffic||leg.duration).value; });
+      route.legs.forEach(l => { totalM += l.distance.value; totalS += l.duration.value; });
       routeDistKm[idx]  = totalM / 1000;
-      routeEtaText[idx] = Math.round(totalS/60) + ' min';
+      routeEtaText[idx] = totalS >= 3600
+        ? `${Math.floor(totalS/3600)}h ${Math.round((totalS%3600)/60)}m`
+        : Math.round(totalS/60) + ' min';
+
       if (routePolylines[idx]) routePolylines[idx].setMap(null);
       routePolylines[idx] = new google.maps.Polyline({
-        path, strokeColor:ROUTE_COLORS[idx], strokeOpacity:.88, strokeWeight:5, map:gmap, zIndex:2,
-        icons:[{icon:{path:google.maps.SymbolPath.FORWARD_CLOSED_ARROW,scale:2.5,strokeWeight:1.5,strokeColor:'#fff',fillColor:ROUTE_COLORS[idx],fillOpacity:1},offset:'50%',repeat:'120px'}]
+        path,
+        strokeColor: ROUTE_COLORS[idx], strokeOpacity: 0.9, strokeWeight: 5,
+        map: gmap, zIndex: 2,
+        icons: [{
+          icon: {
+            path: google.maps.SymbolPath.FORWARD_CLOSED_ARROW,
+            scale: 2.5, strokeWeight: 1.5, strokeColor: '#fff',
+            fillColor: ROUTE_COLORS[idx], fillOpacity: 1,
+          },
+          offset: '50%', repeat: '100px',
+        }],
       });
       routePolylines[idx].addListener('click', () => showRouteInfoCard(idx));
       placeStopMarkers(route.legs, idx);
-      console.log(`✅ Route ${idx+1} via Directions API: ${routeDistKm[idx].toFixed(1)}km`);
+      console.log(`✅ Leg ${idx+1} via DirectionsService: ${routeDistKm[idx].toFixed(1)} km, ${path.length} road points`);
       done();
     } else {
-      console.warn(`Directions API also failed (${status}) for route ${idx+1}, using straight-line fallback`);
+      console.warn(`DirectionsService failed (${status}) for leg ${idx+1} — using straight-line`);
       useStraightLineFallback(cfg, idx, done);
     }
   });
@@ -4346,108 +4379,141 @@ function removePlannerWp(idx) {
 }
 
 async function computePlannerRoute() {
-  if (plannerWaypoints.length < 2) { showNotif('Add at least 2 waypoints first','amber'); return; }
+  if (plannerWaypoints.length < 2) {
+    showNotif('Add at least 2 waypoints first — click the map to pin them', 'amber');
+    return;
+  }
+  if (!plannerMap) {
+    showNotif('Planner map not ready — please wait a moment', 'amber');
+    return;
+  }
 
-  const ps = document.getElementById('planner-status');
-  const pb = document.getElementById('planner-save-btn');
+  const ps  = document.getElementById('planner-status');
+  const pb  = document.getElementById('planner-save-btn');
   const res = document.getElementById('planner-result');
-  if (ps) ps.textContent = '⌛ Computing route via Google Maps…';
+  if (ps)  ps.textContent = '⌛ Computing best route…';
   if (res) res.classList.remove('show');
+  if (pb)  { pb.disabled = true; pb.style.opacity = '.5'; }
 
   const origin = plannerWaypoints[0];
   const dest   = plannerWaypoints[plannerWaypoints.length - 1];
   const mids   = plannerWaypoints.slice(1, -1);
 
-  const body = {
-    origin:      { location: { latLng: { latitude: origin.lat(), longitude: origin.lng() } } },
-    destination: { location: { latLng: { latitude: dest.lat(),   longitude: dest.lng()   } } },
-    intermediates: mids.map(wp => ({ location: { latLng: { latitude: wp.lat(), longitude: wp.lng() } } })),
-    travelMode: 'DRIVE',
-    routingPreference: 'TRAFFIC_AWARE',
-    polylineQuality: 'HIGH_QUALITY',
-    polylineEncoding: 'ENCODED_POLYLINE',
-    computeAlternativeRoutes: false,
-  };
-
-  try {
+  // ── Try Routes API v2 ─────────────────────────────────────────
+  const tryRoutesAPI = async (trafficPref) => {
+    const body = {
+      origin:      { location: { latLng: { latitude: origin.lat(), longitude: origin.lng() } } },
+      destination: { location: { latLng: { latitude: dest.lat(),   longitude: dest.lng()   } } },
+      intermediates: mids.map(wp => ({ location: { latLng: { latitude: wp.lat(), longitude: wp.lng() } } })),
+      travelMode: 'DRIVE',
+      routingPreference: trafficPref,
+      polylineQuality: 'HIGH_QUALITY',
+      polylineEncoding: 'ENCODED_POLYLINE',
+      computeAlternativeRoutes: false,
+    };
     const resp = await fetch('https://routes.googleapis.com/directions/v2:computeRoutes', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
         'X-Goog-Api-Key': GMAPS_KEY,
-        'X-Goog-FieldMask': 'routes.duration,routes.distanceMeters,routes.polyline,routes.legs',
+        'X-Goog-FieldMask': 'routes.duration,routes.distanceMeters,routes.polyline',
       },
       body: JSON.stringify(body),
     });
-
-    if (!resp.ok) throw new Error('Routes API error ' + resp.status);
+    if (!resp.ok) throw new Error('HTTP ' + resp.status);
     const data = await resp.json();
-    if (!data.routes?.[0]?.polyline?.encodedPolyline) throw new Error('No polyline in response');
+    if (!data.routes?.[0]?.polyline?.encodedPolyline) throw new Error('No polyline');
+    return data.routes[0];
+  };
 
-    const route = data.routes[0];
-    const path  = google.maps.geometry.encoding.decodePath(route.polyline.encodedPolyline);
-
+  const drawPlannerResult = (path, distKm, etaTxt, source) => {
     if (plannerPolyline) plannerPolyline.setMap(null);
     plannerPolyline = new google.maps.Polyline({
       path,
       strokeColor: '#2563eb', strokeOpacity: 0.92, strokeWeight: 5,
       map: plannerMap, zIndex: 2,
-      icons: [{ icon: { path: google.maps.SymbolPath.FORWARD_CLOSED_ARROW, scale:2.5, strokeColor:'#fff', strokeWeight:1.5, fillColor:'#2563eb', fillOpacity:1 }, offset:'50%', repeat:'90px' }]
+      icons: [{
+        icon: {
+          path: google.maps.SymbolPath.FORWARD_CLOSED_ARROW,
+          scale: 2.5, strokeColor: '#fff', strokeWeight: 1.5,
+          fillColor: '#2563eb', fillOpacity: 1,
+        },
+        offset: '50%', repeat: '90px',
+      }],
     });
-
-    const distKm = ((route.distanceMeters || 0) / 1000).toFixed(1);
-    const durSec = parseInt((route.duration || '0s').replace('s',''));
-    const etaMin = Math.round(durSec / 60);
-    const etaTxt = etaMin >= 60 ? `${Math.floor(etaMin/60)}h ${etaMin%60}m` : `${etaMin} min`;
-
     if (res) {
-      res.innerHTML = `✅ <strong>Best route found!</strong><br>Distance: <strong>${distKm} km</strong> · ETA: <strong>${etaTxt}</strong> (with live traffic)<br>Waypoints: ${plannerWaypoints.length}`;
+      res.innerHTML = `✅ <strong>Route found!</strong><br>`
+        + `Distance: <strong>${distKm} km</strong> · ETA: <strong>${etaTxt}</strong><br>`
+        + `<span style="font-size:10px;color:var(--muted);">${source} · ${plannerWaypoints.length} waypoint${plannerWaypoints.length!==1?'s':''}</span>`;
       res.classList.add('show');
     }
-    if (ps) ps.textContent = `${distKm} km · ${etaTxt} · ${plannerWaypoints.length} waypoints`;
+    if (ps) ps.textContent = `${distKm} km · ${etaTxt}`;
     if (pb) { pb.disabled = false; pb.style.opacity = '1'; }
-
-    // Fit to route
     const bounds = new google.maps.LatLngBounds();
     path.forEach(pt => bounds.extend(pt));
-    plannerMap.fitBounds(bounds, 50);
+    plannerMap.fitBounds(bounds, { top:40, bottom:40, left:20, right:20 });
+  };
 
-  } catch (err) {
-    console.warn('Routes API failed, trying Directions fallback:', err.message);
-    // Fallback: DirectionsService
-    if (!plannerDirSvc) plannerDirSvc = new google.maps.DirectionsService();
-    const wps = plannerWaypoints.slice(1,-1).map(wp => ({ location: wp, stopover: true }));
-    plannerDirSvc.route({
-      origin: plannerWaypoints[0],
-      destination: plannerWaypoints[plannerWaypoints.length-1],
-      waypoints: wps,
-      travelMode: google.maps.TravelMode.DRIVING,
-      drivingOptions: { departureTime: new Date(), trafficModel: google.maps.TrafficModel.BEST_GUESS },
-    }, (result, status) => {
-      if (status === 'OK') {
-        const r = result.routes[0];
-        const path = [];
-        r.legs.forEach(leg => leg.steps.forEach(step => step.path.forEach(pt => path.push(pt))));
-        if (plannerPolyline) plannerPolyline.setMap(null);
-        plannerPolyline = new google.maps.Polyline({ path, strokeColor:'#2563eb', strokeOpacity:.9, strokeWeight:5, map:plannerMap, zIndex:2,
-          icons:[{icon:{path:google.maps.SymbolPath.FORWARD_CLOSED_ARROW,scale:2.5,strokeColor:'#fff',fillColor:'#2563eb',fillOpacity:1},offset:'50%',repeat:'90px'}]
-        });
-        let totalM=0, totalS=0;
-        r.legs.forEach(l=>{ totalM+=l.distance.value; totalS+=(l.duration_in_traffic||l.duration).value; });
-        const distKm = (totalM/1000).toFixed(1), etaMin = Math.round(totalS/60);
-        const etaTxt = etaMin >= 60 ? `${Math.floor(etaMin/60)}h ${etaMin%60}m` : `${etaMin} min`;
-        if (res) { res.innerHTML = `✅ <strong>Route found!</strong><br>Distance: <strong>${distKm} km</strong> · ETA: <strong>${etaTxt}</strong>`; res.classList.add('show'); }
-        if (ps) ps.textContent = `${distKm} km · ${etaTxt}`;
-        if (pb) { pb.disabled=false; pb.style.opacity='1'; }
-        const bounds = new google.maps.LatLngBounds();
-        path.forEach(pt => bounds.extend(pt));
-        plannerMap.fitBounds(bounds, 50);
-      } else {
-        if (ps) ps.textContent = `Route error: ${status}`;
-        showNotif(`Route error: ${status} — try different waypoints`,'red');
-      }
-    });
+  // Attempt 1: Routes API v2 with traffic
+  try {
+    const route  = await tryRoutesAPI('TRAFFIC_AWARE');
+    const path   = google.maps.geometry.encoding.decodePath(route.polyline.encodedPolyline);
+    const distKm = ((route.distanceMeters||0)/1000).toFixed(1);
+    const durSec = parseInt((route.duration||'0s').replace('s',''));
+    const etaTxt = durSec>=3600 ? `${Math.floor(durSec/3600)}h ${Math.round((durSec%3600)/60)}m` : `${Math.round(durSec/60)} min`;
+    drawPlannerResult(path, distKm, etaTxt, 'Routes API v2 · live traffic');
+    return;
+  } catch (e1) {
+    console.warn('Planner Routes API (TRAFFIC_AWARE) failed:', e1.message);
   }
+
+  // Attempt 2: Routes API v2 without traffic (works on standard billing)
+  try {
+    const route  = await tryRoutesAPI('TRAFFIC_UNAWARE');
+    const path   = google.maps.geometry.encoding.decodePath(route.polyline.encodedPolyline);
+    const distKm = ((route.distanceMeters||0)/1000).toFixed(1);
+    const durSec = parseInt((route.duration||'0s').replace('s',''));
+    const etaTxt = durSec>=3600 ? `${Math.floor(durSec/3600)}h ${Math.round((durSec%3600)/60)}m` : `${Math.round(durSec/60)} min`;
+    drawPlannerResult(path, distKm, etaTxt, 'Routes API v2');
+    return;
+  } catch (e2) {
+    console.warn('Planner Routes API (TRAFFIC_UNAWARE) failed:', e2.message);
+  }
+
+  // Attempt 3: DirectionsService — no premium options
+  if (!window.google?.maps?.DirectionsService) {
+    if (ps) ps.textContent = '❌ Google Maps not loaded';
+    showNotif('Google Maps not ready — please open the Routes Map page first to initialise', 'red');
+    return;
+  }
+  if (ps) ps.textContent = '⌛ Trying Directions API…';
+  const dirSvc2 = new google.maps.DirectionsService();
+  dirSvc2.route({
+    origin:      origin,
+    destination: dest,
+    waypoints:   mids.map(wp => ({ location: wp, stopover: true })),
+    travelMode:  google.maps.TravelMode.DRIVING,
+    // No drivingOptions — avoids premium billing requirement
+  }, (result, status) => {
+    if (status === 'OK') {
+      const r    = result.routes[0];
+      const path = [];
+      r.legs.forEach(leg => leg.steps.forEach(step => step.path.forEach(pt => path.push(pt))));
+      let totalM = 0, totalS = 0;
+      r.legs.forEach(l => { totalM += l.distance.value; totalS += l.duration.value; });
+      const distKm = (totalM/1000).toFixed(1);
+      const etaTxt = totalS>=3600 ? `${Math.floor(totalS/3600)}h ${Math.round((totalS%3600)/60)}m` : `${Math.round(totalS/60)} min`;
+      drawPlannerResult(path, distKm, etaTxt, 'Directions API');
+    } else {
+      if (ps) ps.textContent = `❌ Could not compute route (${status})`;
+      if (res) {
+        res.innerHTML = `❌ <strong>Route not found</strong> (${status})<br>`
+          + `<span style="font-size:10px;color:var(--muted);">Try placing waypoints closer to roads, or check your Google Maps API key has Directions API enabled.</span>`;
+        res.classList.add('show');
+      }
+      showNotif(`Route compute failed: ${status} — ensure waypoints are on or near roads`, 'red');
+    }
+  });
 }
 
 function clearPlannerWaypoints() {
