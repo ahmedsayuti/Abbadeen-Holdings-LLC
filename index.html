@@ -327,6 +327,113 @@
   .footer-bottom{display:flex;justify-content:space-between;align-items:center;font-size:.78rem;color:rgba(255,255,255,.25);flex-wrap:wrap;gap:.5rem}
   .footer-bottom a{color:var(--green-l);text-decoration:none}
 
+  /* ── FLEET SECTION ── */
+  #fleet{padding:8rem 0;background:var(--navy);position:relative;overflow:hidden}
+  .fleet-grid-bg{position:absolute;inset:0;background-image:linear-gradient(rgba(77,139,49,.04) 1px,transparent 1px),linear-gradient(90deg,rgba(77,139,49,.04) 1px,transparent 1px);background-size:50px 50px;animation:gridPan 20s linear infinite;pointer-events:none}
+  .fleet-glow-left{position:absolute;left:-150px;top:50%;transform:translateY(-50%);width:500px;height:500px;background:radial-gradient(circle,rgba(77,139,49,.1) 0%,transparent 70%);pointer-events:none}
+  .fleet-glow-right{position:absolute;right:-150px;top:50%;transform:translateY(-50%);width:500px;height:500px;background:radial-gradient(circle,rgba(77,139,49,.08) 0%,transparent 70%);pointer-events:none}
+  .fleet-header{text-align:center;margin-bottom:5rem}
+  .fleet-header .section-label{justify-content:center}
+  .fleet-header .section-sub{margin:0 auto}
+  .fleet-trucks-wrap{display:grid;grid-template-columns:1fr 1fr;gap:2.5rem}
+  .fleet-card{background:rgba(255,255,255,.03);border:1px solid rgba(77,139,49,.18);border-radius:16px;padding:2.4rem 2.2rem 2rem;position:relative;overflow:hidden;transition:border-color .35s,background .35s,transform .35s var(--ease)}
+  .fleet-card:hover{border-color:rgba(77,139,49,.45);background:rgba(77,139,49,.04);transform:translateY(-5px);box-shadow:0 20px 60px rgba(0,0,0,.3)}
+  .fleet-card::after{content:'';position:absolute;bottom:0;left:0;right:0;height:3px;background:linear-gradient(90deg,transparent,var(--green),transparent);opacity:0;transition:opacity .4s}
+  .fleet-card:hover::after{opacity:1}
+  .fleet-card-badge{display:inline-flex;align-items:center;gap:.45rem;background:rgba(77,139,49,.12);border:1px solid rgba(77,139,49,.3);border-radius:100px;padding:.3rem .8rem;font-family:'Space Mono',monospace;font-size:.62rem;letter-spacing:.12em;color:var(--green-l);text-transform:uppercase;margin-bottom:.9rem}
+  .fleet-badge-dot{width:5px;height:5px;border-radius:50%;background:var(--green-l);animation:pillPulse 1.8s infinite}
+  .fleet-card-title{font-family:'Barlow Condensed',sans-serif;font-weight:800;font-size:1.6rem;text-transform:uppercase;letter-spacing:.04em;color:#fff;margin-bottom:.4rem}
+  .fleet-card-desc{font-size:.85rem;color:rgba(255,255,255,.4);line-height:1.65;margin-bottom:1.3rem}
+  .fleet-card-specs{display:flex;flex-wrap:wrap;gap:.45rem;margin-bottom:1.8rem}
+  .fleet-spec{background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.08);color:rgba(255,255,255,.5);font-size:.68rem;padding:.28rem .7rem;border-radius:100px;font-family:'Space Mono',monospace;letter-spacing:.03em;transition:background .3s,border-color .3s,color .3s}
+  .fleet-card:hover .fleet-spec{background:rgba(77,139,49,.1);border-color:rgba(77,139,49,.3);color:rgba(255,255,255,.65)}
+  .fleet-scene{position:relative;border-radius:10px;background:linear-gradient(180deg,#0a1220 0%,#0d1828 100%);overflow:hidden;min-height:220px;display:flex;flex-direction:column}
+  .fleet-truck-photo{width:100%;height:260px;object-fit:cover;object-position:center;display:block;border-radius:8px;transition:transform .5s var(--ease),filter .5s;filter:brightness(0.92) contrast(1.05);animation:truckFloat 5s ease-in-out infinite}
+  .fleet-card:hover .fleet-truck-photo{transform:scale(1.03);filter:brightness(1) contrast(1.08)}
+  .fleet-photo-fallback{width:100%;height:260px;display:flex;align-items:center;justify-content:center;gap:1.2rem;padding:1.5rem;background:rgba(27,42,71,0.5);border-radius:8px;border:2px dashed rgba(77,139,49,0.3)}
+  .fleet-photo-fallback span{font-size:3rem;opacity:.5}
+  .fleet-fallback-text strong{display:block;font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:1rem;text-transform:uppercase;letter-spacing:.06em;color:rgba(255,255,255,.5);margin-bottom:.3rem}
+  .fleet-fallback-text span{font-size:.78rem;color:rgba(255,255,255,.3);line-height:1.5}
+  .fleet-fallback-text code{background:rgba(77,139,49,.15);color:var(--green-l);padding:.1rem .35rem;border-radius:3px;font-size:.72rem}
+  .fleet-scene-road{height:3px;background:linear-gradient(90deg,transparent,rgba(77,139,49,.7) 20%,rgba(77,139,49,.7) 80%,transparent);margin:0;animation:roadPulse 2.5s ease-in-out infinite;flex-shrink:0}
+  .fleet-temp-chip{position:absolute;top:10px;right:10px;background:rgba(13,23,40,.92);backdrop-filter:blur(8px);border:1px solid rgba(77,139,49,.3);border-radius:8px;padding:.42rem .8rem;display:flex;align-items:center;gap:.5rem;animation:chipFloat 5s ease-in-out infinite}
+  .fleet-card:nth-child(2) .fleet-temp-chip{animation-delay:1.8s}
+  .fleet-temp-icon{font-size:1rem}
+  .fleet-temp-main{font-family:'Space Mono',monospace;font-weight:700;font-size:.72rem;color:#fff}
+  .fleet-temp-sub{font-size:.6rem;color:var(--mid);letter-spacing:.05em}
+  .fleet-live-dot{width:5px;height:5px;border-radius:50%;background:var(--green-l);animation:pillPulse 1.5s infinite;flex-shrink:0}
+  /* OFFICE ADDRESSES */
+  .office-addresses-row{display:grid;grid-template-columns:1fr 1fr;gap:1.2rem;margin-top:1.8rem}
+  .office-addr-card{background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.08);border-left:3px solid var(--green);border-radius:6px;padding:1rem 1.1rem;transition:background .3s,border-color .3s}
+  .office-addr-card:hover{background:rgba(77,139,49,.06);border-left-color:var(--green-l)}
+  .office-addr-label{font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:.68rem;letter-spacing:.12em;text-transform:uppercase;color:var(--green-l);margin-bottom:.45rem;display:flex;align-items:center;gap:.4rem}
+  .office-addr-label::before{content:'📍';font-size:.75rem}
+  .office-addr-text{font-size:.78rem;color:rgba(255,255,255,.45);line-height:1.75}
+  .footer-addr-block{margin-top:1rem;padding-top:1rem;border-top:1px solid rgba(255,255,255,.07)}
+  .footer-addr-entry{margin-bottom:.85rem;padding-left:.7rem;border-left:2px solid rgba(77,139,49,.4)}
+  .footer-addr-entry strong{display:block;font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:.75rem;letter-spacing:.08em;text-transform:uppercase;color:rgba(255,255,255,.5);margin-bottom:.2rem}
+  .footer-addr-entry span{font-size:.78rem;color:rgba(255,255,255,.3);line-height:1.7;display:block}
+  @media(max-width:1024px){.fleet-trucks-wrap{grid-template-columns:1fr}.office-addresses-row{grid-template-columns:1fr}}
+  /* ── FLOATING QUOTE CTA ── */
+  .float-cta{position:fixed;bottom:2.2rem;right:2rem;z-index:990;display:flex;flex-direction:column;align-items:flex-end;gap:.7rem;pointer-events:none}
+  .float-cta-btn{pointer-events:all;background:var(--green);color:#fff;padding:.8rem 1.6rem;border-radius:50px;font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:.95rem;letter-spacing:.1em;text-transform:uppercase;text-decoration:none;display:flex;align-items:center;gap:.55rem;box-shadow:0 8px 32px rgba(77,139,49,.45);transform:translateY(80px);opacity:0;transition:transform .5s var(--ease),opacity .5s var(--ease),background .3s,box-shadow .3s;border:none;cursor:pointer}
+  .float-cta-btn.visible{transform:translateY(0);opacity:1}
+  .float-cta-btn:hover{background:var(--green-l);box-shadow:0 12px 40px rgba(77,139,49,.55);transform:translateY(-3px)!important}
+  .float-cta-pulse{width:10px;height:10px;border-radius:50%;background:rgba(255,255,255,.8);animation:pillPulse 1.6s infinite;flex-shrink:0}
+  .back-to-top{pointer-events:all;width:42px;height:42px;border-radius:50%;background:rgba(17,28,48,.85);backdrop-filter:blur(8px);border:1px solid rgba(77,139,49,.35);color:var(--green-l);display:flex;align-items:center;justify-content:center;font-size:1.1rem;cursor:pointer;transform:translateY(80px);opacity:0;transition:transform .5s var(--ease) .08s,opacity .5s var(--ease) .08s,background .3s;text-decoration:none}
+  .back-to-top.visible{transform:translateY(0);opacity:1}
+  .back-to-top:hover{background:var(--navy-l)}
+
+  /* ── TRUST STRIP ── */
+  #trust{padding:3.5rem 0;background:var(--cream);border-top:1px solid rgba(27,42,71,.08);border-bottom:1px solid rgba(27,42,71,.08)}
+  .trust-inner{display:flex;align-items:center;gap:3.5rem;flex-wrap:wrap;justify-content:center}
+  .trust-label{font-family:'Space Mono',monospace;font-size:.62rem;letter-spacing:.18em;text-transform:uppercase;color:var(--mid);white-space:nowrap;flex-shrink:0}
+  .trust-divider{width:1px;height:28px;background:rgba(27,42,71,.12);flex-shrink:0}
+  .trust-badges{display:flex;align-items:center;gap:3rem;flex-wrap:wrap;justify-content:center}
+  .trust-badge{display:flex;align-items:center;gap:.6rem;opacity:.55;transition:opacity .3s;filter:grayscale(1);cursor:default}
+  .trust-badge:hover{opacity:.85;filter:grayscale(0)}
+  .trust-badge-icon{flex-shrink:0}
+  .trust-badge-text{font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:.88rem;letter-spacing:.06em;text-transform:uppercase;color:var(--navy);line-height:1.2}
+  .trust-badge-sub{font-size:.62rem;color:var(--mid);font-weight:400;letter-spacing:.04em}
+
+  /* ── OFFICES / COVERAGE ── */
+  #offices{padding:8rem 0;background:var(--navy-d);position:relative;overflow:hidden}
+  .offices-glow{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:900px;height:600px;background:radial-gradient(ellipse,rgba(77,139,49,.08) 0%,transparent 70%);pointer-events:none}
+  .offices-grid-bg{position:absolute;inset:0;background-image:linear-gradient(rgba(77,139,49,.04) 1px,transparent 1px),linear-gradient(90deg,rgba(77,139,49,.04) 1px,transparent 1px);background-size:48px 48px;pointer-events:none}
+  .offices-inner{position:relative;z-index:2}
+  .offices-top{text-align:center;margin-bottom:5rem}
+  .offices-top .section-label{justify-content:center}
+  .offices-cards{display:grid;grid-template-columns:1fr 1fr;gap:2rem}
+  .office-card{background:rgba(255,255,255,.03);border:1px solid rgba(77,139,49,.18);border-radius:16px;padding:2.6rem;position:relative;overflow:hidden;transition:border-color .35s,background .35s,transform .35s var(--ease)}
+  .office-card:hover{border-color:rgba(77,139,49,.4);background:rgba(77,139,49,.04);transform:translateY(-6px);box-shadow:0 24px 64px rgba(0,0,0,.35)}
+  .office-card-map{width:100%;border-radius:10px;overflow:hidden;margin-bottom:1.8rem;position:relative;background:#0D1726;border:1px solid rgba(77,139,49,.15)}
+  .office-card-num{position:absolute;top:1.8rem;right:2rem;font-family:'Barlow Condensed',sans-serif;font-weight:900;font-size:5rem;color:rgba(77,139,49,.06);line-height:1;user-select:none}
+  .office-card-state{font-family:'Barlow Condensed',sans-serif;font-weight:900;font-size:2.2rem;text-transform:uppercase;letter-spacing:.02em;color:#fff;line-height:1;margin-bottom:.3rem}
+  .office-card-city{font-family:'Barlow Condensed',sans-serif;font-weight:600;font-size:1rem;text-transform:uppercase;letter-spacing:.12em;color:var(--green-l);margin-bottom:1.4rem}
+  .office-addr-lines{border-top:1px solid rgba(255,255,255,.07);padding-top:1.2rem;margin-top:.2rem}
+  .office-addr-line{font-size:.88rem;color:rgba(255,255,255,.45);line-height:1.9;display:flex;align-items:flex-start;gap:.55rem}
+  .office-addr-line svg{flex-shrink:0;margin-top:.3rem;opacity:.5}
+  .office-type-tag{display:inline-flex;align-items:center;gap:.4rem;background:rgba(77,139,49,.12);border:1px solid rgba(77,139,49,.28);border-radius:100px;padding:.28rem .75rem;font-family:'Space Mono',monospace;font-size:.6rem;letter-spacing:.1em;color:var(--green-l);text-transform:uppercase;margin-bottom:1rem}
+
+  /* ── FAQ ── */
+  #faq{padding:8rem 0;background:var(--white)}
+  .faq-inner{max-width:860px;margin:0 auto;padding:0 5vw}
+  .faq-header{text-align:center;margin-bottom:4rem}
+  .faq-list{display:flex;flex-direction:column;gap:.75rem}
+  .faq-item{border:1px solid rgba(27,42,71,.1);border-radius:10px;overflow:hidden;transition:border-color .3s,box-shadow .3s}
+  .faq-item.open{border-color:rgba(77,139,49,.4);box-shadow:0 4px 24px rgba(77,139,49,.08)}
+  .faq-q{width:100%;background:none;border:none;padding:1.4rem 1.6rem;display:flex;align-items:center;justify-content:space-between;gap:1rem;cursor:pointer;text-align:left;font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:1.05rem;text-transform:uppercase;letter-spacing:.04em;color:var(--navy);transition:background .3s,color .3s}
+  .faq-item.open .faq-q{background:rgba(77,139,49,.04);color:var(--green-d)}
+  .faq-q-icon{width:28px;height:28px;border-radius:50%;border:1.5px solid rgba(27,42,71,.18);display:flex;align-items:center;justify-content:center;flex-shrink:0;font-size:1.1rem;color:var(--green);transition:transform .4s var(--ease),border-color .3s,background .3s}
+  .faq-item.open .faq-q-icon{transform:rotate(45deg);border-color:var(--green);background:var(--green);color:#fff}
+  .faq-a{max-height:0;overflow:hidden;transition:max-height .45s var(--ease),padding .3s}
+  .faq-a-inner{padding:0 1.6rem 1.4rem;font-size:.93rem;color:#6B7A94;line-height:1.8}
+  .faq-item.open .faq-a{max-height:400px}
+
+  /* RESPONSIVE additions */
+  @media(max-width:1024px){.offices-cards{grid-template-columns:1fr}}
+  @media(max-width:768px){.float-cta-btn span.label{display:none}.trust-badges{gap:1.5rem}}
+
   /* ANIMATIONS */
   @keyframes fadeUp{to{opacity:1;transform:translateY(0)}}
   @keyframes fadeIn{to{opacity:1}}
@@ -369,9 +476,19 @@
 <div class="cursor" id="cursor"></div>
 <div class="cursor-ring" id="cursorRing"></div>
 
+<!-- ══ FLOATING CTA + BACK TO TOP ══ -->
+<div class="float-cta" id="floatCta">
+  <a href="#contact" class="float-cta-btn" id="floatBtn">
+    <span class="float-cta-pulse"></span>
+    <span class="label">Get a Quote</span>
+    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+  </a>
+  <a href="#" class="back-to-top" id="backTop" title="Back to top">↑</a>
+</div>
+
 <!-- ══ NAV ══ -->
 <header id="navbar">
-  <a href="#hero" class="nav-logo">
+  <a href="/" class="nav-logo">
     <!--
       ╔══════════════════════════════════════════════════════════╗
       ║  LOCAL LOGO SETUP                                        ║
@@ -383,7 +500,7 @@
     <img src="/srcs/logo.png" alt="Abbadeen Holdings, LLC" class="nav-logo-img" />
   </a>
   <nav id="mainNav">
-    <a href="/">Home</a>
+    <a href="/" class="active">Home</a>
     <a href="/about/">About</a>
     <a href="/news/">News &amp; Collaborations</a>
     <a href="/contact/" class="nav-cta">Contact Us</a>
@@ -402,11 +519,11 @@
     <div class="hero-text">
       <div class="hero-est-pill"><span></span>Est. 2024 · Proudly USA Registered, LLC</div>
       <div class="hero-label">Your Farm-to-Table Freight</div>
-      <h1 class="hero-h1">Fresh From <em>Field To Table</em></h1>
-      <p class="hero-desc">Abbadeen Holdings, LLC is a U.S.-registered freight company delivering premium farm produce and perishables with cold-chain precision — connecting agricultural heartlands to restaurant tables nationwide.</p>
+      <h1 class="hero-h1">Fresh From <em>Farm To Table</em></h1>
+      <p class="hero-desc">Abbadeen Holdings, LLC is a U.S.-registered freight company delivering premium farm produce and perishables with cold-chain precision — connecting agricultural heartlands to retail shelves nationwide.</p>
       <div class="hero-actions">
         <a href="/contact/" class="btn-primary">Get a Quote <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a>
-        <a href="/beta-relay/" target="_blank" rel="noopener noreferrer" class="btn-outline">Beta Relay 2.0 <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="12" cy="12" r="10"/><path d="M10 8l4 4-4 4"/></svg></a>
+        <a href="/beta-relay/" target="_blank" rel="noopener noreferrer" class="btn-outline">Our Beta Relay 2.0 <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="12" cy="12" r="10"/><path d="M10 8l4 4-4 4"/></svg></a>
       </div>
       <div class="hero-stats">
         <div><div class="hero-stat-num" data-target="2400">0</div><div class="hero-stat-label">Active Routes</div></div>
@@ -477,6 +594,7 @@
   </div>
 </div>
 
+
 <!-- ══ BETA RELAY 2.0 ══ -->
 <section id="betarelay">
   <div class="betarelay-glow"></div>
@@ -489,7 +607,6 @@
           <span class="new-badge">Live &amp; Operational</span>
         </div>
         <div class="betarelay-h2 reveal">Beta <span class="relay-v">Relay</span><span class="relay-num">2.0</span></div>
-        <div class="betarelay-sub reveal">National Over-the-Road Freight Coordination Platform</div>
         <p class="betarelay-desc reveal">An <strong>app-based operational intelligence system</strong> that transforms fragmented U.S. trucking operations into a synchronized logistics infrastructure for the <strong>Consumer Packaged Goods (CPG)</strong> industry. Integrating <strong>real-time route-to-market optimization</strong>, a novel <strong>baton-relay driver network</strong>, and nationwide capacity coordination — Beta Relay 2.0 gives administrators <strong>exact live awareness</strong> of every vehicle and route at any moment.</p>
         <div class="betarelay-pillars reveal">
           <div class="pillar-item"><span class="pillar-icon">🗺️</span><div class="pillar-title">Route-to-Market Optimization</div><div class="pillar-desc">AI-driven routing engine minimizes empty miles and fuel spend across the entire national network.</div></div>
@@ -505,7 +622,7 @@
             ╚════════════════════════════════════════════════════════════╝
           -->
           <a href="/beta-relay/" target="_blank" rel="noopener noreferrer" class="btn-relay">
-            View Beta Relay 2.0 Prototype
+            View Our Beta Relay 2.0
             <div class="btn-relay-arrow">↗</div>
           </a>
           <span class="btn-relay-note">Opens in a new tab</span>
@@ -621,6 +738,116 @@
   </div>
 </section>
 
+<!-- ══ FLEET ══ -->
+<section id="fleet">
+  <div class="fleet-grid-bg"></div>
+  <div class="fleet-glow-left"></div>
+  <div class="fleet-glow-right"></div>
+  <div class="section-inner" style="position:relative;z-index:2">
+    <div class="fleet-header reveal">
+      <div class="section-label">Our Reefer Fleet</div>
+      <h2 class="section-h2 light">Cold-Chain Ready.<br>Mile After Mile.</h2>
+      <p class="section-sub light">Purpose-built refrigerated trucks engineered to maintain precise temperatures from −18°C to +4°C across every route, every delivery, every time.</p>
+    </div>
+    <div class="fleet-trucks-wrap">
+
+      <!-- ── TRUCK CARD 1: Full 18-Wheeler Reefer ── -->
+      <div class="fleet-card reveal reveal-delay-1">
+        <div class="fleet-card-badge"><span class="fleet-badge-dot"></span>Primary Fleet</div>
+        <div class="fleet-card-title">Class-8 Reefer Unit</div>
+        <div class="fleet-card-desc">Full refrigerated semi-trailer with onboard Thermo King unit. Built for long-haul CPG and farm-to-market distribution across the continental US.</div>
+        <div class="fleet-card-specs">
+          <span class="fleet-spec">🌡️ −18°C to +4°C</span>
+          <span class="fleet-spec">📡 Live GPS + Temp</span>
+          <span class="fleet-spec">⚡ Beta Relay 2.0</span>
+          <span class="fleet-spec">🔒 HACCP Compliant</span>
+        </div>
+        <div class="fleet-scene">
+          <!-- Temperature chip overlay -->
+          <div class="fleet-temp-chip">
+            <span class="fleet-temp-icon">🧊</span>
+            <div>
+              <div class="fleet-temp-main">−4°C</div>
+              <div class="fleet-temp-sub">Cargo Hold</div>
+            </div>
+            <span class="fleet-live-dot"></span>
+          </div>
+          <!--
+            ════════════════════════════════════════════════════
+              TRUCK PHOTO 1 — Replace src with your image path
+              Recommended: landscape photo, e.g. reefer_truck_1.jpg
+              Place your image in the same folder as index.html
+              or update the path to match your file location.
+            ════════════════════════════════════════════════════
+          -->
+          <img
+            src="/srcs/truck1.png"
+            alt="Abbadeen Holdings Reefer Truck — Cold Chain Fleet"
+            class="fleet-truck-photo"
+            onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"
+          />
+          <!-- Fallback shown only if image not found -->
+          <div class="fleet-photo-fallback" style="display:none">
+            <span>🚛</span>
+            <div class="fleet-fallback-text">
+              <strong>Add Your Truck Photo</strong>
+              <span>Update <code>src="/srcs/truck1.png"</code> to your image path</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ── TRUCK CARD 2: Express Mid-Range Reefer ── -->
+      <div class="fleet-card reveal reveal-delay-2">
+        <div class="fleet-card-badge"><span class="fleet-badge-dot"></span>Express Fleet</div>
+        <div class="fleet-card-title">Express Reefer Sprinter</div>
+        <div class="fleet-card-desc">Agile refrigerated straight-truck for urban last-mile and same-day delivery. Ideal for restaurants, hotels, and retail express routes in metropolitan areas.</div>
+        <div class="fleet-card-specs">
+          <span class="fleet-spec">🌡️ +2°C to +8°C</span>
+          <span class="fleet-spec">🚀 Same-Day Delivery</span>
+          <span class="fleet-spec">📡 Live GPS Tracked</span>
+          <span class="fleet-spec">🏙️ Urban Routes</span>
+          <span class="fleet-spec">♻️ Low Emission</span>
+        </div>
+        <div class="fleet-scene">
+          <!-- Temperature chip overlay -->
+          <div class="fleet-temp-chip delay">
+            <span class="fleet-temp-icon">🌿</span>
+            <div>
+              <div class="fleet-temp-main">+4°C</div>
+              <div class="fleet-temp-sub">Fresh Hold</div>
+            </div>
+            <span class="fleet-live-dot"></span>
+          </div>
+          <!--
+            ════════════════════════════════════════════════════
+              TRUCK PHOTO 2 — Replace src with your image path
+              Recommended: landscape photo, e.g. reefer_truck_2.jpg
+              Place your image in the same folder as index.html
+              or update the path to match your file location.
+            ════════════════════════════════════════════════════
+          -->
+          <img
+            src="/srcs/truck2.png"
+            alt="Abbadeen Holdings Reefer Truck — Express Fleet"
+            class="fleet-truck-photo"
+            onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"
+          />
+          <!-- Fallback shown only if image not found -->
+          <div class="fleet-photo-fallback" style="display:none">
+            <span>🚛</span>
+            <div class="fleet-fallback-text">
+              <strong>Add Your Truck Photo</strong>
+              <span>Update <code>src="/srcs/truck2.png"</code> to your image path</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
 <!-- ══ ABOUT ══ -->
 <section id="whyus">
   <!-- Anchor for the "About" nav link -->
@@ -671,17 +898,17 @@
   <div class="section-inner"><div class="reveal" style="text-align:center"><div class="section-label" style="justify-content:center">Client Voices</div><h2 class="section-h2 light">What Our Partners<br>Are Saying</h2></div></div>
   <div class="testimonials-track-wrap" style="margin-top:3.5rem">
     <div class="testimonials-track">
-      <div class="testimonial-card"><div class="testimonial-stars">★★★★★</div><p class="testimonial-text">"Abbadeen has transformed our supply chain. Our produce arrives fresher than ever — Beta Relay 2.0's real-time tracking gives us complete peace of mind."</p><div class="testimonial-author"><div class="testimonial-avatar">KM</div><div><div class="testimonial-name">Kofi Mensah</div><div class="testimonial-role">Executive Chef, The Meridian</div></div></div></div>
-      <div class="testimonial-card"><div class="testimonial-stars">★★★★★</div><p class="testimonial-text">"As a farm owner, finding a reliable cold-chain partner was always a struggle. Abbadeen solved that completely. Zero spoilage since we switched."</p><div class="testimonial-author"><div class="testimonial-avatar">AS</div><div><div class="testimonial-name">Ama Sarpong</div><div class="testimonial-role">Owner, Sarpong Organics Farm</div></div></div></div>
-      <div class="testimonial-card"><div class="testimonial-stars">★★★★★</div><p class="testimonial-text">"Consistent, professional, and incredibly responsive. Their same-day service for our seafood deliveries is something we can't operate without."</p><div class="testimonial-author"><div class="testimonial-avatar">JO</div><div><div class="testimonial-name">James Osei</div><div class="testimonial-role">Procurement Manager, Volta Hotels</div></div></div></div>
-      <div class="testimonial-card"><div class="testimonial-stars">★★★★★</div><p class="testimonial-text">"The sustainability focus aligns perfectly with our restaurant's values. Our supply chain is as clean as the food on our menu."</p><div class="testimonial-author"><div class="testimonial-avatar">NB</div><div><div class="testimonial-name">Nana Boateng</div><div class="testimonial-role">Co-Founder, Roots &amp; Greens</div></div></div></div>
-      <div class="testimonial-card"><div class="testimonial-stars">★★★★★</div><p class="testimonial-text">"Being a newer company, their hunger and attention to detail sets them apart. We distribute to 12 locations and Abbadeen handles every route flawlessly."</p><div class="testimonial-author"><div class="testimonial-avatar">EK</div><div><div class="testimonial-name">Efua Kumi</div><div class="testimonial-role">Director, FreshLink Distribution</div></div></div></div>
+      <div class="testimonial-card"><div class="testimonial-stars">★★★★★</div><p class="testimonial-text">"Abbadeen has transformed our supply chain. Our produce arrives fresher than ever — Beta Relay 2.0's real-time tracking gives us complete peace of mind."</p><div class="testimonial-author"><div class="testimonial-avatar">KM</div><div><div class="testimonial-name">Kyle Mitchell</div><div class="testimonial-role">Executive Chef, The Meridian</div></div></div></div>
+      <div class="testimonial-card"><div class="testimonial-stars">★★★★★</div><p class="testimonial-text">"As a farm owner, finding a reliable cold-chain partner was always a struggle. Abbadeen solved that completely. Zero spoilage since we switched."</p><div class="testimonial-author"><div class="testimonial-avatar">AS</div><div><div class="testimonial-name">Amanda Spencer</div><div class="testimonial-role">Owner, Spencer Organics Farm</div></div></div></div>
+      <div class="testimonial-card"><div class="testimonial-stars">★★★★★</div><p class="testimonial-text">"Consistent, professional, and incredibly responsive. Their same-day service for our seafood deliveries is something we can't operate without."</p><div class="testimonial-author"><div class="testimonial-avatar">JO</div><div><div class="testimonial-name">Jake O'Brien</div><div class="testimonial-role">Procurement Manager, Valor Hotels</div></div></div></div>
+      <div class="testimonial-card"><div class="testimonial-stars">★★★★★</div><p class="testimonial-text">"The sustainability focus aligns perfectly with our restaurant's values. Our supply chain is as clean as the food on our menu."</p><div class="testimonial-author"><div class="testimonial-avatar">NB</div><div><div class="testimonial-name">Nathan Burns</div><div class="testimonial-role">Co-Founder, Roots &amp; Greens</div></div></div></div>
+      <div class="testimonial-card"><div class="testimonial-stars">★★★★★</div><p class="testimonial-text">"Being a newer company, their hunger and attention to detail sets them apart. We distribute to 12 locations and Abbadeen handles every route flawlessly."</p><div class="testimonial-author"><div class="testimonial-avatar">EK</div><div><div class="testimonial-name">Emily Kramer</div><div class="testimonial-role">Director, FreshLink Distribution</div></div></div></div>
       <!-- duplicates -->
-      <div class="testimonial-card"><div class="testimonial-stars">★★★★★</div><p class="testimonial-text">"Abbadeen has transformed our supply chain. Our produce arrives fresher than ever — Beta Relay 2.0's real-time tracking gives us complete peace of mind."</p><div class="testimonial-author"><div class="testimonial-avatar">KM</div><div><div class="testimonial-name">Kofi Mensah</div><div class="testimonial-role">Executive Chef, The Meridian</div></div></div></div>
-      <div class="testimonial-card"><div class="testimonial-stars">★★★★★</div><p class="testimonial-text">"As a farm owner, finding a reliable cold-chain partner was always a struggle. Abbadeen solved that completely. Zero spoilage since we switched."</p><div class="testimonial-author"><div class="testimonial-avatar">AS</div><div><div class="testimonial-name">Ama Sarpong</div><div class="testimonial-role">Owner, Sarpong Organics Farm</div></div></div></div>
-      <div class="testimonial-card"><div class="testimonial-stars">★★★★★</div><p class="testimonial-text">"Consistent, professional, and incredibly responsive. Their same-day service for our seafood deliveries is something we can't operate without."</p><div class="testimonial-author"><div class="testimonial-avatar">JO</div><div><div class="testimonial-name">James Osei</div><div class="testimonial-role">Procurement Manager, Volta Hotels</div></div></div></div>
-      <div class="testimonial-card"><div class="testimonial-stars">★★★★★</div><p class="testimonial-text">"The sustainability focus aligns perfectly with our restaurant's values. Our supply chain is as clean as the food on our menu."</p><div class="testimonial-author"><div class="testimonial-avatar">NB</div><div><div class="testimonial-name">Nana Boateng</div><div class="testimonial-role">Co-Founder, Roots &amp; Greens</div></div></div></div>
-      <div class="testimonial-card"><div class="testimonial-stars">★★★★★</div><p class="testimonial-text">"Being a newer company, their hunger and attention to detail sets them apart. We distribute to 12 locations and Abbadeen handles every route flawlessly."</p><div class="testimonial-author"><div class="testimonial-avatar">EK</div><div><div class="testimonial-name">Efua Kumi</div><div class="testimonial-role">Director, FreshLink Distribution</div></div></div></div>
+      <div class="testimonial-card"><div class="testimonial-stars">★★★★★</div><p class="testimonial-text">"Abbadeen has transformed our supply chain. Our produce arrives fresher than ever — Beta Relay 2.0's real-time tracking gives us complete peace of mind."</p><div class="testimonial-author"><div class="testimonial-avatar">KM</div><div><div class="testimonial-name">Kyle Mitchell</div><div class="testimonial-role">Executive Chef, The Meridian</div></div></div></div>
+      <div class="testimonial-card"><div class="testimonial-stars">★★★★★</div><p class="testimonial-text">"As a farm owner, finding a reliable cold-chain partner was always a struggle. Abbadeen solved that completely. Zero spoilage since we switched."</p><div class="testimonial-author"><div class="testimonial-avatar">AS</div><div><div class="testimonial-name">Amanda Spencer</div><div class="testimonial-role">Owner, Spencer Organics Farm</div></div></div></div>
+      <div class="testimonial-card"><div class="testimonial-stars">★★★★★</div><p class="testimonial-text">"Consistent, professional, and incredibly responsive. Their same-day service for our seafood deliveries is something we can't operate without."</p><div class="testimonial-author"><div class="testimonial-avatar">JO</div><div><div class="testimonial-name">Jake O'Brien</div><div class="testimonial-role">Procurement Manager, Valor Hotels</div></div></div></div>
+      <div class="testimonial-card"><div class="testimonial-stars">★★★★★</div><p class="testimonial-text">"The sustainability focus aligns perfectly with our restaurant's values. Our supply chain is as clean as the food on our menu."</p><div class="testimonial-author"><div class="testimonial-avatar">NB</div><div><div class="testimonial-name">Nathan Burns</div><div class="testimonial-role">Co-Founder, Roots &amp; Greens</div></div></div></div>
+      <div class="testimonial-card"><div class="testimonial-stars">★★★★★</div><p class="testimonial-text">"Being a newer company, their hunger and attention to detail sets them apart. We distribute to 12 locations and Abbadeen handles every route flawlessly."</p><div class="testimonial-author"><div class="testimonial-avatar">EK</div><div><div class="testimonial-name">Emily Kramer</div><div class="testimonial-role">Director, FreshLink Distribution</div></div></div></div>
     </div>
   </div>
 </section>
@@ -700,7 +927,7 @@
           <div class="news-date">2025</div>
           <div class="news-title">Beta Relay 2.0 Goes Live — Game-Changing Freight Intelligence</div>
           <p class="news-desc">Our flagship platform Beta Relay 2.0 is officially operational, introducing the baton-relay driver network and real-time route-to-market optimization to U.S. freight.</p>
-          <a href="#betarelay" class="news-link">Read More →</a>
+          <a href="/news/stories/story-beta-relay/" class="news-link">Read More →</a>
         </div>
       </div>
       <div class="news-card reveal reveal-delay-2">
@@ -709,7 +936,7 @@
           <div class="news-date">2025</div>
           <div class="news-title">Expanding CPG Distribution Network — 200+ New Routes</div>
           <p class="news-desc">Abbadeen Holdings, LLC announces expanded distribution partnerships with regional CPG brands, adding over 200 new routes across the U.S. Midwest and Southeast.</p>
-          <a href="/contact/" class="news-link">Learn More →</a>
+          <a href="/news/stories/story-cpg-routes/" class="news-link">Learn More →</a>
         </div>
       </div>
       <div class="news-card reveal reveal-delay-3">
@@ -718,7 +945,7 @@
           <div class="news-date">2024</div>
           <div class="news-title">Abbadeen Holdings, LLC — Officially USA Registered</div>
           <p class="news-desc">Abbadeen Holdings, LLC is formally registered as a U.S. Limited Liability Company, marking the official launch of national operations and a new era in farm-to-table freight.</p>
-          <a href="/about/" class="news-link">Our Story →</a>
+          <a href="/news/stories/story-founded/" class="news-link">Our Story →</a>
         </div>
       </div>
     </div>
@@ -735,6 +962,16 @@
         <div class="cta-left-label">Let's Move Together</div>
         <h2 class="cta-h2">Get Your<br><span>Free Quote</span><br>Today</h2>
         <p class="cta-desc-left">Whether you're a farm operator, restaurant group, or CPG distributor — Abbadeen Holdings, LLC has the cold-chain capacity and tech intelligence to serve your needs.<br><br>Tell us your route and cargo type and we'll send a tailored proposal within 2 hours on business days.</p>
+        <div class="office-addresses-row">
+          <div class="office-addr-card">
+            <div class="office-addr-label">Berryville, VA</div>
+            <div class="office-addr-text">Abbadeen Holdings<br>Taiwo Olawuyi MBR<br>3 S Church St<br>Berryville, VA 22611</div>
+          </div>
+          <div class="office-addr-card">
+            <div class="office-addr-label">Beaumont, TX</div>
+            <div class="office-addr-text">1160 Oregon Ave<br>Suite #1<br>Beaumont, TX 77705<br>USA</div>
+          </div>
+        </div>
       </div>
       <div class="reveal">
         <form class="contact-form" onsubmit="handleSubmit(event)">
@@ -802,13 +1039,23 @@
       <div class="footer-col">
         <div class="footer-col-title">Contact</div>
         <ul>
-          <li><a href="mailto:info@abbadeenholdings.org">info@abbadeenholdings.org</a></li>
-          <li><a href="tel:+10000000000">+1 (000) 000-0000</a></li>
+          <li><a href="/cdn-cgi/l/email-protection#e687848487828383888e898a828f888195a6818b878f8ac885898b"><span class="__cf_email__" data-cfemail="bddcdfdfdcd9d8d8d3d5d2d1d9d4d3dacefddad0dcd4d193ded2d0">[email&#160;protected]</span></a></li>
+          <li><a href="tel:+15402020403">+1 (540) 202-0403</a></li>
           <li><a href="https://www.abbadeenholdings.org" target="_blank" rel="noopener">www.abbadeenholdings.org</a></li>
           <li><a href="/contact/">USA — Nationwide Operations</a></li>
           <li><a href="/contact/">Get a Free Quote</a></li>
           <li><a href="#betarelay">Track a Shipment</a></li>
         </ul>
+        <div class="footer-addr-block">
+          <div class="footer-addr-entry">
+            <strong>📍 Berryville, VA</strong>
+            <span>Abbadeen Holdings<br>Taiwo Olawuyi MBR<br>3 S Church St<br>Berryville, VA 22611</span>
+          </div>
+          <div class="footer-addr-entry">
+            <strong>📍 Beaumont, TX</strong>
+            <span>1160 Oregon Ave, Suite #1<br>Beaumont, TX 77705<br>USA</span>
+          </div>
+        </div>
       </div>
     </div>
     <div class="footer-bottom">
@@ -818,7 +1065,7 @@
   </div>
 </footer>
 
-<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
   /* Cursor */
   const cursor=document.getElementById('cursor'),ring=document.getElementById('cursorRing');
   let mx=-100,my=-100,rx=-100,ry=-100;
