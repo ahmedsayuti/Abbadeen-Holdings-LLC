@@ -8,20 +8,20 @@
 <meta name="description" content="Learn about Abbadeen Holdings, LLC — founded in 2024, USA Registered, and already operating a national cold-chain freight network powered by Beta Relay 2.0." />
 <link rel="canonical" href="https://www.abbadeenholdings.com/about/" />
 <meta property="og:type"        content="website" />
-<meta property="og:site_name"  content="Abbadeen Holdings, LLC" />
+<meta property="og:site_name"   content="Abbadeen Holdings, LLC" />
 <meta property="og:title"       content="About Us — Abbadeen Holdings, LLC" />
 <meta property="og:description" content="Born in 2024, built for the future. Abbadeen Holdings, LLC is modernizing America's food supply chain — one cold-chain delivery at a time." />
 <meta property="og:url"         content="https://www.abbadeenholdings.com/about/" />
 <meta property="og:image"       content="https://www.abbadeenholdings.com/srcs/logo_white_bg.png" />
 <meta property="og:image:alt"   content="Abbadeen Holdings, LLC — Your Farm-to-Table Freight" />
 <meta property="og:image:width" content="1200" />
-<meta property="og:image:height"content="630" />
-<meta name="twitter:card"       content="summary_large_image" />
-<meta name="twitter:site"       content="@abbadeenholdings" />
-<meta name="twitter:title"      content="About Abbadeen Holdings, LLC — Farm-to-Table Freight" />
-<meta name="twitter:description"content="Founded 2024. USA Registered LLC. National cold-chain freight network powered by Beta Relay 2.0." />
-<meta name="twitter:image"      content="https://www.abbadeenholdings.com/srcs/logo_white_bg.png" />
-<meta name="twitter:image:alt"  content="Abbadeen Holdings, LLC — Your Farm-to-Table Freight" />
+<meta property="og:image:height" content="630" />
+<meta name="twitter:card"        content="summary_large_image" />
+<meta name="twitter:site"        content="@abbadeenholdings" />
+<meta name="twitter:title"       content="About Abbadeen Holdings, LLC — Farm-to-Table Freight" />
+<meta name="twitter:description" content="Founded 2024. USA Registered LLC. National cold-chain freight network powered by Beta Relay 2.0." />
+<meta name="twitter:image"       content="https://www.abbadeenholdings.com/srcs/logo_white_bg.png" />
+<meta name="twitter:image:alt"   content="Abbadeen Holdings, LLC — Your Farm-to-Table Freight" />
 <link rel="icon" type="image/svg+xml" href="https://www.abbadeenholdings.com/favicon.svg" />
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -159,19 +159,98 @@
 
   /* ── TEAM ── */
   #team{padding:7rem 0;background:var(--white)}
-  .team-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:2rem;margin-top:3.5rem}
-  .team-card{background:#fff;border:1px solid rgba(27,42,71,.08);border-radius:14px;overflow:hidden;transition:transform .3s var(--ease),box-shadow .3s}
+
+  /*
+    Grid auto-fills based on number of cards.
+    Works for 2, 3, 4 or 5 members without CSS changes.
+  */
+  .team-grid{
+    display:grid;
+    grid-template-columns:repeat(auto-fill,minmax(300px,1fr));
+    gap:2rem;
+    margin-top:3.5rem;
+  }
+
+  .team-card{
+    background:#fff;
+    border:1px solid rgba(27,42,71,.08);
+    border-radius:14px;
+    overflow:hidden;
+    transition:transform .3s var(--ease),box-shadow .3s;
+  }
   .team-card:hover{transform:translateY(-8px);box-shadow:0 20px 60px rgba(27,42,71,.12)}
-  .team-avatar{height:220px;background:var(--navy-d);display:flex;align-items:center;justify-content:center;position:relative;overflow:hidden}
-  .team-avatar-icon{font-size:5rem;opacity:.4}
-  .team-avatar-overlay{position:absolute;bottom:0;left:0;right:0;height:60px;background:linear-gradient(to top,var(--navy-d),transparent)}
-  .team-body{padding:1.6rem}
-  .team-name{font-family:'Barlow Condensed',sans-serif;font-weight:800;font-size:1.4rem;text-transform:uppercase;color:var(--navy);margin-bottom:.2rem}
-  .team-role{font-family:'Space Mono',monospace;font-size:.68rem;color:var(--green);letter-spacing:.1em;text-transform:uppercase;margin-bottom:.8rem}
-  .team-bio{font-size:.85rem;color:#6B7A94;line-height:1.65}
-  .team-socials{display:flex;gap:.5rem;margin-top:1rem}
-  .team-social{width:30px;height:30px;border:1px solid rgba(27,42,71,.12);border-radius:6px;display:flex;align-items:center;justify-content:center;color:var(--mid);font-size:.75rem;text-decoration:none;transition:background .2s,border-color .2s,color .2s}
-  .team-social:hover{background:var(--green);border-color:var(--green);color:#fff}
+
+  /* Photo container */
+  .team-photo{
+    height:280px;
+    background:var(--navy-d);
+    position:relative;
+    overflow:hidden;
+    display:flex;align-items:center;justify-content:center;
+  }
+  .team-photo img{
+    width:100%;height:100%;
+    object-fit:cover;
+    object-position:center top; /* keeps face in frame; tweak per photo if needed */
+    display:block;
+    transition:transform .5s var(--ease);
+  }
+  .team-card:hover .team-photo img{transform:scale(1.05)}
+
+  /* Fallback — visible only when photo src fails */
+  .team-photo-fallback{
+    position:absolute;inset:0;
+    display:none; /* JS onerror reveals this */
+    flex-direction:column;align-items:center;justify-content:center;gap:.6rem;
+    background:var(--navy-d);
+  }
+  .team-photo-fallback svg{opacity:.18;width:72px;height:72px}
+  .team-photo-fallback span{
+    font-family:'Space Mono',monospace;font-size:.6rem;
+    letter-spacing:.14em;text-transform:uppercase;
+    color:rgba(255,255,255,.2);
+  }
+
+  /* Department badge — top-right corner */
+  .team-dept-badge{
+    position:absolute;top:14px;right:14px;z-index:2;
+    background:rgba(77,139,49,.88);
+    backdrop-filter:blur(6px);
+    border-radius:4px;
+    padding:.22rem .6rem;
+    font-family:'Space Mono',monospace;font-size:.58rem;
+    letter-spacing:.1em;text-transform:uppercase;color:#fff;
+  }
+
+  /* Gradient fade at photo bottom */
+  .team-photo-overlay{
+    position:absolute;bottom:0;left:0;right:0;height:80px;
+    background:linear-gradient(to top,rgba(17,28,48,.9),transparent);
+    pointer-events:none;
+  }
+
+  /* Card body */
+  .team-body{padding:1.6rem 1.6rem 1.5rem}
+  .team-name{
+    font-family:'Barlow Condensed',sans-serif;font-weight:800;
+    font-size:1.5rem;text-transform:uppercase;
+    color:var(--navy);line-height:1;margin-bottom:.3rem;
+  }
+  .team-role{
+    font-family:'Space Mono',monospace;font-size:.67rem;
+    color:var(--green);letter-spacing:.1em;text-transform:uppercase;
+    margin-bottom:.9rem;
+  }
+  .team-bio{font-size:.87rem;color:#6B7A94;line-height:1.7}
+  .team-socials{display:flex;gap:.5rem;margin-top:1.1rem}
+  .team-social{
+    width:32px;height:32px;
+    border:1px solid rgba(27,42,71,.12);border-radius:6px;
+    display:flex;align-items:center;justify-content:center;
+    color:var(--mid);text-decoration:none;
+    transition:background .2s,border-color .2s,color .2s,transform .2s;
+  }
+  .team-social:hover{background:var(--green);border-color:var(--green);color:#fff;transform:translateY(-2px)}
 
   /* ── WHY US ── */
   #why-us{padding:7rem 0;background:var(--navy)}
@@ -225,11 +304,10 @@
   .footer-bottom a{color:var(--green-l);text-decoration:none}
 
   /* ANIMATIONS */
-  @keyframes fadeUp{to{opacity:1;transform:translateY(0)}}
-  @keyframes fadeIn{to{opacity:1}}
   .reveal{opacity:0;transform:translateY(40px);transition:opacity .8s var(--ease),transform .8s var(--ease)}
   .reveal.visible{opacity:1;transform:translateY(0)}
-  .reveal-delay-1{transition-delay:.1s}.reveal-delay-2{transition-delay:.2s}.reveal-delay-3{transition-delay:.3s}.reveal-delay-4{transition-delay:.4s}.reveal-delay-5{transition-delay:.5s}.reveal-delay-6{transition-delay:.6s}
+  .reveal-delay-1{transition-delay:.1s}.reveal-delay-2{transition-delay:.2s}.reveal-delay-3{transition-delay:.3s}
+  .reveal-delay-4{transition-delay:.4s}.reveal-delay-5{transition-delay:.5s}.reveal-delay-6{transition-delay:.6s}
 
   /* RESPONSIVE */
   @media(max-width:1024px){
@@ -301,6 +379,7 @@
     <div class="ticker-item"><span class="ticker-dot"></span>Beta Relay 2.0 — Flagship Platform</div>
     <div class="ticker-item"><span class="ticker-dot"></span>National Coverage</div>
     <div class="ticker-item"><span class="ticker-dot"></span>98% On-Time Delivery</div>
+    <!-- Duplicate set for seamless loop -->
     <div class="ticker-item"><span class="ticker-dot"></span>Est. 2024</div>
     <div class="ticker-item"><span class="ticker-dot"></span>USA Registered LLC</div>
     <div class="ticker-item"><span class="ticker-dot"></span>Farm-to-Table Freight</div>
@@ -323,10 +402,8 @@
                 <radialGradient id="sg" cx="50%" cy="50%" r="50%"><stop offset="0%" stop-color="#253860"/><stop offset="100%" stop-color="#111C30"/></radialGradient>
               </defs>
               <rect width="400" height="500" fill="url(#sg)"/>
-              <!-- Road -->
               <rect x="160" y="0" width="80" height="500" fill="rgba(255,255,255,0.03)"/>
               <rect x="197" y="0" width="6" height="500" fill="rgba(77,139,49,0.15)" stroke-dasharray="30 20"/>
-              <!-- Truck illustration -->
               <rect x="80" y="180" width="200" height="100" rx="6" fill="#1B2A47"/>
               <rect x="80" y="250" width="200" height="16" fill="#4D8B31"/>
               <path d="M280 200 L330 185 L350 200 L355 270 L280 270 Z" fill="#253860"/>
@@ -335,14 +412,11 @@
               <circle cx="120" cy="278" r="20" fill="#111C30"/><circle cx="120" cy="278" r="13" fill="#4D8B31"/><circle cx="120" cy="278" r="5" fill="#111C30"/>
               <circle cx="180" cy="278" r="20" fill="#111C30"/><circle cx="180" cy="278" r="13" fill="#4D8B31"/><circle cx="180" cy="278" r="5" fill="#111C30"/>
               <circle cx="316" cy="278" r="18" fill="#111C30"/><circle cx="316" cy="278" r="12" fill="#4D8B31"/><circle cx="316" cy="278" r="4" fill="#111C30"/>
-              <!-- Speed lines -->
               <rect x="20" y="215" width="50" height="2.5" rx="1.25" fill="#4D8B31" opacity=".6"/>
               <rect x="20" y="225" width="35" height="2.5" rx="1.25" fill="#4D8B31" opacity=".4"/>
               <rect x="20" y="235" width="60" height="2.5" rx="1.25" fill="#4D8B31" opacity=".6"/>
               <rect x="20" y="245" width="28" height="2.5" rx="1.25" fill="#4D8B31" opacity=".3"/>
-              <!-- USA map outline hint -->
               <text x="200" y="380" font-family="Barlow Condensed" font-size="11" fill="rgba(77,139,49,0.3)" text-anchor="middle" letter-spacing="6">NATIONWIDE U.S.A.</text>
-              <!-- Dotted route -->
               <path d="M60,350 Q120,320 200,340 Q280,360 340,330" stroke="#4D8B31" stroke-width="1.5" stroke-dasharray="6 3" fill="none" opacity="0.4"/>
               <circle cx="60" cy="350" r="4" fill="#62A83E" opacity=".7"/>
               <circle cx="200" cy="340" r="4" fill="#62A83E" opacity=".7"/>
@@ -489,7 +563,23 @@
   </div>
 </section>
 
-<!-- ══ TEAM ══ -->
+<!-- ══════════════════════════════════════════════════════════════
+     TEAM SECTION
+     ══════════════════════════════════════════════════════════════
+     HOW TO POPULATE EACH CARD:
+       • team-photo > img[src]  → path to headshot (e.g. /srcs/team/john-doe.jpg)
+                                  Recommended: portrait crop, min 600×800 px
+       • team-photo > img[alt]  → "Full Name — Job Title, Abbadeen Holdings"
+       • .team-dept-badge       → short department label (e.g. Founder / Ops / Tech)
+       • .team-name             → person's full name
+       • .team-role             → full job title
+       • .team-bio              → 1–2 sentences
+       • .team-social[LinkedIn] → real LinkedIn URL in href
+       • .team-social[X]        → real X profile URL in href (delete <a> if not used)
+
+     ADD MORE MEMBERS: copy any .team-card block, paste below, fill in.
+     The grid auto-adjusts — no CSS changes needed.
+     ══════════════════════════════════════════════════════════════ -->
 <section id="team">
   <div class="section-inner">
     <div class="reveal" style="text-align:center;margin-bottom:.5rem">
@@ -497,43 +587,151 @@
       <h2 class="section-h2">Leadership Team</h2>
       <p class="section-sub" style="max-width:500px;margin:1rem auto 0">The minds and hands building Abbadeen Holdings into a national logistics leader.</p>
     </div>
+
     <div class="team-grid">
+
+      <!-- ─── MEMBER 1 ────────────────────────────────── -->
       <div class="team-card reveal reveal-delay-1">
-        <div class="team-avatar"><span class="team-avatar-icon">👤</span><div class="team-avatar-overlay"></div></div>
+        <div class="team-photo">
+          <!--
+            ★ PHOTO: update src to the real image path
+            ★ ALT:   update to "Full Name — Job Title, Abbadeen Holdings, LLC"
+          -->
+          <img
+            src="/srcs/team/taiwo.jpeg"
+            alt="Taiwo Ayo-ku Olawuyi — Head of Operations, Abbadeen Holdings, LLC"
+            onerror="this.style.display='none';this.nextElementSibling.style.display='flex';"
+          />
+          <div class="team-photo-fallback">
+            <svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="1" stroke-linecap="round" stroke-linejoin="round">
+              <circle cx="12" cy="8" r="4"/><path d="M4 20c0-4 3.6-7 8-7s8 3 8 7"/>
+            </svg>
+            <span>Photo coming soon</span>
+          </div>
+          <!-- ★ DEPT BADGE: update label -->
+          <div class="team-dept-badge">Operations</div>
+          <div class="team-photo-overlay"></div>
+        </div>
         <div class="team-body">
-          <div class="team-name">Founder &amp; CEO</div>
-          <div class="team-role">Chief Executive Officer</div>
-          <p class="team-bio">Visionary behind Abbadeen Holdings, LLC. Driving the company's national expansion strategy and overseeing the development of the Beta Relay 2.0 platform.</p>
+          <!-- ★ NAME: replace with real full name -->
+          <div class="team-name">Taiwo Ayo-ku Olawuyi</div>
+          <!-- ★ ROLE: replace with real job title -->
+          <div class="team-role">Head of Operations</div>
+          <!-- ★ BIO: replace with real 1–2 sentence bio -->
+          <p class="team-bio">MSc - Supply Chain Management, MBA - Operations & Production Management, BSc - Marketing</p>
           <div class="team-socials">
-            <a href="#" class="team-social">in</a>
-            <a href="#" class="team-social">𝕏</a>
+            <!-- ★ Update href values with real profile URLs -->
+            <a href="#" class="team-social" title="LinkedIn" aria-label="LinkedIn">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-4 0v7H10V9h4v1.5A4.5 4.5 0 0 1 22 14v7zM2 9h4v12H2z"/><circle cx="4" cy="4" r="2"/></svg>
+            </a>
+            <a href="#" class="team-social" title="X / Twitter" aria-label="X / Twitter">
+              <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
+            </a>
           </div>
         </div>
       </div>
+
+      <!-- ─── MEMBER 2 ────────────────────────────────── -->
       <div class="team-card reveal reveal-delay-2">
-        <div class="team-avatar"><span class="team-avatar-icon">👤</span><div class="team-avatar-overlay"></div></div>
+        <div class="team-photo">
+          <img
+            src="/srcs/team/adeniyi-paul.jpeg"
+            alt="Olawuyi Adeniyi-Paul — Head of Technology, Abbadeen Holdings, LLC"
+            onerror="this.style.display='none';this.nextElementSibling.style.display='flex';"
+          />
+          <div class="team-photo-fallback">
+            <svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="1" stroke-linecap="round" stroke-linejoin="round">
+              <circle cx="12" cy="8" r="4"/><path d="M4 20c0-4 3.6-7 8-7s8 3 8 7"/>
+            </svg>
+            <span>Photo coming soon</span>
+          </div>
+          <div class="team-dept-badge">Technology</div>
+          <div class="team-photo-overlay"></div>
+        </div>
         <div class="team-body">
-          <div class="team-name">Head of Operations</div>
-          <div class="team-role">Chief Operations Officer</div>
-          <p class="team-bio">Oversees all fleet operations, cold-chain compliance, and driver network management. Ensures every route runs on time and every load arrives intact.</p>
+          <div class="team-name">Olawuyi Adeniyi-Paul</div>
+          <div class="team-role">Head of Technology</div>
+          <p class="team-bio">Bsc. Mechnical. And MSc. Industrial Management & Engineering.</p>
           <div class="team-socials">
-            <a href="#" class="team-social">in</a>
-            <a href="#" class="team-social">𝕏</a>
+            <a href="#" class="team-social" title="LinkedIn" aria-label="LinkedIn">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-4 0v7H10V9h4v1.5A4.5 4.5 0 0 1 22 14v7zM2 9h4v12H2z"/><circle cx="4" cy="4" r="2"/></svg>
+            </a>
+            <a href="#" class="team-social" title="X / Twitter" aria-label="X / Twitter">
+              <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
+            </a>
           </div>
         </div>
       </div>
+
+      <!-- ─── MEMBER 3 ────────────────────────────────── -->
       <div class="team-card reveal reveal-delay-3">
-        <div class="team-avatar"><span class="team-avatar-icon">👤</span><div class="team-avatar-overlay"></div></div>
+        <div class="team-photo">
+          <img
+            src="/srcs/team/cto.jpg"
+            alt="Olaifa Kehinde — Co-owner, Abbadeen Holdings, LLC"
+            onerror="this.style.display='none';this.nextElementSibling.style.display='flex';"
+          />
+          <div class="team-photo-fallback">
+            <svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="1" stroke-linecap="round" stroke-linejoin="round">
+              <circle cx="12" cy="8" r="4"/><path d="M4 20c0-4 3.6-7 8-7s8 3 8 7"/>
+            </svg>
+            <span>Photo coming soon</span>
+          </div>
+          <div class="team-dept-badge">Technology</div>
+          <div class="team-photo-overlay"></div>
+        </div>
         <div class="team-body">
-          <div class="team-name">Head of Technology</div>
-          <div class="team-role">Chief Technology Officer</div>
-          <p class="team-bio">Architect of the Beta Relay 2.0 platform. Leading development of real-time vehicle intelligence, route optimization algorithms, and the national capacity coordination engine.</p>
+          <div class="team-name">Olaifa Kehinde</div>
+          <div class="team-role">Co-owner</div>
+          <p class="team-bio">HND - Accounting & MBA.</p>
           <div class="team-socials">
-            <a href="#" class="team-social">in</a>
-            <a href="#" class="team-social">𝕏</a>
+            <a href="#" class="team-social" title="LinkedIn" aria-label="LinkedIn">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-4 0v7H10V9h4v1.5A4.5 4.5 0 0 1 22 14v7zM2 9h4v12H2z"/><circle cx="4" cy="4" r="2"/></svg>
+            </a>
+            <a href="#" class="team-social" title="X / Twitter" aria-label="X / Twitter">
+              <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
+            </a>
           </div>
         </div>
       </div>
+
+      <!--
+      ═══════════════════════════════════════════════════════════
+      ADD MORE MEMBERS — copy this block and fill in the details
+      ═══════════════════════════════════════════════════════════
+
+      <div class="team-card reveal reveal-delay-4">
+        <div class="team-photo">
+          <img
+            src="/srcs/team/FILENAME.jpg"
+            alt="[Full Name] — [Job Title], Abbadeen Holdings, LLC"
+            onerror="this.style.display='none';this.nextElementSibling.style.display='flex';"
+          />
+          <div class="team-photo-fallback">
+            <svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="1" stroke-linecap="round" stroke-linejoin="round">
+              <circle cx="12" cy="8" r="4"/><path d="M4 20c0-4 3.6-7 8-7s8 3 8 7"/>
+            </svg>
+            <span>Photo coming soon</span>
+          </div>
+          <div class="team-dept-badge">[Department]</div>
+          <div class="team-photo-overlay"></div>
+        </div>
+        <div class="team-body">
+          <div class="team-name">[Full Name]</div>
+          <div class="team-role">[Job Title]</div>
+          <p class="team-bio">[1–2 sentence bio.]</p>
+          <div class="team-socials">
+            <a href="[LINKEDIN_URL]" class="team-social" title="LinkedIn" aria-label="LinkedIn">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-4 0v7H10V9h4v1.5A4.5 4.5 0 0 1 22 14v7zM2 9h4v12H2z"/><circle cx="4" cy="4" r="2"/></svg>
+            </a>
+            <a href="[X_URL]" class="team-social" title="X / Twitter" aria-label="X / Twitter">
+              <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
+            </a>
+          </div>
+        </div>
+      </div>
+      -->
+
     </div>
   </div>
 </section>
@@ -547,11 +745,19 @@
           <svg width="100%" height="100%" viewBox="0 0 400 400" xmlns="http://www.w3.org/2000/svg">
             <defs><radialGradient id="wg" cx="50%" cy="50%" r="50%"><stop offset="0%" stop-color="#253860"/><stop offset="100%" stop-color="#111C30"/></radialGradient></defs>
             <rect width="400" height="400" fill="url(#wg)"/>
-            <g stroke="rgba(255,255,255,0.04)" stroke-width="1"><line x1="0" y1="80" x2="400" y2="80"/><line x1="0" y1="160" x2="400" y2="160"/><line x1="0" y1="240" x2="400" y2="240"/><line x1="0" y1="320" x2="400" y2="320"/><line x1="80" y1="0" x2="80" y2="400"/><line x1="160" y1="0" x2="160" y2="400"/><line x1="240" y1="0" x2="240" y2="400"/><line x1="320" y1="0" x2="320" y2="400"/></g>
+            <g stroke="rgba(255,255,255,0.04)" stroke-width="1">
+              <line x1="0" y1="80" x2="400" y2="80"/><line x1="0" y1="160" x2="400" y2="160"/>
+              <line x1="0" y1="240" x2="400" y2="240"/><line x1="0" y1="320" x2="400" y2="320"/>
+              <line x1="80" y1="0" x2="80" y2="400"/><line x1="160" y1="0" x2="160" y2="400"/>
+              <line x1="240" y1="0" x2="240" y2="400"/><line x1="320" y1="0" x2="320" y2="400"/>
+            </g>
             <path class="route-path" d="M60,80 Q140,140 220,100 Q300,60 360,130"/>
             <path class="route-path" d="M40,200 Q120,170 200,200 Q280,230 360,190" style="animation-delay:1.2s"/>
             <path class="route-path" d="M80,320 Q160,290 240,310 Q320,330 370,290" style="animation-delay:.6s"/>
-            <circle class="route-dot" cx="60" cy="80" r="5"/><circle class="route-dot" cx="220" cy="100" r="5"/><circle class="route-dot" cx="360" cy="130" r="5"/><circle class="route-dot" cx="40" cy="200" r="5"/><circle class="route-dot" cx="360" cy="190" r="5"/><circle class="route-dot" cx="80" cy="320" r="5"/><circle class="route-dot" cx="370" cy="290" r="5"/>
+            <circle class="route-dot" cx="60" cy="80" r="5"/><circle class="route-dot" cx="220" cy="100" r="5"/>
+            <circle class="route-dot" cx="360" cy="130" r="5"/><circle class="route-dot" cx="40" cy="200" r="5"/>
+            <circle class="route-dot" cx="360" cy="190" r="5"/><circle class="route-dot" cx="80" cy="320" r="5"/>
+            <circle class="route-dot" cx="370" cy="290" r="5"/>
             <text x="200" y="370" font-family="Space Mono" font-size="9" fill="rgba(77,139,49,0.4)" text-anchor="middle" letter-spacing="4">NATIONWIDE COVERAGE</text>
           </svg>
         </div>
@@ -564,7 +770,7 @@
         </div>
       </div>
       <div class="reveal">
-        <div class="section-label" style="color:rgba(255,255,255,.4)"><span style="background:rgba(255,255,255,.3)"></span>Why Choose Abbadeen</div>
+        <div class="section-label" style="color:rgba(255,255,255,.4)">Why Choose Abbadeen</div>
         <h2 class="section-h2 light">The Competitive<br>Advantage</h2>
         <p class="section-sub light">We're not just another freight company. We're a tech-powered logistics platform purpose-built for the cold chain.</p>
         <ul class="why-us-list">
@@ -634,7 +840,7 @@
       <div class="footer-col">
         <div class="footer-col-title">Contact</div>
         <ul>
-          <li><a href="mailto:abbadeenholdings@gmail.com">abbadeenholdings@gmail.com</a></li>
+          <li><a href="mailto:hello@abbadeenholdings.com">hello@abbadeenholdings.com</a></li>
           <li><a href="tel:+15402020403">+1 (540) 202-0403</a></li>
           <li><a href="https://www.abbadeenholdings.com" target="_blank" rel="noopener">www.abbadeenholdings.com</a></li>
           <li><a href="../contact/">USA — Nationwide Operations</a></li>
@@ -651,21 +857,53 @@
 </footer>
 
 <script>
-  const cursor=document.getElementById('cursor'),ring=document.getElementById('cursorRing');
-  let mx=-100,my=-100,rx=-100,ry=-100;
-  document.addEventListener('mousemove',e=>{mx=e.clientX;my=e.clientY});
-  (function a(){rx+=(mx-rx)*.12;ry+=(my-ry)*.12;cursor.style.left=mx+'px';cursor.style.top=my+'px';ring.style.left=rx+'px';ring.style.top=ry+'px';requestAnimationFrame(a)})();
-  document.querySelectorAll('a,button,.value-card,.team-card,.mission-card,.why-us-item').forEach(el=>{
-    el.addEventListener('mouseenter',()=>{cursor.classList.add('hovered');ring.classList.add('hovered')});
-    el.addEventListener('mouseleave',()=>{cursor.classList.remove('hovered');ring.classList.remove('hovered')});
+  /* ── Custom cursor ── */
+  const cursor = document.getElementById('cursor');
+  const ring   = document.getElementById('cursorRing');
+  let mx = -100, my = -100, rx = -100, ry = -100;
+  document.addEventListener('mousemove', e => { mx = e.clientX; my = e.clientY; });
+  (function loop() {
+    rx += (mx - rx) * .12;
+    ry += (my - ry) * .12;
+    cursor.style.left = mx + 'px'; cursor.style.top = my + 'px';
+    ring.style.left   = rx + 'px'; ring.style.top  = ry + 'px';
+    requestAnimationFrame(loop);
+  })();
+  document.querySelectorAll('a,button,.value-card,.team-card,.mission-card,.why-us-item').forEach(el => {
+    el.addEventListener('mouseenter', () => { cursor.classList.add('hovered');    ring.classList.add('hovered');    });
+    el.addEventListener('mouseleave', () => { cursor.classList.remove('hovered'); ring.classList.remove('hovered'); });
   });
-  function toggleNav(){document.getElementById('mainNav').classList.toggle('open')}
-  document.querySelectorAll('#mainNav a').forEach(a=>a.addEventListener('click',()=>document.getElementById('mainNav').classList.remove('open')));
-  const ro=new IntersectionObserver(e=>e.forEach(x=>{if(x.isIntersecting){x.target.classList.add('visible');ro.unobserve(x.target)}}),{threshold:.13});
-  document.querySelectorAll('.reveal').forEach(el=>ro.observe(el));
-  function countUp(el,t,d=1800){let n=0;const s=t/(d/16),i=setInterval(()=>{n+=s;if(n>=t){n=t;clearInterval(i)}el.textContent=Math.floor(n).toLocaleString()},16)}
-  const co=new IntersectionObserver(e=>e.forEach(x=>{if(x.isIntersecting){countUp(x.target,parseInt(x.target.dataset.target));co.unobserve(x.target)}}),{threshold:.5});
-  document.querySelectorAll('[data-target]').forEach(el=>co.observe(el));
+
+  /* ── Mobile nav ── */
+  function toggleNav() { document.getElementById('mainNav').classList.toggle('open'); }
+  document.querySelectorAll('#mainNav a').forEach(a =>
+    a.addEventListener('click', () => document.getElementById('mainNav').classList.remove('open'))
+  );
+
+  /* ── Scroll reveal ── */
+  const ro = new IntersectionObserver(entries => entries.forEach(x => {
+    if (x.isIntersecting) { x.target.classList.add('visible'); ro.unobserve(x.target); }
+  }), { threshold: .13 });
+  document.querySelectorAll('.reveal').forEach(el => ro.observe(el));
+
+  /* ── Count-up stat numbers ── */
+  function countUp(el, target, duration) {
+    duration = duration || 1800;
+    let n = 0;
+    const step = target / (duration / 16);
+    const timer = setInterval(() => {
+      n += step;
+      if (n >= target) { n = target; clearInterval(timer); }
+      el.textContent = Math.floor(n).toLocaleString();
+    }, 16);
+  }
+  const co = new IntersectionObserver(entries => entries.forEach(x => {
+    if (x.isIntersecting) {
+      x.target.querySelectorAll('.count-up').forEach(el => countUp(el, +el.dataset.target));
+      co.unobserve(x.target);
+    }
+  }), { threshold: .5 });
+  document.querySelectorAll('#about-stats .about-stat').forEach(el => co.observe(el));
 </script>
 </body>
 </html>
