@@ -2350,7 +2350,14 @@ html,body{height:100%;font-family:'Manrope',sans-serif;background:var(--bg);colo
 // ══════════════════════════════════════════
 // CONSTANTS & CONFIG
 // ══════════════════════════════════════════
-const GMAPS_KEY = 'AIzaSyB0RhMCRd06U2rKvszrOWEc-GcJQxcbx74';
+// NOTE: the server-side Google API key used to live here and was sent
+// directly from the browser (X-Goog-Api-Key). It has been removed.
+// Routes API v2 calls now go through the /api/proxy-routes Cloudflare
+// Pages Function, which attaches the real key server-side from the
+// GOOGLE_MAPS_SERVER_KEY environment variable. Nothing secret ships
+// in this file anymore — only the referrer-restricted browser key in
+// the <script src="...maps/api/js?key=..."> tag above, which is safe
+// to expose by design.
 const TICK_MS   = 4000; // telemetry probe refresh: 4 seconds
 // ── DIRECT DISTANCE CONTROL ─────────────────────────────────────────
 // Cars advance a fixed number of METRES every TICK_MS.
@@ -2753,11 +2760,10 @@ async function fetchRouteViaAPI(cfg, idx, done) {
   });
 
   const tryFetch = async (body) => {
-    const resp = await fetch('https://routes.googleapis.com/directions/v2:computeRoutes', {
+    const resp = await fetch('/api/proxy-routes', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
-        'X-Goog-Api-Key': GMAPS_KEY,
         'X-Goog-FieldMask': 'routes.duration,routes.distanceMeters,routes.polyline,routes.legs',
       },
       body: JSON.stringify(body),
@@ -4995,11 +5001,10 @@ async function computePlannerRoute() {
       polylineEncoding: 'ENCODED_POLYLINE',
       computeAlternativeRoutes: false,
     };
-    const resp = await fetch('https://routes.googleapis.com/directions/v2:computeRoutes', {
+    const resp = await fetch('/api/proxy-routes', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
-        'X-Goog-Api-Key': GMAPS_KEY,
         'X-Goog-FieldMask': 'routes.duration,routes.distanceMeters,routes.polyline',
       },
       body: JSON.stringify(body),
